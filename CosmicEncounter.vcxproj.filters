@@ -40,6 +40,12 @@
     <Filter Include="Source Files\Game\Systems">
       <UniqueIdentifier>{b24c7da6-5046-479b-a917-3d48dcac0c83}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\Assets">
+      <UniqueIdentifier>{1425b552-099d-400a-9384-066026399e7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Assets">
+      <UniqueIdentifier>{2287a557-61ed-4c57-b373-8d92889e20ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -68,6 +74,12 @@
     </ClCompile>
     <ClCompile Include="Engine\Keyboard.cpp">
       <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Assets\Texture.cpp">
+      <Filter>Source Files\Engine\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Systems\GFXTextureRenderer.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,14 +131,8 @@
     <ClInclude Include="ECS\World.h">
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Worker.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Systems\Systems.h">
       <Filter>Header Files\Game\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Systems\GFXRectRenderer.h">
-      <Filter>Header Files\Game\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Game\Systems\RendererSystem.h">
       <Filter>Header Files\Game\Systems</Filter>
@@ -139,6 +145,21 @@
     </ClInclude>
     <ClInclude Include="Engine\Keyboard.h">
       <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Assets.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Assets\Texture.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Worker.h">
+      <Filter>Header Files\Engine\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Systems\GFXRectRenderer.h">
+      <Filter>Header Files\Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Systems\GFXTextureRenderer.h">
+      <Filter>Header Files\Game\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

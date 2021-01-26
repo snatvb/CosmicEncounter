@@ -3,6 +3,7 @@
 #undef main
 #include "Worker.h"
 #include "Keyboard.h"
+#include "Assets.h"
 
 
 namespace Engine {
@@ -18,6 +19,7 @@ namespace Engine {
 #pragma endregion
 
 		Keyboard keyboard;
+		Assets::Manager* assets = nullptr;
 
 		void setName(const char* name);
 		void init(Worker& gameHandler);
@@ -42,6 +44,7 @@ namespace Engine {
 
 		void _initWindow();
 		void _initRenderer();
+		void _initAssetsManager();
 		void _handleEvents();
 	};
 }

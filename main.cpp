@@ -4,23 +4,28 @@
 #include "Game/Components/Components.h"
 #include "Game/Systems/Systems.h"
 
-inline void makePlayer(ECS::World& world) {
+inline void makePlayer(ECS::World& world, Engine::Game& game) {
 	auto& entity = world.newEntity();
 	entity.addComponent<Components::Position>(10, 10);
 	entity.addComponent<Components::Size>(20, 20);
 	entity.addComponent<Components::PlayerTag>();
 	SDL_Color color{ 255, 255, 255 };
-	entity.addComponent<Components::GFXRect>(color);
+	//entity.addComponent<Components::GFXRect>(color);
+	auto* texture = game.assets->textures.load("Assets/Ships/tile.png");
+	entity.addComponent<Components::GFXTexture>(color, *texture);
 	auto& stats = entity.addComponent<Components::HeroStats>();
 	stats.speed = 1;
 }
 
 class Worker : public Engine::Worker {
 	inline void init() override {
+		auto& game = Engine::Game::GetInstance();
 		auto& world = getWorld();
-		makePlayer(world);
+		makePlayer(world, game);
 		world.registerSystem<Systems::GFXRectRenderer>();
+		world.registerSystem<Systems::GFXTextureRenderer>();
 		world.registerSystem<Systems::Input>();
+
 	}
 
 	inline void update() override {
