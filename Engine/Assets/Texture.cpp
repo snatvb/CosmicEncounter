@@ -24,11 +24,13 @@ namespace Assets {
 		SDL_Surface* surface = IMG_Load(path);
 
 		if (!surface) {
-			Engine::Debug::Log("Error in loading texture", path);
-			std::cout << (IMG_GetError()) << std::endl;
+			const auto error = IMG_GetError();
+			Engine::Debug::Error("Error in loading texture", path);
+			Engine::Debug::Error(error);
 			return nullptr;
 		}
 
+		Engine::Debug::Error("Loaded new texture", path);
 		SDL_Texture* loadedTexture = SDL_CreateTextureFromSurface(_renderer, surface);
 		SDL_FreeSurface(surface);
 
@@ -44,6 +46,7 @@ namespace Assets {
 		if (texture) {
 			SDL_DestroyTexture(texture);
 			_textures[path] = nullptr;
+			Engine::Debug::Log("Clear memory texture", path);
 			return true;
 		}
 

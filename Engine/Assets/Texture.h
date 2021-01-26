@@ -5,6 +5,7 @@
 #include "SDL_image.h"
 
 namespace Assets {
+
 	class Textures {
 	public:
 

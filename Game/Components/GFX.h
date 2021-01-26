@@ -1,6 +1,7 @@
 #pragma once
 #include "ECS.h"
 #include "SDL.h"
+#include "./GFX/GFXAnimation.h"
 
 namespace Components {
 	struct GFX : ECS::Component {
