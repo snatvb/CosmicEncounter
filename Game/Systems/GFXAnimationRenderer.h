@@ -6,7 +6,7 @@
 namespace Systems {
 	class GFXAnimationRenderer : public RendererSystem<Systems::GFXAnimationRenderer> {
 	public:
-		using Filter = ECS::Filters::With<Components::Position, Components::GFXAnimtion>;
+		using Filter = ECS::Filters::With<Components::Transform, Components::GFXAnimtion>;
 
 		void run(ECS::FilteredEntities& entities) override;
 	};

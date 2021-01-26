@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdint.h>
 #include "ECS.h"
 #include "Engine/Engine.h"
 #include "Game/Components/Components.h"
@@ -8,12 +9,13 @@
 
 inline ECS::Entity& makePlayer(ECS::World& world, Engine::Game& game) {
 	auto& entity = world.newEntity();
-	entity.addComponent<Components::Position>(10, 10);
-	entity.addComponent<Components::Scale>(20, 20);
+	auto position = Components::Transform::Position(10, 10);
+	auto tileSize = Size{ 32, 32 };
+	double rotation = 90.0;
+	entity.addComponent<Components::Transform>(position, tileSize, rotation);
 	entity.addComponent<Components::PlayerTag>();
 	auto* texture = game.assets->textures.load("Assets/Ships/tile.png");
 
-	auto tileSize = Size{ 32, 32 };
 	entity.addComponent<Components::GFXTexture>(*texture, tileSize);
 	auto& stats = entity.addComponent<Components::HeroStats>();
 	stats.speed = 300;
@@ -22,7 +24,7 @@ inline ECS::Entity& makePlayer(ECS::World& world, Engine::Game& game) {
 
 inline void makeFire(ECS::World& world, Engine::Game& game, ECS::Entity& parent) {
 	auto& entity = world.newEntity();
-	entity.addComponent<Components::Position>(100, 100);
+	entity.addComponent<Components::Transform>();
 
 	auto* texture = game.assets->textures.load("Assets/Fire/Small_Iceball_9x24_top.png");
 	Size tileSize{ 9, 24 };
@@ -30,8 +32,10 @@ inline void makeFire(ECS::World& world, Engine::Game& game, ECS::Entity& parent)
 	auto& animtion = entity.addComponent<Components::GFXAnimtion>(*texture, tileSize, frames);
 	animtion.speed = 0.5;
 
-	Vector2D<int> fireOffset{ 6, 18 };
-	entity.addComponent<Components::Anchor>(parent.id, fireOffset);
+	Vector2D<int> fireOffset{ 12, 28 };
+	auto& anchor = entity.addComponent<Components::Anchor>(parent.id, fireOffset);
+	anchor.center.x = 16;
+	anchor.center.y = 16;
 }
 
 class Worker : public Engine::Worker {
@@ -51,11 +55,6 @@ class Worker : public Engine::Worker {
 	inline void update() override {
 	}
 };
-
-int test() {
-	static int x = 0;
-	return ++x;
-}
 
 int main() {
 	auto& game = Engine::Game::GetInstance();

@@ -5,10 +5,10 @@
 #include <array>
 
 namespace ECS {
-	constexpr std::size_t MAX_COMPONENTS = 32;
+	constexpr std::size_t MAX_COMPONENTS = 64;
 
-	using ComponentID = std::size_t;
-	using EntityID = std::size_t;
+	using ComponentID = unsigned __int16;
+	using EntityID = unsigned __int16;
 	using ComponentBitSet = std::bitset<MAX_COMPONENTS>;
 
 	inline ComponentID getComponentTypeID() {

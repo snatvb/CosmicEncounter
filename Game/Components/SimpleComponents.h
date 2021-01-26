@@ -23,8 +23,32 @@ namespace Components {
 	struct Anchor : ECS::Component {
 		ECS::EntityID entityId;
 		Vector2D<int> offset;
+		Vector2D<int> center;
 
 		Anchor(ECS::EntityID entityId) : entityId(entityId) {}
-		Anchor(ECS::EntityID entityId, Vector2D<int>& offset) : entityId(entityId), offset(offset) {}
+		Anchor(ECS::EntityID entityId, Vector2D<int>& offset)
+			: entityId(entityId), offset(offset) {}
+	};
+
+	struct Transform : ECS::Component {
+		using Position = Vector2D<float>;
+		using Rotation = double;
+		using Scale = Size;
+
+		Scale scale;
+		Position position;
+		Rotation rotation;
+
+		Transform() {}
+		Transform(float x, float y) : position(Position{ x, y }) {}
+		Transform(Position& position) : position(position) {}
+		Transform(Position& position, Scale& scale)
+			: position(position), scale(scale) {}
+		Transform(Position& position, Rotation& rotation)
+			: position(position), rotation(rotation) {}
+		Transform(Position& position, Scale& scale, Rotation& rotation)
+			: position(position), rotation(rotation), scale(scale) {}
+		Transform(Position& position, Rotation& rotation, Scale& scale)
+			: position(position), rotation(rotation), scale(scale) {}
 	};
 }

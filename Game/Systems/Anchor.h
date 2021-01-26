@@ -7,7 +7,7 @@
 namespace Systems {
 	class Anchor : public ECS::System<Anchor> {
 	public:
-		using Filter = ECS::Filters::With<Components::Anchor, Components::Position>;
+		using Filter = ECS::Filters::With<Components::Anchor, Components::Transform>;
 
 		void init() override {};
 		void run(ECS::FilteredEntities& enitites) override;

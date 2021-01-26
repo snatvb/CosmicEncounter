@@ -8,7 +8,6 @@ namespace ECS {
 	class Entity {
 	public:
 		EntityID id;
-
 		bool isActive() { return _active;  };
 
 		template<typename T>

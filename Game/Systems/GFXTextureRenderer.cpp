@@ -4,18 +4,14 @@ namespace Systems {
 	void GFXTextureRenderer::run(ECS::FilteredEntities& entities)
 	{
 		for (auto& entity : entities) {
-			auto& position = entity->getComponent<Components::Position>();
+			auto& transform = entity->getComponent<Components::Transform>();
 			auto& gfx = entity->getComponent<Components::GFXTexture>();
 
 			SDL_Rect drawRect;
-			drawRect.x = position.x;
-			drawRect.y = position.y;
-
-			if (entity->hasComponent<Components::Scale>()) {
-				auto& scale = entity->getComponent<Components::Scale>();
-				drawRect.w = scale.width;
-				drawRect.h = scale.height;
-			}
+			drawRect.x = (int)transform.position.x;
+			drawRect.y = (int)transform.position.y;
+			drawRect.w = (int)transform.scale.width;
+			drawRect.h = (int)transform.scale.height;
 
 			SDL_Rect clipRect;
 			clipRect.x = gfx.offset.x;
@@ -30,7 +26,21 @@ namespace Systems {
 				SDL_QueryTexture(gfx.texture, NULL, NULL, &clipRect.w, &clipRect.h);
 			}
 
-			SDL_RenderCopy(_renderer, gfx.texture, &clipRect, &drawRect);
+			if (transform.rotation > 0) {
+				SDL_RenderCopyEx(
+					_renderer,
+					gfx.texture,
+					&clipRect,
+					&drawRect,
+					transform.rotation,
+					NULL,
+					SDL_FLIP_NONE
+				);
+			}
+			else {
+				SDL_RenderCopy(_renderer, gfx.texture, &clipRect, &drawRect);
+			}
+
 		}
 	}
 }

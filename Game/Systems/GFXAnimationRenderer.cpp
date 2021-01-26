@@ -1,9 +1,9 @@
 #include "GFXAnimationRenderer.h"
 
-inline SDL_Rect createDrawRect(Components::GFXAnimtion& gfx, Components::Position& position) {
+inline SDL_Rect createDrawRect(Components::GFXAnimtion& gfx, Components::Transform& transform) {
 	SDL_Rect drawRect;
-	drawRect.x = position.x;
-	drawRect.y = position.y;
+	drawRect.x = (int)transform.position.x;
+	drawRect.y = (int)transform.position.y;
 	drawRect.w = gfx.tileSize.width;
 	drawRect.h = gfx.tileSize.height;
 	return drawRect;
@@ -38,12 +38,25 @@ namespace Systems {
 	{
 		for (auto& entity : entities) {
 			auto& gfx = entity->getComponent<Components::GFXAnimtion>();
-			auto& position = entity->getComponent<Components::Position>();
+			auto& transform = entity->getComponent<Components::Transform>();
 
 			SDL_Rect clipRect = createClipRect(gfx);
-			SDL_Rect drawRect = createDrawRect(gfx, position);
+			SDL_Rect drawRect = createDrawRect(gfx, transform);
 
-			SDL_RenderCopy(_renderer, gfx.texture, &clipRect, &drawRect);
+			if (transform.rotation > 0) {
+				SDL_RenderCopyEx(
+					_renderer,
+					gfx.texture,
+					&clipRect,
+					&drawRect,
+					transform.rotation,
+					NULL,
+					SDL_FLIP_NONE
+				);
+			}
+			else {
+				SDL_RenderCopy(_renderer, gfx.texture, &clipRect, &drawRect);
+			}
 
 			if (gfx.play) {
 				moveFrame(gfx);

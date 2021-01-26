@@ -1,7 +1,7 @@
 #include "InputSystem.h"
 
 inline void move(ECS::Entity& entity, int x, int y, double delta) {
-	auto& position = entity.getComponent<Components::Position>();
+	auto& position = entity.getComponent<Components::Transform>().position;
 	auto& stats = entity.getComponent<Components::HeroStats>();
 
 	position.x += (int)(stats.speed * delta * x);
@@ -37,6 +37,11 @@ inline void handleMove(ECS::World& world, Engine::Game& game, ECS::Entity& entit
 
 	if (keyboard.isPressed(SDLK_f)) {
 		world.removeEntity(entity);
+	}
+
+	if (keyboard.isPressed(SDLK_r)) {
+		auto& transform = entity.getComponent<Components::Transform>().rotation;
+		transform += 10 * game.time.delta();
 	}
 
 	int x = getX(keyboard);

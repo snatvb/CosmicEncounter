@@ -7,8 +7,7 @@ namespace Systems {
 	public:
 		using Filter = ECS::Filters::With<
 			Components::GFXRect,
-			Components::Position,
-			Components::Scale
+			Components::Transform
 		>;
 		void run(ECS::FilteredEntities& entities) override;
 	};
