@@ -15,6 +15,24 @@ namespace ECS {
 			_entities.reserve(256);
 		}
 
+		inline void filterEntities(Entities& entityPool, Filter& filter) {
+			for (auto& entity : _entities) {
+				if (filter.validate(*entity)) {
+					entityPool.emplace_back(entity);
+				}
+			}
+		}
+
+		inline Entities filterEntities(Filter& filter) {
+			Entities entityPool;
+			for (auto& entity : _entities) {
+				if (filter.validate(*entity)) {
+					entityPool.emplace_back(entity);
+				}
+			}
+			return entityPool;
+		}
+
 		void update() {
 			std::vector<Entity*> filteredEntities;
 			for (auto& system : _systems) {
@@ -23,14 +41,14 @@ namespace ECS {
 					system->run(filteredEntities);
 				}
 				else {
-					for (auto& entity : _entities) {
-						if (filter.validate(*entity)) {
-							filteredEntities.emplace_back(entity);
-						}
-					}
+					filterEntities(filteredEntities, filter);
 					system->run(filteredEntities);
 					filteredEntities.clear();
 				}
+			}
+
+			for (auto entity : _entities) {
+				entity->clearOneFrameComponents();
 			}
 		};
 

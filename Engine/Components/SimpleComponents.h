@@ -26,9 +26,10 @@ namespace Components {
 		Vector2D<int> rotationCenter;
 		Vector2D<int> jointCenter;
 
-		Anchor(ECS::EntityID entityId) : entityId(entityId) {}
+		Anchor(ECS::EntityID entityId)
+			: entityId(entityId), rotationCenter(-1, -1) {}
 		Anchor(ECS::EntityID entityId, Vector2D<int>& offset)
-			: entityId(entityId), offset(offset) {}
+			: entityId(entityId), offset(offset), rotationCenter(-1, -1) {}
 	};
 
 	struct Transform : ECS::Component {
@@ -38,18 +39,18 @@ namespace Components {
 
 		Scale scale;
 		Position position;
-		Rotation rotation;
+		Rotation rotation = 0.0f;
 
 		Transform() {}
-		Transform(float x, float y) : position(Position{ x, y }) {}
+		Transform(float x, float y) : position(x, y) {}
 		Transform(Position& position) : position(position) {}
 		Transform(Position& position, Scale& scale)
 			: position(position), scale(scale) {}
-		Transform(Position& position, Rotation& rotation)
+		Transform(Position& position, Rotation rotation)
 			: position(position), rotation(rotation) {}
-		Transform(Position& position, Scale& scale, Rotation& rotation)
+		Transform(Position& position, Scale& scale, Rotation rotation)
 			: position(position), rotation(rotation), scale(scale) {}
-		Transform(Position& position, Rotation& rotation, Scale& scale)
+		Transform(Position& position, Rotation rotation, Scale& scale)
 			: position(position), rotation(rotation), scale(scale) {}
 	};
 }

@@ -23,6 +23,7 @@ namespace Components {
 		SDL_Texture* texture;
 		Vector2D<int> offset;
 		std::optional<Size> tileSize;
+		float rotation = 0;
 
 		GFXTexture(SDL_Texture& texture)
 			: texture(&texture) {}

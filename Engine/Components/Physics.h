@@ -9,8 +9,16 @@ namespace Components {
 		Point center;
 		float radius;
 
-		CircleCollider() {}
 		CircleCollider(Point& center, float radius)
 			: center(center), radius(radius) {}
+
+		CircleCollider(float x, float y, float radius)
+			: center(x, y), radius(radius) {}
+	};
+
+	struct Collided : ECS::OneFrameComponent {
+		ECS::EntityID entityId;
+
+		Collided(ECS::EntityID id) : entityId(id) {}
 	};
 }

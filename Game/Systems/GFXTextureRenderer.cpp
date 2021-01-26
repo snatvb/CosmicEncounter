@@ -26,13 +26,13 @@ namespace Systems {
 				SDL_QueryTexture(gfx.texture, NULL, NULL, &clipRect.w, &clipRect.h);
 			}
 
-			if (transform.rotation > 0) {
+			if (gfx.rotation) {
 				SDL_RenderCopyEx(
 					_renderer,
 					gfx.texture,
 					&clipRect,
 					&drawRect,
-					transform.rotation,
+					gfx.rotation,
 					NULL,
 					SDL_FLIP_NONE
 				);

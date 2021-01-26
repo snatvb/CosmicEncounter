@@ -46,11 +46,17 @@
     <Filter Include="Source Files\Engine\Assets">
       <UniqueIdentifier>{2287a557-61ed-4c57-b373-8d92889e20ee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Game\Components\GFX">
-      <UniqueIdentifier>{0a345a9e-efd4-4c6f-950b-e724fc5cee4f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Engine\Components">
       <UniqueIdentifier>{25542d7e-6e48-4b11-b35d-3ca1818fc501}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Systems">
+      <UniqueIdentifier>{a530c0bd-5294-4022-b217-eb435d23578f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Components\GFX">
+      <UniqueIdentifier>{61b1f705-a6d5-4ecb-b172-cfc350b5f8e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Systems">
+      <UniqueIdentifier>{9c1ce2a1-33b3-4660-9309-2225307890eb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +105,12 @@
     <ClCompile Include="Engine\EngineTime.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Systems\Collide.cpp">
+      <Filter>Source Files\Engine\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Systems\StandartEnemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -131,9 +143,6 @@
     <ClInclude Include="Game\Components\Components.h">
       <Filter>Header Files\Game\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Components\SimpleComponents.h">
-      <Filter>Header Files\Game\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Components\Tags.h">
       <Filter>Header Files\Game\Components</Filter>
     </ClInclude>
@@ -152,9 +161,6 @@
     <ClInclude Include="Game\Systems\RendererSystem.h">
       <Filter>Header Files\Game\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Components\GFX.h">
-      <Filter>Header Files\Game\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Systems\InputSystem.h">
       <Filter>Header Files\Game\Systems</Filter>
     </ClInclude>
@@ -169,9 +175,6 @@
     </ClInclude>
     <ClInclude Include="Game\Systems\GFXTextureRenderer.h">
       <Filter>Header Files\Game\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Components\GFX\GFXAnimation.h">
-      <Filter>Header Files\Game\Components\GFX</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Worker.h">
       <Filter>Header Files\Engine</Filter>
@@ -202,6 +205,24 @@
     </ClInclude>
     <ClInclude Include="Engine\Components.h">
       <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Systems.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Systems\Collide.h">
+      <Filter>Header Files\Engine\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Components\GFX.h">
+      <Filter>Header Files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Components\SimpleComponents.h">
+      <Filter>Header Files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Components\GFX\GFXAnimation.h">
+      <Filter>Header Files\Engine\Components\GFX</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Systems\StandartEnemy.h">
+      <Filter>Header Files\Game\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

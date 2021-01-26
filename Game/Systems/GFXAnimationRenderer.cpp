@@ -43,13 +43,13 @@ namespace Systems {
 			SDL_Rect clipRect = createClipRect(gfx);
 			SDL_Rect drawRect = createDrawRect(gfx, transform);
 
-			if (transform.rotation > 0) {
+			if (gfx.rotation > 0) {
 				SDL_RenderCopyEx(
 					_renderer,
 					gfx.texture,
 					&clipRect,
 					&drawRect,
-					transform.rotation,
+					gfx.rotation,
 					NULL,
 					SDL_FLIP_NONE
 				);

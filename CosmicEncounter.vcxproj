@@ -165,6 +165,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="Engine\Game.cpp" />
     <ClCompile Include="Engine\Keyboard.cpp" />
     <ClCompile Include="Engine\EngineTime.cpp" />
+    <ClCompile Include="Engine\Systems\Collide.cpp" />
     <ClCompile Include="Engine\Worker.cpp" />
     <ClCompile Include="Game\Systems\Anchor.cpp" />
     <ClCompile Include="Game\Systems\GFXAnimationRenderer.cpp" />
@@ -173,6 +174,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="Game\Systems\InputSystem.cpp" />
     <ClCompile Include="Game\Systems\Remover.cpp" />
     <ClCompile Include="Game\Systems\RenderPlayer.cpp" />
+    <ClCompile Include="Game\Systems\StandartEnemy.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -186,17 +188,19 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Engine\Assets.h" />
     <ClInclude Include="Engine\Assets\Texture.h" />
     <ClInclude Include="Engine\Components.h" />
+    <ClInclude Include="Engine\Components\GFX.h" />
+    <ClInclude Include="Engine\Components\GFX\GFXAnimation.h" />
     <ClInclude Include="Engine\Components\Physics.h" />
+    <ClInclude Include="Engine\Components\SimpleComponents.h" />
     <ClInclude Include="Engine\Debug.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\Game.h" />
     <ClInclude Include="Engine\Keyboard.h" />
     <ClInclude Include="Engine\EngineTime.h" />
+    <ClInclude Include="Engine\Systems.h" />
+    <ClInclude Include="Engine\Systems\Collide.h" />
     <ClInclude Include="Engine\Worker.h" />
     <ClInclude Include="Game\Components\Components.h" />
-    <ClInclude Include="Game\Components\GFX.h" />
-    <ClInclude Include="Game\Components\GFX\GFXAnimation.h" />
-    <ClInclude Include="Game\Components\SimpleComponents.h" />
     <ClInclude Include="Game\Components\Stats.h" />
     <ClInclude Include="Game\Components\Tags.h" />
     <ClInclude Include="Game\Systems\Anchor.h" />
@@ -207,6 +211,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Game\Systems\Remover.h" />
     <ClInclude Include="Game\Systems\RendererSystem.h" />
     <ClInclude Include="Game\Systems\RenderPlayer.h" />
+    <ClInclude Include="Game\Systems\StandartEnemy.h" />
     <ClInclude Include="Game\Systems\Systems.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="TimeMeasure.h" />

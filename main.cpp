@@ -9,14 +9,31 @@
 
 inline ECS::Entity& makePlayer(ECS::World& world, Engine::Game& game) {
 	auto& entity = world.newEntity();
-	auto position = Components::Transform::Position(10, 10);
+	auto position = Components::Transform::Position(300, 700);
 	auto tileSize = Size{ 32, 32 };
-	auto rotation = 0.0f;
-	entity.addComponent<Components::Transform>(position, tileSize, rotation);
+	entity.addComponent<Components::Transform>(position, tileSize);
+	entity.addComponent<Components::CircleCollider>(16.0f, 16.0f, 16.0f);
 	entity.addComponent<Components::PlayerTag>();
 	auto* texture = game.assets->textures.load("Assets/Ships/tile.png");
 
 	entity.addComponent<Components::GFXTexture>(*texture, tileSize);
+	auto& stats = entity.addComponent<Components::HeroStats>();
+	stats.speed = 300;
+	return entity;
+}
+
+inline ECS::Entity& makeEnemy(ECS::World& world, Engine::Game& game) {
+	auto& entity = world.newEntity();
+	auto position = Components::Transform::Position(300.0f, 300.0f);
+	auto tileSize = Size{ 32, 32 };
+	entity.addComponent<Components::Transform>(position, tileSize);
+	entity.addComponent<Components::CircleCollider>(16.0f, 16.0f, 16.0f);
+	entity.addComponent<Components::EnemyTag>();
+	auto* texture = game.assets->textures.load("Assets/Ships/tile.png");
+
+	Vector2D<int> tileOffset{64, 64};
+	auto& gfx = entity.addComponent<Components::GFXTexture>(*texture, tileOffset, tileSize);
+	gfx.rotation = 180.0f;
 	auto& stats = entity.addComponent<Components::HeroStats>();
 	stats.speed = 300;
 	return entity;
@@ -30,12 +47,10 @@ inline void makeFire(ECS::World& world, Engine::Game& game, ECS::Entity& parent)
 	Size tileSize{ 9, 24 };
 	Vector2D<int> frames{ 10, 6 };
 	auto& animtion = entity.addComponent<Components::GFXAnimtion>(*texture, tileSize, frames);
-	animtion.speed = 0.5;
+	animtion.speed = 0.8f;
 
 	Vector2D<int> fireOffset{ -4, 0 };
 	auto& anchor = entity.addComponent<Components::Anchor>(parent.id, fireOffset);
-	anchor.rotationCenter.x = -1;
-	anchor.rotationCenter.y = -1;
 	anchor.jointCenter.x = 16;
 	anchor.jointCenter.y = 24;
 }
@@ -46,8 +61,11 @@ class Worker : public Engine::Worker {
 		auto& world = getWorld();
 		auto& player = makePlayer(world, game);
 		makeFire(world, game, player);
+		makeEnemy(world, game);
+		world.registerSystem<Systems::Collide>();
 		world.registerSystem<Systems::Input>();
 		world.registerSystem<Systems::Anchor>();
+		world.registerSystem<Systems::StandartEnemy>();
 		world.registerSystem<Systems::GFXAnimationRenderer>();
 		world.registerSystem<Systems::GFXTextureRenderer>();
 		world.registerSystem<Systems::GFXRectRenderer>();
