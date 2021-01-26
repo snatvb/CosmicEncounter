@@ -68,6 +68,11 @@ namespace ECS {
 			auto toDelete = _entities.find(id);
 			if (toDelete != _entities.end()) {
 				auto [_, entity] = *toDelete;
+				for (auto system : _systems) {
+					for (auto filter : system->filters) {
+						filter->handleRemovedEntity(*entity);
+					}
+				}
 				for (auto& [_, entities] : _filteredEntities) {
 					entities.erase(std::remove(
 						entities.begin(),
@@ -133,6 +138,12 @@ namespace ECS {
 					}
 				}
 			}
+
+			for (auto system : _systems) {
+				for (auto filter : system->filters) {
+					filter->handleAddedComponent(entity);
+				}
+			}
 		}
 
 		void _handleComponentRemoved(Entity& entity, Component& component) {
@@ -143,6 +154,12 @@ namespace ECS {
 						entities.end(),
 						[&](Entity* item) { return entity.id == item->id; }
 					), entities.end());
+				}
+			}
+
+			for (auto system : _systems) {
+				for (auto filter : system->filters) {
+					filter->handleRemovedComponent(entity);
 				}
 			}
 		}

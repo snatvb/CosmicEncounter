@@ -9,6 +9,12 @@ namespace Systems {
 	public:
 		using Filter = ECS::Filters::Include<Components::PlayerTag>;
 
+		ECS::Filters::Include<Components::PlayerTag> playerFilter;
+
+		ControlPlayer() {
+			filters = ECS::FilterList{ &playerFilter };
+		}
+
 		void init() override;
 		void run(ECS::FilteredEntities& enitites) override;
 	private:

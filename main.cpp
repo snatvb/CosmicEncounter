@@ -90,8 +90,7 @@ class Worker : public Engine::Worker {
 		createEnemy(world, game);
 	}
 
-	inline void update() override {
-	}
+	inline void update() override {}
 };
 
 int main() {

@@ -26,7 +26,7 @@ namespace Engine {
 			_functionsByLayers[static_cast<int>(layer)].emplace_back(callback);
 		};
 	private:
-		RenderCache _functionsByLayers;
+		RenderCache _functionsByLayers{};
 		SDL_Renderer* _renderer = nullptr;
 	};
 }

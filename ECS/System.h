@@ -5,10 +5,12 @@ namespace ECS {
 	class Filter;
 	class Entity;
 	using FilteredEntities = std::vector<Entity*>;
+	using FilterList = std::vector<Filter*>;
 
 	class BaseSystem {
 	public:
 		bool isActive = true;
+		FilterList filters;
 
 		virtual Filter& getFilter() = 0;
 		virtual void init() = 0;
@@ -17,7 +19,7 @@ namespace ECS {
 	protected:
 		BaseSystem(SystemID id) : _id(id) {}
 		SystemID _id;
-		World* _world;
+		World* _world = nullptr;
 
 		friend class World;
 	};

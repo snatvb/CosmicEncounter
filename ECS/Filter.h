@@ -1,9 +1,11 @@
 #pragma once
-#include "Entity.h"
+#include <vector>
 #include <iostream>
+#include "Entity.h"
 
 namespace ECS {
 	class Entity;
+	using FilteredEntities = std::vector<Entity*>;
 
 	template<typename ...Args> struct FilterHelper;
 
@@ -53,6 +55,7 @@ namespace ECS {
 			OneFrame,
 		};
 
+		FilteredEntities entities{};
 		Type type = Type::None;
 		Filter()
 			: _id(getFilterId()) {
@@ -61,6 +64,33 @@ namespace ECS {
 
 		FilterID getId() { return _id; };
 		virtual bool validate(ECS::Entity& entity) = 0;
+
+		void handleRemovedEntity(ECS::Entity& entity) {
+			entities.erase(std::remove(
+				entities.begin(),
+				entities.end(),
+				&entity
+			), entities.end());
+		}
+
+		void handleAddedComponent(ECS::Entity& entity) {
+			if (validate(entity)) {
+				if (std::find(entities.begin(), entities.end(), &entity) == entities.end()) {
+					entities.emplace_back(&entity);
+				}
+			}
+		}
+
+		void handleRemovedComponent(ECS::Entity& entity) {
+			if (!validate(entity)) {
+				entities.erase(std::remove(
+					entities.begin(),
+					entities.end(),
+					&entity
+				), entities.end());
+			}
+		}
+
 	protected:
 	private:
 		FilterID _id;
@@ -68,7 +98,7 @@ namespace ECS {
 
 	namespace Filters {
 		template <typename ...ComponentTypes>
-		class Include : Filter {
+		class Include : public Filter {
 		public:
 			Type type = Type::Include;
 
@@ -78,7 +108,7 @@ namespace ECS {
 		};
 
 		template <typename ...ComponentTypes>
-		class Exclude : Filter {
+		class Exclude : public Filter {
 		public:
 			Type type = Type::Exclude;
 
@@ -88,7 +118,7 @@ namespace ECS {
 		};
 
 		template <typename ...ComponentTypes>
-		class With : Filter {
+		class With : public Filter {
 		public:
 			Type type = Type::With;
 
@@ -97,7 +127,7 @@ namespace ECS {
 			};
 		};
 
-		class All : Filter {
+		class All : public Filter {
 		public:
 			Type type = Type::All;
 
@@ -106,7 +136,7 @@ namespace ECS {
 			};
 		};
 
-		class Nothing : Filter {
+		class Nothing : public Filter {
 		public:
 			Type type = Type::Nothing;
 
@@ -115,7 +145,7 @@ namespace ECS {
 			};
 		};
 
-		class OneFrame : Filter {
+		class OneFrame : public Filter {
 		public:
 			Type type = Type::OneFrame;
 
