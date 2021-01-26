@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 #include "Entity.h"
 #include "System.h"
 
@@ -7,6 +8,13 @@ namespace ECS {
 
 	class World {
 	public:
+		using Entities = std::vector<Entity*>;
+		using Systems = std::vector<BaseSystem*>;
+
+		World() {
+			_entities.reserve(256);
+		}
+
 		void update() {
 			std::vector<Entity*> filteredEntities;
 			for (auto& system : _systems) {
@@ -15,9 +23,9 @@ namespace ECS {
 					system->run(filteredEntities);
 				}
 				else {
-					for (auto& entity : _entites) {
+					for (auto& entity : _entities) {
 						if (filter.validate(*entity)) {
-							filteredEntities.push_back(entity.get());
+							filteredEntities.emplace_back(entity);
 						}
 					}
 					system->run(filteredEntities);
@@ -28,9 +36,26 @@ namespace ECS {
 
 		Entity& newEntity() {
 			auto entity = new Entity();
-			std::unique_ptr<Entity> entityPtr{ entity };
-			_entites.emplace_back(std::move(entityPtr));
+			_entities.emplace_back(entity);
 			return *entity;
+		}
+
+		Entity* getEntityById(EntityID id) {
+			for (auto& entity : _entities) {
+				if (entity->id == id) {
+					return entity;
+				}
+			}
+
+			return nullptr;
+		}
+
+		void removeEntity(Entity& entity) {
+			_entities.erase(std::remove_if(
+				_entities.begin(),
+				_entities.end(),
+				[&](Entity* item) { return &entity == item; }
+			), _entities.end());
 		}
 
 		template<typename T>
@@ -38,13 +63,12 @@ namespace ECS {
 			T* system = new T();
 			system->_world = this;
 			system->init();
-			std::unique_ptr<BaseSystem> systemPtr{ system };
-			_systems.emplace_back(std::move(systemPtr));
+			_systems.emplace_back(system);
 			return *system;
 		}
 
 	private:
-		std::vector<std::unique_ptr<Entity>> _entites;
-		std::vector<std::unique_ptr<BaseSystem>> _systems;
+		Entities _entities;
+		Systems _systems;
 	};
 }

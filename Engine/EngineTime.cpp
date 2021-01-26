@@ -1,9 +1,14 @@
-#include "Time.h"
+#include "EngineTime.h"
 
 namespace Engine {
 	double Time::delta()
 	{
 		return _delta.count();
+	}
+
+	double Time::deltaMs()
+	{
+		return std::chrono::duration_cast<std::chrono::milliseconds>(_delta).count();
 	}
 
 	void Time::_init()

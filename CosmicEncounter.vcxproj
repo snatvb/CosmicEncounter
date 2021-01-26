@@ -120,6 +120,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Geometry;$(SolutionDir)Engine;$(SolutionDir)ECS;$(SolutionDir)SDL2_ttf\include;$(SolutionDir)SDL2_image\include;$(SolutionDir)SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,6 +143,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Geometry;$(SolutionDir)Engine;$(SolutionDir)ECS;$(SolutionDir)SDL2_ttf\include;$(SolutionDir)SDL2_image\include;$(SolutionDir)SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -162,12 +164,14 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="Engine\Assets\Texture.cpp" />
     <ClCompile Include="Engine\Game.cpp" />
     <ClCompile Include="Engine\Keyboard.cpp" />
-    <ClCompile Include="Engine\Time.cpp" />
+    <ClCompile Include="Engine\EngineTime.cpp" />
     <ClCompile Include="Engine\Worker.cpp" />
+    <ClCompile Include="Game\Systems\Anchor.cpp" />
     <ClCompile Include="Game\Systems\GFXAnimationRenderer.cpp" />
     <ClCompile Include="Game\Systems\GFXRectRenderer.cpp" />
     <ClCompile Include="Game\Systems\GFXTextureRenderer.cpp" />
     <ClCompile Include="Game\Systems\InputSystem.cpp" />
+    <ClCompile Include="Game\Systems\Remover.cpp" />
     <ClCompile Include="Game\Systems\RenderPlayer.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -185,7 +189,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\Game.h" />
     <ClInclude Include="Engine\Keyboard.h" />
-    <ClInclude Include="Engine\Time.h" />
+    <ClInclude Include="Engine\EngineTime.h" />
     <ClInclude Include="Engine\Worker.h" />
     <ClInclude Include="Game\Components\Components.h" />
     <ClInclude Include="Game\Components\GFX.h" />
@@ -193,14 +197,17 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Game\Components\SimpleComponents.h" />
     <ClInclude Include="Game\Components\Stats.h" />
     <ClInclude Include="Game\Components\Tags.h" />
+    <ClInclude Include="Game\Systems\Anchor.h" />
     <ClInclude Include="Game\Systems\GFXAnimationRenderer.h" />
     <ClInclude Include="Game\Systems\GFXRectRenderer.h" />
     <ClInclude Include="Game\Systems\GFXTextureRenderer.h" />
     <ClInclude Include="Game\Systems\InputSystem.h" />
+    <ClInclude Include="Game\Systems\Remover.h" />
     <ClInclude Include="Game\Systems\RendererSystem.h" />
     <ClInclude Include="Game\Systems\RenderPlayer.h" />
     <ClInclude Include="Game\Systems\Systems.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="TimeMeasure.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CosmicEncounter.rc" />

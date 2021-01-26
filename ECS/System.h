@@ -26,6 +26,8 @@ namespace ECS {
 	public:
 		bool isActive = true;
 
+		virtual void init() {};
+
 		auto getFilter() {
 			using Filter = typename Impl::Filter;
 			static auto filter = Filter();

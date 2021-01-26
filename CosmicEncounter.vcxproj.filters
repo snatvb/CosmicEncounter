@@ -84,11 +84,17 @@
     <ClCompile Include="Game\Systems\GFXTextureRenderer.cpp">
       <Filter>Source Files\Game\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Time.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Systems\GFXAnimationRenderer.cpp">
       <Filter>Source Files\Game\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Systems\Anchor.cpp">
+      <Filter>Source Files\Game\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Systems\Remover.cpp">
+      <Filter>Source Files\Game\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\EngineTime.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -176,7 +182,16 @@
     <ClInclude Include="Game\Systems\GFXAnimationRenderer.h">
       <Filter>Header Files\Game\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Time.h">
+    <ClInclude Include="Game\Systems\Anchor.h">
+      <Filter>Header Files\Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Systems\Remover.h">
+      <Filter>Source Files\Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeMeasure.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\EngineTime.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>

@@ -15,6 +15,14 @@ struct API Vector2D
 	Vector2D(T x, T y) : x(x), y(y) {};
 };
 
+template struct Vector2D<__int8>;
+template struct Vector2D<__int16>;
+template struct Vector2D<__int32>;
 template struct Vector2D<int>;
+template struct Vector2D<unsigned __int8>;
+template struct Vector2D<unsigned __int16>;
+template struct Vector2D<unsigned __int32>;
+template struct Vector2D<unsigned int>;
 template struct Vector2D<float>;
+template struct Vector2D<double>;
 

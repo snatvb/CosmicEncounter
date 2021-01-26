@@ -1,4 +1,5 @@
 #pragma once
+#include <optional>
 #include "ECS.h"
 #include "SDL.h"
 #include "./GFX/GFXAnimation.h"
@@ -18,10 +19,18 @@ namespace Components {
 		GFXCircle(SDL_Color& color) : GFX(color) {}
 	};
 
-	struct GFXTexture : GFX {
+	struct GFXTexture : ECS::Component {
 		SDL_Texture* texture;
+		Vector2D<int> offset;
+		std::optional<Size> tileSize;
 
-		GFXTexture(SDL_Color& color, SDL_Texture& texture)
-			: GFX(color), texture(&texture) {}
+		GFXTexture(SDL_Texture& texture)
+			: texture(&texture) {}
+
+		GFXTexture(SDL_Texture& texture, Size& tileSize)
+			: texture(&texture), tileSize(tileSize) {}
+
+		GFXTexture(SDL_Texture& texture, Vector2D<int>& offset, Size& tileSize)
+			: texture(&texture), offset(offset), tileSize(tileSize) {}
 	};
 }

@@ -8,6 +8,7 @@ namespace ECS {
 	constexpr std::size_t MAX_COMPONENTS = 32;
 
 	using ComponentID = std::size_t;
+	using EntityID = std::size_t;
 	using ComponentBitSet = std::bitset<MAX_COMPONENTS>;
 
 	inline ComponentID getComponentTypeID() {
@@ -19,5 +20,10 @@ namespace ECS {
 	inline ComponentID getComponentTypeID() noexcept {
 		static ComponentID typeID = getComponentTypeID();
 		return typeID;
+	}
+
+	inline EntityID getEntityId() {
+		static EntityID lastId = 0;
+		return lastId++;
 	}
 }

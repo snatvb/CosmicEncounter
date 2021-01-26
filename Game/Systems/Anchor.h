@@ -5,13 +5,11 @@
 #include "../Components/Components.h"
 
 namespace Systems {
-	class Input : public ECS::System<Input> {
+	class Anchor : public ECS::System<Anchor> {
 	public:
-		using Filter = ECS::Filters::Include<Components::PlayerTag>;
+		using Filter = ECS::Filters::With<Components::Anchor, Components::Position>;
 
-		void init() override;
+		void init() override {};
 		void run(ECS::FilteredEntities& enitites) override;
-	private:
-		Engine::Game* _game;
 	};
 }

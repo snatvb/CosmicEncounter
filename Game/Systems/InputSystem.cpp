@@ -1,11 +1,11 @@
 #include "InputSystem.h"
 
-inline void move(ECS::Entity& entity, int x, int y) {
+inline void move(ECS::Entity& entity, int x, int y, double delta) {
 	auto& position = entity.getComponent<Components::Position>();
 	auto& stats = entity.getComponent<Components::HeroStats>();
 
-	position.x += (int)(x * stats.speed);
-	position.y += (int)(y * stats.speed);
+	position.x += (int)(stats.speed * delta * x);
+	position.y += (int)(stats.speed * delta * y);
 }
 
 inline int getX(Engine::Keyboard& keyboard) {
@@ -32,6 +32,21 @@ inline int getY(Engine::Keyboard& keyboard) {
 	return 0;
 }
 
+inline void handleMove(ECS::World& world, Engine::Game& game, ECS::Entity& entity) {
+	auto& keyboard = game.keyboard;
+
+	if (keyboard.isPressed(SDLK_f)) {
+		world.removeEntity(entity);
+	}
+
+	int x = getX(keyboard);
+	int y = getY(keyboard);
+
+	if (x != 0 || y != 0) {
+		move(entity, x, y, game.time.delta());
+	}
+}
+
 namespace Systems {
 	void Input::init()
 	{
@@ -40,20 +55,8 @@ namespace Systems {
 
 	void Input::run(ECS::FilteredEntities& entities)
 	{
-
 		for (auto& entity : entities) {
-			_handleMove(*entity);
-		}
-	}
-
-	void Input::_handleMove(ECS::Entity& entity)
-	{
-		auto& keyboard = _game->keyboard;
-		int x = getX(keyboard);
-		int y = getY(keyboard);
-
-		if (x != 0 || y != 0) {
-			move(entity, x, y);
+			handleMove(*_world, *_game, *entity);
 		}
 	}
 }
