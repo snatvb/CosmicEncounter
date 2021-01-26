@@ -12,6 +12,9 @@ struct API Vector2D
 	T y;
 
 	Vector2D() : x(0), y(0) {};
-	Vector2D(T x, T y) : x(x), y(0) {};
+	Vector2D(T x, T y) : x(x), y(y) {};
 };
+
+template struct Vector2D<int>;
+template struct Vector2D<float>;
 

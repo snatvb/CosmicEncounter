@@ -4,10 +4,13 @@
 #include "Worker.h"
 #include "Keyboard.h"
 #include "Assets.h"
+#include "Time.h"
 
 
 namespace Engine {
 	class Keyboard;
+	class Time;
+	class Worker;
 
 	class Game {
 	public:
@@ -19,6 +22,7 @@ namespace Engine {
 #pragma endregion
 
 		Keyboard keyboard;
+		Time time;
 		Assets::Manager* assets = nullptr;
 
 		void setName(const char* name);

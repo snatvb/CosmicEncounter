@@ -20,6 +20,7 @@ namespace Engine {
 	{
 		_worker = &worker;
 		if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
+			time._init();
 			_initWindow();
 			_initRenderer();
 			_initAssetsManager();
@@ -34,6 +35,7 @@ namespace Engine {
 		int frameTime;
 
 		while (_isRunning) {
+			time._update();
 			frameStart = SDL_GetTicks();
 			frameTime = SDL_GetTicks() - frameStart;
 

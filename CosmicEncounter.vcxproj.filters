@@ -84,6 +84,12 @@
     <ClCompile Include="Game\Systems\GFXTextureRenderer.cpp">
       <Filter>Source Files\Game\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Time.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Systems\GFXAnimationRenderer.cpp">
+      <Filter>Source Files\Game\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -166,6 +172,12 @@
     </ClInclude>
     <ClInclude Include="Game\Systems\Systems.h">
       <Filter>Header Files\Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Systems\GFXAnimationRenderer.h">
+      <Filter>Header Files\Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Time.h">
+      <Filter>Header Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
