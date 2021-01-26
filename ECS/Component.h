@@ -1,25 +1,21 @@
 #pragma once
 
 namespace ECS {
-	class Entity;
+
+	enum class ComponentType {
+		Simple,
+		OneFrame
+	};
 
 	struct Component {
+
 	protected:
-		enum class Type {
-			Simple,
-			OneFrame
-		};
+		virtual ComponentType _getType();
 
-		virtual Type _getType() {
-			return Type::Simple;
-		}
-
-		friend class Entity;
+		friend bool componentIs(Component& component, ComponentType type);
 	};
 
 	struct OneFrameComponent : Component {
-		virtual Type _getType() override {
-			return Type::OneFrame;
-		}
+		virtual ComponentType _getType() override;
 	};
 }

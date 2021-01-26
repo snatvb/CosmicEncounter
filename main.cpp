@@ -79,11 +79,6 @@ class Worker : public Engine::Worker {
 		auto& player = createPlayer(world, game);
 		createFire(world, game, player);
 		createEnemy(world, game);
-		for (size_t i = 0; i < 10000; i++)
-		{
-			auto& entity = world.newEntity();
-			entity.addComponent<Components::Scale>();
-		}
 	}
 
 	inline void update() override {

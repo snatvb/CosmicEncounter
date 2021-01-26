@@ -4,6 +4,7 @@
 #include <map>
 #include "System.h"
 #include "Filter.h"
+#include "OneFrameClearSystem.h"
 
 namespace ECS {
 	class BaseSystem;
@@ -20,6 +21,7 @@ namespace ECS {
 		}
 
 		void init() {
+			registerSystem<OneFrameClearSystem>();
 			for (auto& system : _systems) {
 				Filter& filter = system->getFilter();
 				_filteredEntities[&filter] = Entities{};
@@ -96,6 +98,7 @@ namespace ECS {
 
 	private:
 		std::map<Filter*, Entities> _filteredEntities;
+		Filters::OneFrame _oneFrameFilter;
 		Entities _entities;
 		Systems _systems;
 
@@ -103,17 +106,17 @@ namespace ECS {
 			switch (changeType)
 			{
 			case ECS::Entity::ChangeType::RemovedComponent:
-				_handleComponentRemoved(entity);
+				_handleComponentRemoved(entity, component);
 				break;
 			case ECS::Entity::ChangeType::AddedComponent:
-				_handleComponentAdded(entity);
+				_handleComponentAdded(entity, component);
 				break;
 			default:
 				break;
 			}
 		}
 
-		void _handleComponentAdded(Entity& entity) {
+		void _handleComponentAdded(Entity& entity, Component& component) {
 			for (auto& [filter, entities] : _filteredEntities) {
 				if (filter->validate(entity)) {
 					entities.emplace_back(&entity);
@@ -121,7 +124,7 @@ namespace ECS {
 			}
 		}
 
-		void _handleComponentRemoved(Entity& entity) {
+		void _handleComponentRemoved(Entity& entity, Component& component) {
 			for (auto& [filter, entities] : _filteredEntities) {
 				if (!filter->validate(entity)) {
 					entities.erase(std::remove_if(

@@ -3,6 +3,7 @@
 namespace ECS {
 	class World;
 	class Filter;
+	class Entity;
 	using FilteredEntities = std::vector<Entity*>;
 
 	class BaseSystem {

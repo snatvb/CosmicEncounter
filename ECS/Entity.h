@@ -4,7 +4,6 @@
 #include "Component.h"
 
 namespace ECS {
-	class World;
 	using ComponentArray = std::array<Component*, MAX_COMPONENTS>;
 
 	class Entity {
@@ -43,6 +42,9 @@ namespace ECS {
 
 			_componentArray[id] = component;
 			_componentBitSet[id] = true;
+			if (componentIs(*component, ComponentType::OneFrame)) {
+				_oneFrameComponentCount++;
+			}
 			_onChange(*this, *component, ChangeType::AddedComponent);
 
 			return *component;
@@ -61,6 +63,9 @@ namespace ECS {
 				auto component = _componentArray[id];
 				_componentArray[id] = nullptr;
 				_componentBitSet[id] = false;
+				if (componentIs(*component, ComponentType::OneFrame)) {
+					_oneFrameComponentCount--;
+				}
 				_onChange(*this, *component, ChangeType::RemovedComponent);
 				delete component;
 				return true;
@@ -68,12 +73,16 @@ namespace ECS {
 			return false;
 		}
 
+		inline bool hasOneFrameComponents() {
+			return _oneFrameComponentCount > 0;
+		}
+
 		inline void clearOneFrameComponents() {
 			for (ComponentID i = 0; i < _componentArray.size(); i++)
 			{
 				if (_componentBitSet[i]) {
 					auto component = _componentArray[i];
-					if (component->_getType() == Component::Type::OneFrame) {
+					if (componentIs(*component, ComponentType::OneFrame)) {
 						_componentArray[i] = nullptr;
 						_componentBitSet[i] = false;
 						delete component;
@@ -88,10 +97,9 @@ namespace ECS {
 
 	private:
 		bool _active = true;
+		unsigned char _oneFrameComponentCount = 0;
 		ComponentArray _componentArray{};
 		ComponentBitSet _componentBitSet;
 		OnChange _onChange;
-
-		friend class World;
 	};
 }

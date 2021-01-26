@@ -120,7 +120,7 @@ namespace ECS {
 			Type type = Type::OneFrame;
 
 			bool validate(Entity& entity) {
-				return false;
+				return entity.hasOneFrameComponents();
 			};
 		};
 	}

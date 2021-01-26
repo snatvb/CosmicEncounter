@@ -159,6 +159,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ECS\Component.cpp" />
     <ClCompile Include="ECS\World.cpp" />
     <ClCompile Include="Engine\Assets\Texture.cpp" />
     <ClCompile Include="Engine\Game.cpp" />
@@ -220,6 +221,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Game\Systems\RenderPlayer.h" />
     <ClInclude Include="Game\Systems\StandartEnemy.h" />
     <ClInclude Include="Game\Systems\Systems.h" />
+    <ClInclude Include="ECS\OneFrameClearSystem.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="TimeMeasure.h" />
   </ItemGroup>
