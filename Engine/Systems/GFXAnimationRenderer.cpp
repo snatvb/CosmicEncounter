@@ -1,4 +1,5 @@
 #include "GFXAnimationRenderer.h"
+#include "../Game.h"
 
 inline SDL_Rect createDrawRect(const Components::GFXAnimtion& gfx, const Components::Transform& transform) {
 	SDL_Rect drawRect;

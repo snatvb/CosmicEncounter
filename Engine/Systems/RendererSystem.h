@@ -1,9 +1,9 @@
 #pragma once
 #include "ECS.h"
+#include "../Renderer.h"
+#include "../Game.h"
 
 namespace Systems {
-	class Engine::Game;
-
 	template<typename T>
 	class RendererSystem : public ECS::System<T> {
 	public:

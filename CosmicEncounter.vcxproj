@@ -171,8 +171,8 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="Engine\Worker.cpp" />
     <ClCompile Include="Game\Systems\Anchor.cpp" />
     <ClCompile Include="Game\Systems\BulletControler.cpp" />
-    <ClCompile Include="Game\Systems\GFXAnimationRenderer.cpp" />
-    <ClCompile Include="Game\Systems\GFXRectRenderer.cpp" />
+    <ClCompile Include="Engine\Systems\GFXAnimationRenderer.cpp" />
+    <ClCompile Include="Engine\Systems\GFXShapeRenderer.cpp" />
     <ClCompile Include="Game\Systems\ControlPlayer.cpp" />
     <ClCompile Include="Game\Systems\Remover.cpp" />
     <ClCompile Include="Game\Systems\RenderPlayer.cpp" />
@@ -216,8 +216,8 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Game\Systems\Anchor.h" />
     <ClInclude Include="Game\Systems\Assets.h" />
     <ClInclude Include="Game\Systems\BulletControler.h" />
-    <ClInclude Include="Game\Systems\GFXAnimationRenderer.h" />
-    <ClInclude Include="Game\Systems\GFXRectRenderer.h" />
+    <ClInclude Include="Engine\Systems\GFXAnimationRenderer.h" />
+    <ClInclude Include="Engine\Systems\GFXShapeRenderer.h" />
     <ClInclude Include="Game\Systems\ControlPlayer.h" />
     <ClInclude Include="Game\Systems\Remover.h" />
     <ClInclude Include="Engine\Systems\RendererSystem.h" />

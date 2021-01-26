@@ -1,5 +1,7 @@
 #pragma once
-#include "../Components/Components.h"
+#include "ECS.h"
+#include "./RendererSystem.h"
+#include "../Components.h"
 
 namespace Systems {
 	class GFXRectRenderer : public RendererSystem<Systems::GFXRectRenderer> {
