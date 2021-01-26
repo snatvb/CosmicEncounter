@@ -1,6 +1,7 @@
 #pragma once
 #include "SDL.h"
 #undef main
+#include "Common.h"
 #include "Worker.h"
 #include "Keyboard.h"
 #include "Assets.h"

@@ -5,33 +5,19 @@
 #include "./GFX/GFXAnimation.h"
 
 namespace Components {
-	struct GFX : ECS::Component {
+	struct GFXTag : ECS::Component {};
+
+	struct GFXShape : ECS::Component {
 		SDL_Color color;
 
-		GFX(SDL_Color& color) : color(color) {}
+		GFXShape(SDL_Color& color) : color(color) {}
 	};
 
-	struct GFXRect : GFX {
-		GFXRect(SDL_Color& color) : GFX(color) {}
+	struct GFXRect : GFXShape {
+		GFXRect(SDL_Color& color) : GFXShape(color) {}
 	};
 
-	struct GFXCircle : GFX {
-		GFXCircle(SDL_Color& color) : GFX(color) {}
-	};
-
-	struct GFXTexture : ECS::Component {
-		SDL_Texture* texture;
-		Vector2D<int> offset;
-		std::optional<Size> tileSize;
-		float rotation = 0;
-
-		GFXTexture(SDL_Texture& texture)
-			: texture(&texture) {}
-
-		GFXTexture(SDL_Texture& texture, Size& tileSize)
-			: texture(&texture), tileSize(tileSize) {}
-
-		GFXTexture(SDL_Texture& texture, Vector2D<int>& offset, Size& tileSize)
-			: texture(&texture), offset(offset), tileSize(tileSize) {}
+	struct GFXCircle : GFXShape {
+		GFXCircle(SDL_Color& color) : GFXShape(color) {}
 	};
 }

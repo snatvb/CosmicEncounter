@@ -1,5 +1,4 @@
 #pragma once
-#include "RendererSystem.h"
 #include "../Components/Components.h"
 
 namespace Systems {

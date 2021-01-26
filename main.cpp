@@ -22,7 +22,8 @@ inline ECS::Entity& createPlayer(ECS::World& world, Engine::Game& game) {
 	gun.bulletSpeed = 1500.0f;
 
 	auto texture = game.assets->textures.load("Assets/Ships/tile.png");
-	entity.addComponent<Components::GFXTexture>(*texture, tileSize);
+	auto& gfx = entity.addComponent<Components::GFXAnimtion>(*texture, tileSize);
+	gfx.play = false;
 	auto& stats = entity.addComponent<Components::HeroStats>();
 	stats.speed = 900.0f;
 	return entity;
@@ -43,7 +44,8 @@ inline ECS::Entity& createEnemy(ECS::World& world, Engine::Game& game) {
 	gun.bulletSpeed = 1200.0f;
 
 	Vector2D<int> tileOffset{64, 64};
-	auto& gfx = entity.addComponent<Components::GFXTexture>(*texture, tileOffset, tileSize);
+	auto& gfx = entity.addComponent<Components::GFXAnimtion>(*texture, tileOffset, tileSize);
+	gfx.play = false;
 	gfx.rotation = 180.0f;
 	auto& stats = entity.addComponent<Components::HeroStats>();
 	stats.speed = 500.0f;
@@ -78,7 +80,6 @@ class Worker : public Engine::Worker {
 		world.registerSystem<Systems::StandartEnemy>();
 		world.registerSystem<Systems::BulletControl>();
 		world.registerSystem<Systems::GFXAnimationRenderer>();
-		world.registerSystem<Systems::GFXTextureRenderer>();
 		world.registerSystem<Systems::GFXRectRenderer>();
 		world.registerSystem<Systems::Remover>();
 		world.init();

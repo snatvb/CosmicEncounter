@@ -58,15 +58,6 @@ namespace Systems {
 				SDL_RenderCopy(_renderer, gfx.texture, &clipRect, &drawRect);
 			}
 
-			//SDL_Rect rect;
-			//rect.x = static_cast<int>(transform.position.x);
-			//rect.y = static_cast<int>(transform.position.y);
-			//rect.w = 3;
-			//rect.h = 3;
-			//auto _renderer = Engine::Game::GetInstance().getRenderer();
-			//SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
-			//SDL_RenderFillRect(_renderer, &rect);
-
 			if (gfx.play) {
 				moveFrame(gfx);
 			}

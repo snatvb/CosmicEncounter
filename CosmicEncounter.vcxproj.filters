@@ -84,9 +84,6 @@
     <ClCompile Include="Engine\Assets\Texture.cpp">
       <Filter>Source Files\Engine\Assets</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Systems\GFXTextureRenderer.cpp">
-      <Filter>Source Files\Game\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Systems\GFXAnimationRenderer.cpp">
       <Filter>Source Files\Game\Systems</Filter>
     </ClCompile>
@@ -170,9 +167,6 @@
     <ClInclude Include="ECS\World.h">
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Systems\RendererSystem.h">
-      <Filter>Header Files\Game\Systems</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Keyboard.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
@@ -180,9 +174,6 @@
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Game\Systems\GFXRectRenderer.h">
-      <Filter>Header Files\Game\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Systems\GFXTextureRenderer.h">
       <Filter>Header Files\Game\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Worker.h">
@@ -262,6 +253,12 @@
     </ClInclude>
     <ClInclude Include="Engine\Systems\EndAnimationRemover.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Systems\RendererSystem.h">
+      <Filter>Header Files\Game\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

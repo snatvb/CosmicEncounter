@@ -173,7 +173,6 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="Game\Systems\BulletControler.cpp" />
     <ClCompile Include="Game\Systems\GFXAnimationRenderer.cpp" />
     <ClCompile Include="Game\Systems\GFXRectRenderer.cpp" />
-    <ClCompile Include="Game\Systems\GFXTextureRenderer.cpp" />
     <ClCompile Include="Game\Systems\ControlPlayer.cpp" />
     <ClCompile Include="Game\Systems\Remover.cpp" />
     <ClCompile Include="Game\Systems\RenderPlayer.cpp" />
@@ -190,6 +189,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="ECS\World.h" />
     <ClInclude Include="Engine\Assets.h" />
     <ClInclude Include="Engine\Assets\Texture.h" />
+    <ClInclude Include="Engine\Common.h" />
     <ClInclude Include="Engine\Components.h" />
     <ClInclude Include="Engine\Components\GFX.h" />
     <ClInclude Include="Engine\Components\GFX\GFXAnimation.h" />
@@ -217,10 +217,9 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Game\Systems\BulletControler.h" />
     <ClInclude Include="Game\Systems\GFXAnimationRenderer.h" />
     <ClInclude Include="Game\Systems\GFXRectRenderer.h" />
-    <ClInclude Include="Game\Systems\GFXTextureRenderer.h" />
     <ClInclude Include="Game\Systems\ControlPlayer.h" />
     <ClInclude Include="Game\Systems\Remover.h" />
-    <ClInclude Include="Game\Systems\RendererSystem.h" />
+    <ClInclude Include="Engine\Systems\RendererSystem.h" />
     <ClInclude Include="Game\Systems\RenderPlayer.h" />
     <ClInclude Include="Game\Systems\StandartEnemy.h" />
     <ClInclude Include="Game\Systems\Systems.h" />
