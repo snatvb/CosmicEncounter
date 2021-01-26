@@ -8,8 +8,6 @@ namespace Systems {
 	public:
 		using Filter = ECS::Filters::With<Components::Transform, Components::GFXAnimtion>;
 
-		GFXAnimationRenderer(Engine::RenderCache& cache) : RendererSystem(cache) {}
-
 		void run(ECS::FilteredEntities& entities) override;
 	};
 }

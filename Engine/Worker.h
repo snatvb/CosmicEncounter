@@ -11,8 +11,6 @@ namespace Engine {
 		virtual void inline update() = 0;
 		virtual ECS::World& getWorld();
 
-	protected:
-		RenderCache _renderCache;
 	private:
 		ECS::World _world;
 	};

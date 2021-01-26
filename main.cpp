@@ -80,7 +80,7 @@ class Worker : public Engine::Worker {
 		world.registerSystem<Systems::StandartEnemy>();
 		world.registerSystem<Systems::BulletControl>();
 		world.registerSystem<Systems::Remover>();
-		world.registerSystem<Systems::GFXAnimationRenderer>(_renderCache);
+		world.registerSystem<Systems::GFXAnimationRenderer>();
 		//world.registerSystem<Systems::GFXRectRenderer>();
 		world.init();
 		auto& player = createPlayer(world, game);
@@ -89,13 +89,6 @@ class Worker : public Engine::Worker {
 	}
 
 	inline void update() override {
-		auto& renderer = *Engine::Game::GetInstance().getRenderer();
-		for (auto& layer : _renderCache) {
-			for (auto& f : layer) {
-				f(renderer);
-			}
-			layer.clear();
-		}
 	}
 };
 

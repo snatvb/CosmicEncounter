@@ -39,12 +39,12 @@ namespace Systems {
 		for (auto& entity : entities) {
 			auto& gfx = entity->getComponent<Components::GFXAnimtion>();
 			auto& transform = entity->getComponent<Components::Transform>();
-			_renderCache[gfx.layer].emplace_back([gfx, transform](SDL_Renderer& renderer) {
+			_renderer->add(gfx.layer, [gfx, transform](SDL_Renderer& sdlRenderer) {
 				SDL_Rect clipRect = createClipRect(gfx);
 				SDL_Rect drawRect = createDrawRect(gfx, transform);
 				if (gfx.rotation > 0) {
 					SDL_RenderCopyEx(
-						&renderer,
+						&sdlRenderer,
 						gfx.texture,
 						&clipRect,
 						&drawRect,
@@ -54,7 +54,7 @@ namespace Systems {
 					);
 				}
 				else {
-					SDL_RenderCopy(&renderer, gfx.texture, &clipRect, &drawRect);
+					SDL_RenderCopy(&sdlRenderer, gfx.texture, &clipRect, &drawRect);
 				}
 			});
 

@@ -6,15 +6,10 @@
 #include "./GFX/GFXAnimation.h"
 
 namespace Components {
-	struct GFXTag : ECS::Component {
-		Engine::Layer layer;
-
-		GFXTag() : layer(Engine::Layer::Default) {}
-		GFXTag(Engine::Layer layer) : layer(layer) {}
-	};
 
 	struct GFXShape : ECS::Component {
 		SDL_Color color;
+		Engine::Layer layer = Engine::Layer::Default;
 
 		GFXShape(SDL_Color& color) : color(color) {}
 	};

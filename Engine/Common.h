@@ -12,5 +12,6 @@ namespace Engine {
 		Last
 	};
 
-	using RenderCache = std::array<std::vector<std::function<void(SDL_Renderer&)>>, static_cast<char>(Layer::Last)>;
+	using RenderCallback = std::function<void(SDL_Renderer&)>;
+	using RenderCache = std::array<std::vector<RenderCallback>, static_cast<char>(Layer::Last)>;
 }

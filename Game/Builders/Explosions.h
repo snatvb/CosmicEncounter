@@ -12,7 +12,8 @@ namespace Builders {
 		auto& entity = world.newEntity();
 		Vector2D<int> frames{ 5, 1 };
 		auto& gfx = entity.addComponent<Components::GFXAnimtion>(*texture, tileSize, frames);
-		gfx.layer = static_cast<char>(Engine::Layer::Background);
+		gfx.layer = static_cast<char>(Engine::Layer::Effects);
+		gfx.speed = 0.5f;
 		entity.addComponent<Components::Transform>(transform.position);
 		entity.addComponent<Components::GFXDestroyByEndAnimationTag>();
 	}

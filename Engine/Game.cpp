@@ -3,7 +3,9 @@
 
 namespace Engine {
 	Game::Game() {}
-	Game::~Game() {}
+	Game::~Game() {
+		delete _renderer;
+	}
 
 	Game& Game::GetInstance()
 	{
@@ -23,6 +25,7 @@ namespace Engine {
 			time._init();
 			_initWindow();
 			_initRenderer();
+			_renderer = new Renderer(*_sdlRenderer);
 			_initAssetsManager();
 			worker.init();
 			_isRunning = true;
@@ -40,12 +43,13 @@ namespace Engine {
 			frameTime = SDL_GetTicks() - frameStart;
 
 
-			SDL_RenderClear(_renderer);
+			SDL_RenderClear(_sdlRenderer);
 			_handleEvents();
 			_worker->getWorld().update();
 			_worker->update();
-			SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
-			SDL_RenderPresent(_renderer);
+			_renderer->render();
+			SDL_SetRenderDrawColor(_sdlRenderer, 0, 0, 0, 255);
+			SDL_RenderPresent(_sdlRenderer);
 
 			if (_frameDelay > frameTime) {
 				SDL_Delay(_frameDelay - frameTime);
@@ -53,9 +57,9 @@ namespace Engine {
 		}
 	}
 
-	SDL_Renderer* Game::getRenderer()
+	SDL_Renderer* Game::getSDLRenderer()
 	{
-		return _renderer;
+		return _sdlRenderer;
 	}
 
 	SDL_Window* Game::getWindow()
@@ -86,17 +90,17 @@ namespace Engine {
 
 	void Game::_initRenderer()
 	{
-		_renderer = SDL_CreateRenderer(_window, -1, 0);
+		_sdlRenderer = SDL_CreateRenderer(_window, -1, 0);
 
-		if (_renderer) {
-			SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
+		if (_sdlRenderer) {
+			SDL_SetRenderDrawColor(_sdlRenderer, 0, 0, 0, 255);
 			Debug::Log("Renderer initialized");
 		}
 	}
 
 	void Game::_initAssetsManager()
 	{
-		assets = new Assets::Manager(*_renderer);
+		assets = new Assets::Manager(*_sdlRenderer);
 	}
 
 	void Game::_handleEvents()

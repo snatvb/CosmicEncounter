@@ -200,6 +200,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Engine\Game.h" />
     <ClInclude Include="Engine\Keyboard.h" />
     <ClInclude Include="Engine\EngineTime.h" />
+    <ClInclude Include="Engine\Renderer.h" />
     <ClInclude Include="Engine\Systems.h" />
     <ClInclude Include="Engine\Systems\Collide.h" />
     <ClInclude Include="Engine\Systems\EndAnimationRemover.h" />

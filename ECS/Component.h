@@ -4,8 +4,7 @@ namespace ECS {
 
 	enum class ComponentType {
 		Simple,
-		OneFrame,
-		GFX
+		OneFrame
 	};
 
 	struct Component {

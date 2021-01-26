@@ -6,6 +6,7 @@
 #include "Keyboard.h"
 #include "Assets.h"
 #include "EngineTime.h"
+#include "Renderer.h"
 
 
 namespace Engine {
@@ -26,11 +27,15 @@ namespace Engine {
 		Time time;
 		Assets::Manager* assets = nullptr;
 
+		static Renderer* GetRenderer() {
+			return GetInstance()._renderer;
+		}
+
 		void setName(const char* name);
 		void init(Worker& gameHandler);
 		void run();
 
-		SDL_Renderer* getRenderer();
+		SDL_Renderer* getSDLRenderer();
 		SDL_Window* getWindow();
 		const SDL_Event& getEvent();
 
@@ -43,9 +48,10 @@ namespace Engine {
 		int _frameDelay = 1000 / _fps;
 		const char* _name = "Engine";
 		SDL_Window* _window = nullptr;
-		SDL_Renderer* _renderer = nullptr;
+		SDL_Renderer* _sdlRenderer = nullptr;
+		Renderer* _renderer = nullptr;
 		Worker* _worker = nullptr;
-		SDL_Event _event;
+		SDL_Event _event{};
 
 		void _initWindow();
 		void _initRenderer();
