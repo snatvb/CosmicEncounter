@@ -13,11 +13,13 @@ namespace Components {
 		GFXShape(SDL_Color& color) : color(color) {}
 	};
 
-	struct GFXRect : GFXShape {
-		GFXRect(SDL_Color& color) : GFXShape(color) {}
+	struct GFXRect : ECS::Component {
+		Size size;
+		GFXRect(Size& size) : size(size) {}
 	};
 
-	struct GFXCircle : GFXShape {
-		GFXCircle(SDL_Color& color) : GFXShape(color) {}
+	struct GFXCircle : ECS::Component {
+		float radius;
+		GFXCircle(float radius) : radius(radius) {}
 	};
 }
