@@ -18,7 +18,7 @@ inline ECS::Entity& createPlayer(ECS::World& world, Engine::Game& game) {
 
 	auto gunOffset = Vector2D<float>{ 12, -16 };
 	auto direction = Vector2D<float>{ 0, -1 };
-	auto& gun = entity.addComponent<Components::Gun>(gunOffset, direction, 10.0f, 1.0f);
+	auto& gun = entity.addComponent<Components::Gun>(gunOffset, direction, 10.0f, 101.0f);
 	gun.bulletSpeed = 1500.0f;
 
 	auto texture = game.assets->textures.load("Assets/Ships/tile.png");
@@ -39,7 +39,7 @@ inline ECS::Entity& createEnemy(ECS::World& world, Engine::Game& game) {
 
 	auto gunOffset = Vector2D<float>{ 12, 32 };
 	auto direction = Vector2D<float>{ 0, 1 };
-	auto& gun = entity.addComponent<Components::Gun>(gunOffset, direction, 10.0f, 3.0f);
+	auto& gun = entity.addComponent<Components::Gun>(gunOffset, direction, 10.0f, 13.0f);
 	gun.bulletSpeed = 1200.0f;
 
 	Vector2D<int> tileOffset{64, 64};

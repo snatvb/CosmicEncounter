@@ -12,7 +12,8 @@ namespace Builders {
 		entity.addComponent<Components::CircleCollider>(4.0f, 5.0f, 3.0f);
 
 		auto texture = game.assets->textures.load(Assets::bullets);
-		entity.addComponent<Components::GFXTexture>(*texture, tileSize);
+		auto& gfx = entity.addComponent<Components::GFXTexture>(*texture, tileSize);
+		gfx.rotation = gun.direction.y > 0 ? 180.0f : 0.0f;
 	}
 
 	inline void createSimpleBullet(ECS::World& world, Components::Gun& gun, Components::Point& point) {

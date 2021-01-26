@@ -17,7 +17,6 @@ namespace ECS {
 		using Systems = std::vector<BaseSystem*>;
 
 		World() {
-			_entities.reserve(256);
 			registerSystem<OneFrameClearSystem>();
 		}
 
@@ -51,34 +50,33 @@ namespace ECS {
 			auto entity = new Entity([this](Entity& entity, Component& component, Entity::ChangeType changeType) {
 				_handleEntityChange(entity, component, changeType);
 				});
-			_entities.emplace_back(entity);
+			_entities[entity->id] = entity;
 			return *entity;
 		}
 
 		Entity* getEntityById(EntityID id) {
-			for (auto& entity : _entities) {
-				if (entity->id == id) {
-					return entity;
-				}
+			auto found = _entities.find(id);
+			if (found != _entities.end()) {
+				auto [_, entity] = *found;
+				return entity;
 			}
-
 			return nullptr;
 		}
 
 		inline void removeEntity(EntityID id) {
 			std::cout << "remove: " << id << std::endl;
-			auto toDelete = std::find_if(_entities.begin(), _entities.end(), [&](Entity* item) { return id == item->id; });
+			auto toDelete = _entities.find(id);
 			if (toDelete != _entities.end()) {
+				auto [_, entity] = *toDelete;
 				for (auto& [_, entities] : _filteredEntities) {
-					entities.erase(std::remove_if(
+					entities.erase(std::remove(
 						entities.begin(),
 						entities.end(),
-						[&](Entity* item) { return item->id == id; }
+						entity
 					), entities.end());
 				}
-				Entity* x = *toDelete;
 				_entities.erase(toDelete);
-				delete x;
+				delete entity;
 			}
 		}
 
@@ -110,7 +108,7 @@ namespace ECS {
 
 	private:
 		std::map<Filter*, Entities> _filteredEntities;
-		Entities _entities;
+		std::map<EntityID, Entity*> _entities;
 		Systems _systems;
 
 		void _handleEntityChange(Entity& entity, Component& component, Entity::ChangeType changeType) {

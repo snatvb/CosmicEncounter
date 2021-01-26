@@ -15,8 +15,12 @@ void Systems::BulletControl::run(ECS::FilteredEntities& entities)
 		transform.position += diff;
 
 		if (entity->hasComponent<Components::Collided>()) {
-			//_world->removeEntity(*entity);
-			entity->addComponent<Components::ToRemoveTag>();
+			auto& collided = entity->getComponent<Components::Collided>();
+			if (auto entityCollided = _world->getEntityById(collided.entityId)) {
+				if (!entityCollided->hasComponent<Components::Bullet>()) {
+					entity->addComponent<Components::ToRemoveTag>();
+				}
+			}
 		}
 
 		int width;
