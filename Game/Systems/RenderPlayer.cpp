@@ -9,7 +9,7 @@ namespace Systems {
 	{
 		for (auto& entity : entities) {
 			auto& position = entity->getComponent<Components::Position>();
-			auto& size = entity->getComponent<Components::Size>();
+			auto& size = entity->getComponent<Components::Scale>();
 			auto& gfx = entity->getComponent<Components::GFX>();
 			SDL_Rect rect;
 			rect.x = position.x;

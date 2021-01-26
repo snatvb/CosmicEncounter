@@ -46,6 +46,9 @@
     <Filter Include="Source Files\Engine\Assets">
       <UniqueIdentifier>{2287a557-61ed-4c57-b373-8d92889e20ee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game\Components\GFX">
+      <UniqueIdentifier>{0a345a9e-efd4-4c6f-950b-e724fc5cee4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -79,7 +82,7 @@
       <Filter>Source Files\Engine\Assets</Filter>
     </ClCompile>
     <ClCompile Include="Game\Systems\GFXTextureRenderer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -131,9 +134,6 @@
     <ClInclude Include="ECS\World.h">
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Systems\Systems.h">
-      <Filter>Header Files\Game\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Systems\RendererSystem.h">
       <Filter>Header Files\Game\Systems</Filter>
     </ClInclude>
@@ -149,16 +149,22 @@
     <ClInclude Include="Engine\Assets.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Assets\Texture.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Worker.h">
-      <Filter>Header Files\Engine\Assets</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Systems\GFXRectRenderer.h">
       <Filter>Header Files\Game\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Game\Systems\GFXTextureRenderer.h">
+      <Filter>Header Files\Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Components\GFX\GFXAnimation.h">
+      <Filter>Header Files\Game\Components\GFX</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Worker.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Assets\Texture.h">
+      <Filter>Header Files\Engine\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Systems\Systems.h">
       <Filter>Header Files\Game\Systems</Filter>
     </ClInclude>
   </ItemGroup>

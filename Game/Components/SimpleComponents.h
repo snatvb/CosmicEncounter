@@ -10,12 +10,12 @@ namespace Components {
 		Position(int x, int y) : x(x), y(y) {}
 	};
 
-	struct Size : ECS::Component {
+	struct Scale : ECS::Component {
 		int width;
 		int height;
 
-		Size() : width(0), height(0) {}
-		Size(int width, int height)
+		Scale() : width(0), height(0) {}
+		Scale(int width, int height)
 			: width(width), height(height) {}
 	};
 }

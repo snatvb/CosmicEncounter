@@ -8,7 +8,7 @@ namespace Systems {
 		using Filter = ECS::Filters::With<
 			Components::GFXTexture,
 			Components::Position,
-			Components::Size
+			Components::Scale
 		>;
 		void run(ECS::FilteredEntities& entities) override;
 	};
