@@ -79,9 +79,9 @@ class Worker : public Engine::Worker {
 		world.registerSystem<Systems::Anchor>();
 		world.registerSystem<Systems::StandartEnemy>();
 		world.registerSystem<Systems::BulletControl>();
-		world.registerSystem<Systems::GFXAnimationRenderer>();
-		world.registerSystem<Systems::GFXRectRenderer>();
 		world.registerSystem<Systems::Remover>();
+		world.registerSystem<Systems::GFXAnimationRenderer>(_renderCache);
+		//world.registerSystem<Systems::GFXRectRenderer>();
 		world.init();
 		auto& player = createPlayer(world, game);
 		createFire(world, game, player);
@@ -89,6 +89,12 @@ class Worker : public Engine::Worker {
 	}
 
 	inline void update() override {
+		for (auto& layer : _renderCache) {
+			for (auto& f : layer) {
+				f();
+			}
+			layer.clear();
+		}
 	}
 };
 

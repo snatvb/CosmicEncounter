@@ -6,6 +6,7 @@
 namespace Components {
 	struct GFXAnimtion : ECS::Component {
 		static const int FPS = 60;
+		char layer = static_cast<char>(Engine::Layer::Default);
 		SDL_Texture* texture;
 		float speed = 1;
 		Vector2D<int> frames;

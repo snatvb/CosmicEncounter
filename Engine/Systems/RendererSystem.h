@@ -8,8 +8,10 @@ namespace Systems {
 	class RendererSystem : public ECS::System<T> {
 	public:
 		virtual void init() override;
+		RendererSystem(Engine::RenderCache& cache) : _renderCache(cache) {}
 
 	protected:
+		Engine::RenderCache& _renderCache;
 		SDL_Renderer* _renderer = nullptr;
 	};
 	

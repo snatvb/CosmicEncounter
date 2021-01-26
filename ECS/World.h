@@ -84,9 +84,9 @@ namespace ECS {
 			removeEntity(entity.id);
 		}
 
-		template<typename T>
-		T& registerSystem() {
-			T* system = new T();
+		template<typename T, typename ...TArgs>
+		T& registerSystem(TArgs&& ...args) {
+			T* system = new T(std::forward<TArgs>(args)...);
 			system->_world = this;
 			auto filter = system->getFilter();
 			system->init();

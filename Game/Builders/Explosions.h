@@ -11,7 +11,8 @@ namespace Builders {
 		auto tileSize = Size{ 32, 32 };
 		auto& entity = world.newEntity();
 		Vector2D<int> frames{ 5, 1 };
-		entity.addComponent<Components::GFXAnimtion>(*texture, tileSize, frames);
+		auto& gfx = entity.addComponent<Components::GFXAnimtion>(*texture, tileSize, frames);
+		gfx.layer = static_cast<char>(Engine::Layer::Background);
 		entity.addComponent<Components::Transform>(transform.position);
 		entity.addComponent<Components::GFXDestroyByEndAnimationTag>();
 	}

@@ -39,24 +39,24 @@ namespace Systems {
 		for (auto& entity : entities) {
 			auto& gfx = entity->getComponent<Components::GFXAnimtion>();
 			auto& transform = entity->getComponent<Components::Transform>();
-
-			SDL_Rect clipRect = createClipRect(gfx);
-			SDL_Rect drawRect = createDrawRect(gfx, transform);
-
-			if (gfx.rotation > 0) {
-				SDL_RenderCopyEx(
-					_renderer,
-					gfx.texture,
-					&clipRect,
-					&drawRect,
-					gfx.rotation,
-					NULL,
-					SDL_FLIP_NONE
-				);
-			}
-			else {
-				SDL_RenderCopy(_renderer, gfx.texture, &clipRect, &drawRect);
-			}
+			_renderCache[gfx.layer].emplace_back([&]() {
+				SDL_Rect clipRect = createClipRect(gfx);
+				SDL_Rect drawRect = createDrawRect(gfx, transform);
+				if (gfx.rotation > 0) {
+					SDL_RenderCopyEx(
+						_renderer,
+						gfx.texture,
+						&clipRect,
+						&drawRect,
+						gfx.rotation,
+						NULL,
+						SDL_FLIP_NONE
+					);
+				}
+				else {
+					SDL_RenderCopy(_renderer, gfx.texture, &clipRect, &drawRect);
+				}
+				});
 
 			if (gfx.play) {
 				moveFrame(gfx);
