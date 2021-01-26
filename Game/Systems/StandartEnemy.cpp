@@ -7,7 +7,7 @@ void Systems::StandartEnemy::init()
 
 void Systems::StandartEnemy::run(ECS::FilteredEntities& entities)
 {
-	for (auto entity : entities) {
+	for (auto& entity : entities) {
 		auto& transform = entity->getComponent<Components::Transform>();
 		auto& stats = entity->getComponent<Components::HeroStats>();
 		transform.position.y += static_cast<int>(stats.speed * _game->time.delta());

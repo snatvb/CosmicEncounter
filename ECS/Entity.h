@@ -13,7 +13,7 @@ namespace ECS {
 			RemovedComponent,
 			AddedComponent,
 		};
-		using OnChange = std::function<void(Entity&, ChangeType)>;
+		using OnChange = std::function<void(Entity&, Component&, ChangeType)>;
 
 		EntityID id;
 
@@ -43,7 +43,7 @@ namespace ECS {
 
 			_componentArray[id] = component;
 			_componentBitSet[id] = true;
-			_onChange(*this, ChangeType::AddedComponent);
+			_onChange(*this, *component, ChangeType::AddedComponent);
 
 			return *component;
 		}
@@ -61,14 +61,14 @@ namespace ECS {
 				auto component = _componentArray[id];
 				_componentArray[id] = nullptr;
 				_componentBitSet[id] = false;
-				_onChange(*this, ChangeType::RemovedComponent);
+				_onChange(*this, *component, ChangeType::RemovedComponent);
 				delete component;
 				return true;
 			}
 			return false;
 		}
 
-		void clearOneFrameComponents() {
+		inline void clearOneFrameComponents() {
 			for (ComponentID i = 0; i < _componentArray.size(); i++)
 			{
 				if (_componentBitSet[i]) {
@@ -82,11 +82,15 @@ namespace ECS {
 			}
 		}
 
+		inline bool hasComponents() {
+			return _componentBitSet.any();
+		}
+
 	private:
 		bool _active = true;
 		ComponentArray _componentArray{};
 		ComponentBitSet _componentBitSet;
-		std::function<void(Entity&, ChangeType)> _onChange;
+		OnChange _onChange;
 
 		friend class World;
 	};

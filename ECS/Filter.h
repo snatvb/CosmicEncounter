@@ -50,6 +50,7 @@ namespace ECS {
 			All,
 			None,
 			Nothing,
+			OneFrame,
 		};
 
 		Type type = Type::None;
@@ -110,7 +111,16 @@ namespace ECS {
 			Type type = Type::Nothing;
 
 			bool validate(Entity& entity) {
-				return true;
+				return false;
+			};
+		};
+
+		class OneFrame : Filter {
+		public:
+			Type type = Type::OneFrame;
+
+			bool validate(Entity& entity) {
+				return false;
 			};
 		};
 	}

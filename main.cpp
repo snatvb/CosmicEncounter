@@ -18,7 +18,7 @@ inline ECS::Entity& createPlayer(ECS::World& world, Engine::Game& game) {
 
 	auto gunOffset = Vector2D<float>{ 12, -16 };
 	auto direction = Vector2D<float>{ 0, -1 };
-	auto& gun = entity.addComponent<Components::Gun>(gunOffset, direction, 10.0f, 10);
+	auto& gun = entity.addComponent<Components::Gun>(gunOffset, direction, 10.0f, 1);
 	gun.bulletSpeed = 500.0f;
 
 	auto texture = game.assets->textures.load("Assets/Ships/tile.png");
@@ -79,6 +79,11 @@ class Worker : public Engine::Worker {
 		auto& player = createPlayer(world, game);
 		createFire(world, game, player);
 		createEnemy(world, game);
+		for (size_t i = 0; i < 10000; i++)
+		{
+			auto& entity = world.newEntity();
+			entity.addComponent<Components::Scale>();
+		}
 	}
 
 	inline void update() override {
