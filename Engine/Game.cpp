@@ -1,3 +1,4 @@
+#include "./helpers.h"
 #include "Game.h"
 #include "Debug.h"
 
@@ -20,6 +21,7 @@ namespace Engine {
 
 	void Game::init(Worker& worker)
 	{
+		helpers::srandTime();
 		_worker = &worker;
 		if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
 			time._init();

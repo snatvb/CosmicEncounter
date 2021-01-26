@@ -16,6 +16,7 @@ namespace ECS {
 	};
 
 	struct OneFrameComponent : Component {
+	protected:
 		virtual ComponentType _getType() override;
 	};
 }

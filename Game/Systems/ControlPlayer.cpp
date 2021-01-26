@@ -66,6 +66,25 @@ inline void handleMove(ECS::World& world, Engine::Game& game, ECS::Entity& entit
 	}
 }
 
+inline void handleCollide(ECS::World& world, Engine::Game& game, ECS::Entity& entity) {
+	if (!entity.hasComponent<Components::Collided>()) {
+		return;
+	}
+
+	auto& collided = entity.getComponent<Components::Collided>();
+	auto& stats = entity.getComponent<Components::HeroStats>();
+	if (auto collidedEntity = world.getEntityById(collided.entityId)) {
+		if (collidedEntity->hasComponent<Components::Bullet>()) {
+			auto& bullet = collidedEntity->getComponent<Components::Bullet>();
+			stats.health -= bullet.damage;
+		}
+	}
+
+	if (stats.health <= 0) {
+		entity.addComponent<Components::ToRemoveTag>();
+	}
+}
+
 namespace Systems {
 	void ControlPlayer::init()
 	{
@@ -77,6 +96,7 @@ namespace Systems {
 		for (auto& entity : entities) {
 			handleMove(*_world, *_game, *entity);
 			handleFire(*_world, *_game, *entity);
+			handleCollide(*_world, *_game, *entity);
 		}
 	}
 }

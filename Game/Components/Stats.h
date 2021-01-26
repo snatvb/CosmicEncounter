@@ -3,7 +3,7 @@
 
 namespace Components {
 	struct HeroStats : ECS::Component {
-		int health;
+		float health;
 		float speed;
 	};
 }
