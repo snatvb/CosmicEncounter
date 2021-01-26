@@ -74,6 +74,10 @@ struct API Vector2D
 		return *this;
 	}
 
+	bool operator==(const Vector2D& v) const {
+		return x == v.x && y == v.y;
+	}
+
 	void set(T x, T y) {
 		this->x = x;
 		this->y = y;

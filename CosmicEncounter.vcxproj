@@ -166,6 +166,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="Engine\Keyboard.cpp" />
     <ClCompile Include="Engine\EngineTime.cpp" />
     <ClCompile Include="Engine\Systems\Collide.cpp" />
+    <ClCompile Include="Engine\Systems\EndAnimationRemover.cpp" />
     <ClCompile Include="Engine\Utils\vectors.cpp" />
     <ClCompile Include="Engine\Worker.cpp" />
     <ClCompile Include="Game\Systems\Anchor.cpp" />
@@ -201,6 +202,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Engine\EngineTime.h" />
     <ClInclude Include="Engine\Systems.h" />
     <ClInclude Include="Engine\Systems\Collide.h" />
+    <ClInclude Include="Engine\Systems\EndAnimationRemover.h" />
     <ClInclude Include="Engine\Worker.h" />
     <ClInclude Include="Game\Builders.h" />
     <ClInclude Include="Game\Builders\Bullets.h" />

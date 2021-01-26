@@ -120,6 +120,9 @@
     <ClCompile Include="Engine\Utils\vectors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Systems\EndAnimationRemover.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -255,6 +258,9 @@
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
     <ClInclude Include="Game\Builders\Explosions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Systems\EndAnimationRemover.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

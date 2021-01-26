@@ -21,4 +21,6 @@ namespace Components {
 			: texture(&texture), tileSize(tileSize), frames(frames), currentFrame(1, 1)
 		{}
 	};
+
+	struct GFXDestroyByEndAnimationTag : ECS::Component {};
 }

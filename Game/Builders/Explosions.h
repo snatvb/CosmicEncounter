@@ -13,5 +13,6 @@ namespace Builders {
 		Vector2D<int> frames{ 5, 1 };
 		entity.addComponent<Components::GFXAnimtion>(*texture, tileSize, frames);
 		entity.addComponent<Components::Transform>(transform.position);
+		entity.addComponent<Components::GFXDestroyByEndAnimationTag>();
 	}
 }
