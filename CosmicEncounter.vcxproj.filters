@@ -58,6 +58,9 @@
     <Filter Include="Source Files\Engine\Systems">
       <UniqueIdentifier>{9c1ce2a1-33b3-4660-9309-2225307890eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game\Bulders">
+      <UniqueIdentifier>{9c7af7af-0908-4a39-9523-dadcdbde682d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -105,10 +108,13 @@
     <ClCompile Include="Engine\Systems\Collide.cpp">
       <Filter>Source Files\Engine\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Systems\StandartEnemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Systems\ControlPlayer.cpp">
+      <Filter>Source Files\Game\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Systems\StandartEnemy.cpp">
+      <Filter>Source Files\Game\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Systems\BulletControler.cpp">
       <Filter>Source Files\Game\Systems</Filter>
     </ClCompile>
   </ItemGroup>
@@ -231,6 +237,15 @@
       <Filter>Header Files\Game\Components</Filter>
     </ClInclude>
     <ClInclude Include="Game\Systems\ControlPlayer.h">
+      <Filter>Header Files\Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Builders\Bullets.h">
+      <Filter>Header Files\Game\Bulders</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Builders.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Systems\BulletControler.h">
       <Filter>Header Files\Game\Systems</Filter>
     </ClInclude>
   </ItemGroup>

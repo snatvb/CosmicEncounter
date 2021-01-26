@@ -168,6 +168,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="Engine\Systems\Collide.cpp" />
     <ClCompile Include="Engine\Worker.cpp" />
     <ClCompile Include="Game\Systems\Anchor.cpp" />
+    <ClCompile Include="Game\Systems\BulletControler.cpp" />
     <ClCompile Include="Game\Systems\GFXAnimationRenderer.cpp" />
     <ClCompile Include="Game\Systems\GFXRectRenderer.cpp" />
     <ClCompile Include="Game\Systems\GFXTextureRenderer.cpp" />
@@ -200,6 +201,8 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Engine\Systems.h" />
     <ClInclude Include="Engine\Systems\Collide.h" />
     <ClInclude Include="Engine\Worker.h" />
+    <ClInclude Include="Game\Builders.h" />
+    <ClInclude Include="Game\Builders\Bullets.h" />
     <ClInclude Include="Game\Components\Bullet.h" />
     <ClInclude Include="Game\Components\Components.h" />
     <ClInclude Include="Game\Components\Gun.h" />
@@ -207,6 +210,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Game\Components\Tags.h" />
     <ClInclude Include="Game\Systems\Anchor.h" />
     <ClInclude Include="Game\Systems\Assets.h" />
+    <ClInclude Include="Game\Systems\BulletControler.h" />
     <ClInclude Include="Game\Systems\GFXAnimationRenderer.h" />
     <ClInclude Include="Game\Systems\GFXRectRenderer.h" />
     <ClInclude Include="Game\Systems\GFXTextureRenderer.h" />

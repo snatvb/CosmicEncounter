@@ -68,12 +68,16 @@ namespace ECS {
 			return nullptr;
 		}
 
-		void removeEntity(Entity& entity) {
+		inline void removeEntity(EntityID id) {
 			_entities.erase(std::remove_if(
 				_entities.begin(),
 				_entities.end(),
-				[&](Entity* item) { return &entity == item; }
+				[&](Entity* item) { return id == item->id; }
 			), _entities.end());
+		}
+
+		inline void removeEntity(Entity& entity) {
+			removeEntity(entity.id);
 		}
 
 		template<typename T>

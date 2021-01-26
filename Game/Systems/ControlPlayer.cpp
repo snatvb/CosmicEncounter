@@ -1,16 +1,6 @@
 #include "ControlPlayer.h"
 #include "../Assets.h"
-
-inline void createBullet(ECS::World& world, Components::Point& point) {
-	Size tileSize{ 9, 15 };
-	auto& game = Engine::Game::GetInstance();
-	auto& entity = world.newEntity();
-	entity.addComponent<Components::Transform>(point, tileSize);
-	entity.addComponent<Components::Bullet>(500.0f, 10.0f);
-
-	auto texture = game.assets->textures.load(Assets::bullets);
-	entity.addComponent<Components::GFXTexture>(*texture, tileSize);
-}
+#include "../Builders.h"
 
 inline void move(ECS::Entity& entity, int x, int y, double delta) {
 	auto& position = entity.getComponent<Components::Transform>().position;
@@ -44,13 +34,25 @@ inline int getY(Engine::Keyboard& keyboard) {
 	return 0;
 }
 
+inline void handleFire(ECS::World& world, Engine::Game& game, ECS::Entity& entity) {
+	if (!entity.hasComponent<Components::Gun>()) { return; }
+
+	auto& gun = entity.getComponent<Components::Gun>();
+	auto& transform = entity.getComponent<Components::Transform>();
+	if (gun.cooldown <= 0) {
+		if (game.keyboard.isPressed(SDLK_SPACE)) {
+			auto position = transform.position + gun.offset;
+			Builders::createSimpleBullet(world, gun, position);
+			gun.cooldown = 1000 / gun.fireRate;
+		}
+	}
+	else {
+		gun.cooldown -= static_cast<int>(game.time.deltaMs());
+	}
+}
+
 inline void handleMove(ECS::World& world, Engine::Game& game, ECS::Entity& entity) {
 	auto& keyboard = game.keyboard;
-
-	if (keyboard.isPressed(SDLK_SPACE)) {
-		auto& transform = entity.getComponent<Components::Transform>();
-		createBullet(world, transform.position);
-	}
 
 	if (keyboard.isPressed(SDLK_f)) {
 		world.removeEntity(entity);
@@ -74,6 +76,7 @@ namespace Systems {
 	{
 		for (auto& entity : entities) {
 			handleMove(*_world, *_game, *entity);
+			handleFire(*_world, *_game, *entity);
 		}
 	}
 }

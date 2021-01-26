@@ -16,7 +16,10 @@ inline ECS::Entity& createPlayer(ECS::World& world, Engine::Game& game) {
 	entity.addComponent<Components::CircleCollider>(16.0f, 16.0f, 16.0f);
 	entity.addComponent<Components::PlayerTag>();
 
-	// TODO: Add gun
+	auto gunOffset = Vector2D<float>{ 12, -16 };
+	auto direction = Vector2D<float>{ 0, -1 };
+	auto& gun = entity.addComponent<Components::Gun>(gunOffset, direction, 10.0f, 10);
+	gun.bulletSpeed = 500.0f;
 
 	auto texture = game.assets->textures.load("Assets/Ships/tile.png");
 	entity.addComponent<Components::GFXTexture>(*texture, tileSize);
@@ -70,6 +73,7 @@ class Worker : public Engine::Worker {
 		world.registerSystem<Systems::ControlPlayer>();
 		world.registerSystem<Systems::Anchor>();
 		world.registerSystem<Systems::StandartEnemy>();
+		world.registerSystem<Systems::BulletControl>();
 		world.registerSystem<Systems::GFXAnimationRenderer>();
 		world.registerSystem<Systems::GFXTextureRenderer>();
 		world.registerSystem<Systems::GFXRectRenderer>();

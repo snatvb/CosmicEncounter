@@ -3,6 +3,7 @@
 #include "GFXAnimationRenderer.h"
 #include "GFXTextureRenderer.h"
 #include "GFXRectRenderer.h"
+#include "BulletControler.h"
 #include "StandartEnemy.h"
 #include "ControlPlayer.h"
 #include "Remover.h"
