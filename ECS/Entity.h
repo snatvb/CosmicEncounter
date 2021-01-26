@@ -3,6 +3,7 @@
 #include "Component.h"
 
 namespace ECS {
+	class World;
 	using ComponentArray = std::array<Component*, MAX_COMPONENTS>;
 
 	class Entity {
@@ -17,7 +18,7 @@ namespace ECS {
 			}
 		}
 
-		bool isActive() { return _active;  };
+		bool isActive() { return _active; };
 
 		template<typename T>
 		bool hasComponent() const {
@@ -29,7 +30,7 @@ namespace ECS {
 			if (hasComponent<T>()) {
 				return getComponent<T>();
 			}
-			
+
 			T* component = new T(std::forward<TArgs>(args)...);
 			auto id = getComponentTypeID<T>();
 
@@ -76,5 +77,7 @@ namespace ECS {
 		bool _active = true;
 		ComponentArray _componentArray{};
 		ComponentBitSet _componentBitSet;
+
+		friend class World;
 	};
 }

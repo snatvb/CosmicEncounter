@@ -3,6 +3,8 @@
 #include <iostream>
 
 namespace ECS {
+	class Entity;
+
 	template<typename ...Args> struct FilterHelper;
 
 	template<>
@@ -51,11 +53,16 @@ namespace ECS {
 		};
 
 		Type type = Type::None;
-		Filter() {
+		Filter()
+			: _id(getFilterId()) {
 			std::cout << "Filter created" << std::endl;
 		}
+
+		FilterID getId() { return _id; };
 		virtual bool validate(ECS::Entity& entity) = 0;
 	protected:
+	private:
+		FilterID _id;
 	};
 
 	namespace Filters {

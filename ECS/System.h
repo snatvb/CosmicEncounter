@@ -1,10 +1,8 @@
 #pragma once
-#include "Entity.h"
-#include "Filter.h"
-#include "World.h"
 
 namespace ECS {
 	class World;
+	class Filter;
 	using FilteredEntities = std::vector<Entity*>;
 
 	class BaseSystem {

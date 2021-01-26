@@ -1,10 +1,14 @@
 #pragma once
+#include <vector>
 #include <algorithm>
-#include "Entity.h"
+#include <map>
 #include "System.h"
+#include "Filter.h"
 
 namespace ECS {
 	class BaseSystem;
+	class Entity;
+	class Filter;
 
 	class World {
 	public:
@@ -13,6 +17,13 @@ namespace ECS {
 
 		World() {
 			_entities.reserve(256);
+		}
+
+		void init() {
+			for (auto& system : _systems) {
+				Filter& filter = system->getFilter();
+				_filteredEntities[&filter] = std::vector<Entity*>{};
+			}
 		}
 
 		inline void filterEntities(Entities& entityPool, Filter& filter) {
@@ -53,7 +64,7 @@ namespace ECS {
 		};
 
 		Entity& newEntity() {
-			auto entity = new Entity();
+			auto entity = new Entity(*this);
 			_entities.emplace_back(entity);
 			return *entity;
 		}
@@ -74,6 +85,14 @@ namespace ECS {
 				_entities.end(),
 				[&](Entity* item) { return id == item->id; }
 			), _entities.end());
+
+			for (auto [_, entities] : _filteredEntities) {
+				entities.erase(std::remove_if(
+					entities.begin(),
+					entities.end(),
+					[&](Entity* item) { return id == item->id; }
+				), entities.end());
+			}
 		}
 
 		inline void removeEntity(Entity& entity) {
@@ -84,13 +103,37 @@ namespace ECS {
 		T& registerSystem() {
 			T* system = new T();
 			system->_world = this;
+			auto filter = system->getFilter();
 			system->init();
 			_systems.emplace_back(system);
 			return *system;
 		}
 
 	private:
+		std::map<Filter*, Entities> _filteredEntities;
 		Entities _entities;
 		Systems _systems;
+
+		void _componentAdded(Entity& entity) {
+			for (auto [filter, entities] : _filteredEntities) {
+				if (filter->validate(entity)) {
+					entities.emplace_back(&entity);
+				}
+			}
+		}
+
+		void _componentRemoved(Entity& entity) {
+			for (auto [filter, entities] : _filteredEntities) {
+				if (!filter->validate(entity)) {
+					entities.erase(std::remove_if(
+						entities.begin(),
+						entities.end(),
+						[&](Entity* item) { return entity.id == item->id; }
+					), entities.end());
+				}
+			}
+		}
+
+		friend class Entity;
 	};
 }

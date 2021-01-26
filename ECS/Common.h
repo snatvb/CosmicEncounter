@@ -26,4 +26,11 @@ namespace ECS {
 		static EntityID lastId = 0;
 		return lastId++;
 	}
+
+	using FilterID = unsigned __int16;
+
+	inline FilterID getFilterId() {
+		static FilterID lastId = 0;
+		return lastId++;
+	}
 }
