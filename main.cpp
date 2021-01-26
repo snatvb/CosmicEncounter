@@ -66,9 +66,6 @@ class Worker : public Engine::Worker {
 	inline void init() override {
 		auto& game = Engine::Game::GetInstance();
 		auto& world = getWorld();
-		auto& player = createPlayer(world, game);
-		createFire(world, game, player);
-		createEnemy(world, game);
 		world.registerSystem<Systems::Collide>();
 		world.registerSystem<Systems::ControlPlayer>();
 		world.registerSystem<Systems::Anchor>();
@@ -78,6 +75,10 @@ class Worker : public Engine::Worker {
 		world.registerSystem<Systems::GFXTextureRenderer>();
 		world.registerSystem<Systems::GFXRectRenderer>();
 		world.registerSystem<Systems::Remover>();
+		world.init();
+		auto& player = createPlayer(world, game);
+		createFire(world, game, player);
+		createEnemy(world, game);
 	}
 
 	inline void update() override {

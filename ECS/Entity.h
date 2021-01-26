@@ -1,4 +1,5 @@
 #pragma once
+#include <functional>
 #include "Common.h"
 #include "Component.h"
 
@@ -8,9 +9,15 @@ namespace ECS {
 
 	class Entity {
 	public:
+		enum class ChangeType {
+			RemovedComponent,
+			AddedComponent,
+		};
+		using OnChange = std::function<void(Entity&, ChangeType)>;
+
 		EntityID id;
 
-		Entity() : id(getEntityId()) {}
+		Entity(OnChange onChange) : id(getEntityId()), _onChange(onChange) {}
 
 		~Entity() {
 			for (auto component : _componentArray) {
@@ -36,6 +43,7 @@ namespace ECS {
 
 			_componentArray[id] = component;
 			_componentBitSet[id] = true;
+			_onChange(*this, ChangeType::AddedComponent);
 
 			return *component;
 		}
@@ -53,6 +61,7 @@ namespace ECS {
 				auto component = _componentArray[id];
 				_componentArray[id] = nullptr;
 				_componentBitSet[id] = false;
+				_onChange(*this, ChangeType::RemovedComponent);
 				delete component;
 				return true;
 			}
@@ -77,6 +86,7 @@ namespace ECS {
 		bool _active = true;
 		ComponentArray _componentArray{};
 		ComponentBitSet _componentBitSet;
+		std::function<void(Entity&, ChangeType)> _onChange;
 
 		friend class World;
 	};

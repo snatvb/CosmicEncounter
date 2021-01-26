@@ -22,7 +22,7 @@ namespace ECS {
 		void init() {
 			for (auto& system : _systems) {
 				Filter& filter = system->getFilter();
-				_filteredEntities[&filter] = std::vector<Entity*>{};
+				_filteredEntities[&filter] = Entities{};
 			}
 		}
 
@@ -45,16 +45,15 @@ namespace ECS {
 		}
 
 		void update() {
-			std::vector<Entity*> filteredEntities;
 			for (auto& system : _systems) {
 				Filter& filter = system->getFilter();
 				if (filter.type == Filter::Type::Nothing) {
+					std::vector<Entity*> filteredEntities;
 					system->run(filteredEntities);
 				}
 				else {
-					filterEntities(filteredEntities, filter);
-					system->run(filteredEntities);
-					filteredEntities.clear();
+					Entities entities = _filteredEntities[&filter];
+					system->run(entities);
 				}
 			}
 
@@ -64,7 +63,9 @@ namespace ECS {
 		};
 
 		Entity& newEntity() {
-			auto entity = new Entity(*this);
+			auto entity = new Entity([this](Entity& entity, Entity::ChangeType changeType) {
+				_handleEntityChange(entity, changeType);
+				});
 			_entities.emplace_back(entity);
 			return *entity;
 		}
@@ -80,19 +81,27 @@ namespace ECS {
 		}
 
 		inline void removeEntity(EntityID id) {
-			_entities.erase(std::remove_if(
-				_entities.begin(),
-				_entities.end(),
-				[&](Entity* item) { return id == item->id; }
-			), _entities.end());
-
-			for (auto [_, entities] : _filteredEntities) {
-				entities.erase(std::remove_if(
-					entities.begin(),
-					entities.end(),
-					[&](Entity* item) { return id == item->id; }
-				), entities.end());
+			std::cout << "remove: " << id << std::endl;
+			auto toDelete = std::find_if(_entities.begin(), _entities.end(), [&](Entity* item) { return id == item->id; });
+			//auto toDelete = _entities.erase(std::remove_if(
+			//	_entities.begin(),
+			//	_entities.end(),
+			//	[&](Entity* item) { return id == item->id; }
+			//), _entities.end());
+			if (toDelete != _entities.end()) {
+				for (auto& [_, entities] : _filteredEntities) {
+					entities.erase(std::remove_if(
+						entities.begin(),
+						entities.end(),
+						[&](Entity* item) { return id == item->id; }
+					), entities.end());
+				}
+				_entities.erase(toDelete);
+				delete* toDelete;
+				std::cout << "removed" << std::endl;
 			}
+			
+
 		}
 
 		inline void removeEntity(Entity& entity) {
@@ -114,16 +123,30 @@ namespace ECS {
 		Entities _entities;
 		Systems _systems;
 
-		void _componentAdded(Entity& entity) {
-			for (auto [filter, entities] : _filteredEntities) {
+		void _handleEntityChange(Entity& entity, Entity::ChangeType changeType) {
+			switch (changeType)
+			{
+			case ECS::Entity::ChangeType::RemovedComponent:
+				_handleComponentRemoved(entity);
+				break;
+			case ECS::Entity::ChangeType::AddedComponent:
+				_handleComponentAdded(entity);
+				break;
+			default:
+				break;
+			}
+		}
+
+		void _handleComponentAdded(Entity& entity) {
+			for (auto& [filter, entities] : _filteredEntities) {
 				if (filter->validate(entity)) {
 					entities.emplace_back(&entity);
 				}
 			}
 		}
 
-		void _componentRemoved(Entity& entity) {
-			for (auto [filter, entities] : _filteredEntities) {
+		void _handleComponentRemoved(Entity& entity) {
+			for (auto& [filter, entities] : _filteredEntities) {
 				if (!filter->validate(entity)) {
 					entities.erase(std::remove_if(
 						entities.begin(),
