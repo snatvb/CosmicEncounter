@@ -5,7 +5,7 @@
 #include "../Components/Components.h"
 
 namespace Systems {
-	class Input : public ECS::System<Input> {
+	class ControlPlayer : public ECS::System<ControlPlayer> {
 	public:
 		using Filter = ECS::Filters::Include<Components::PlayerTag>;
 

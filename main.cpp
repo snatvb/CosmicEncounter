@@ -5,31 +5,34 @@
 #include "Game/Components/Components.h"
 #include "Game/Systems/Systems.h"
 #include "Geometry.h"
+#include "Game/Assets.h"
 #include "TimeMeasure.h"
 
-inline ECS::Entity& makePlayer(ECS::World& world, Engine::Game& game) {
+inline ECS::Entity& createPlayer(ECS::World& world, Engine::Game& game) {
 	auto& entity = world.newEntity();
 	auto position = Components::Transform::Position(300, 700);
 	auto tileSize = Size{ 32, 32 };
 	entity.addComponent<Components::Transform>(position, tileSize);
 	entity.addComponent<Components::CircleCollider>(16.0f, 16.0f, 16.0f);
 	entity.addComponent<Components::PlayerTag>();
-	auto* texture = game.assets->textures.load("Assets/Ships/tile.png");
 
+	// TODO: Add gun
+
+	auto texture = game.assets->textures.load("Assets/Ships/tile.png");
 	entity.addComponent<Components::GFXTexture>(*texture, tileSize);
 	auto& stats = entity.addComponent<Components::HeroStats>();
 	stats.speed = 300;
 	return entity;
 }
 
-inline ECS::Entity& makeEnemy(ECS::World& world, Engine::Game& game) {
+inline ECS::Entity& createEnemy(ECS::World& world, Engine::Game& game) {
 	auto& entity = world.newEntity();
 	auto position = Components::Transform::Position(300.0f, 300.0f);
 	auto tileSize = Size{ 32, 32 };
 	entity.addComponent<Components::Transform>(position, tileSize);
 	entity.addComponent<Components::CircleCollider>(16.0f, 16.0f, 16.0f);
 	entity.addComponent<Components::EnemyTag>();
-	auto* texture = game.assets->textures.load("Assets/Ships/tile.png");
+	auto texture = game.assets->textures.load("Assets/Ships/tile.png");
 
 	Vector2D<int> tileOffset{64, 64};
 	auto& gfx = entity.addComponent<Components::GFXTexture>(*texture, tileOffset, tileSize);
@@ -39,7 +42,8 @@ inline ECS::Entity& makeEnemy(ECS::World& world, Engine::Game& game) {
 	return entity;
 }
 
-inline void makeFire(ECS::World& world, Engine::Game& game, ECS::Entity& parent) {
+
+inline void createFire(ECS::World& world, Engine::Game& game, ECS::Entity& parent) {
 	auto& entity = world.newEntity();
 	entity.addComponent<Components::Transform>();
 
@@ -59,11 +63,11 @@ class Worker : public Engine::Worker {
 	inline void init() override {
 		auto& game = Engine::Game::GetInstance();
 		auto& world = getWorld();
-		auto& player = makePlayer(world, game);
-		makeFire(world, game, player);
-		makeEnemy(world, game);
+		auto& player = createPlayer(world, game);
+		createFire(world, game, player);
+		createEnemy(world, game);
 		world.registerSystem<Systems::Collide>();
-		world.registerSystem<Systems::Input>();
+		world.registerSystem<Systems::ControlPlayer>();
 		world.registerSystem<Systems::Anchor>();
 		world.registerSystem<Systems::StandartEnemy>();
 		world.registerSystem<Systems::GFXAnimationRenderer>();

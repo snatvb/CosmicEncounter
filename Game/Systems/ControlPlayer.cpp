@@ -1,4 +1,16 @@
-#include "InputSystem.h"
+#include "ControlPlayer.h"
+#include "../Assets.h"
+
+inline void createBullet(ECS::World& world, Components::Point& point) {
+	Size tileSize{ 9, 15 };
+	auto& game = Engine::Game::GetInstance();
+	auto& entity = world.newEntity();
+	entity.addComponent<Components::Transform>(point, tileSize);
+	entity.addComponent<Components::Bullet>(500.0f, 10.0f);
+
+	auto texture = game.assets->textures.load(Assets::bullets);
+	entity.addComponent<Components::GFXTexture>(*texture, tileSize);
+}
 
 inline void move(ECS::Entity& entity, int x, int y, double delta) {
 	auto& position = entity.getComponent<Components::Transform>().position;
@@ -35,18 +47,13 @@ inline int getY(Engine::Keyboard& keyboard) {
 inline void handleMove(ECS::World& world, Engine::Game& game, ECS::Entity& entity) {
 	auto& keyboard = game.keyboard;
 
+	if (keyboard.isPressed(SDLK_SPACE)) {
+		auto& transform = entity.getComponent<Components::Transform>();
+		createBullet(world, transform.position);
+	}
+
 	if (keyboard.isPressed(SDLK_f)) {
 		world.removeEntity(entity);
-	}
-
-	if (keyboard.isPressed(SDLK_r)) {
-		auto& transform = entity.getComponent<Components::Transform>().rotation;
-		transform += 80 * static_cast<float>(game.time.delta());
-	}
-
-	if (keyboard.isPressed(SDLK_q)) {
-		auto& transform = entity.getComponent<Components::Transform>().rotation;
-		transform -= 80 * static_cast<float>(game.time.delta());
 	}
 
 	int x = getX(keyboard);
@@ -58,12 +65,12 @@ inline void handleMove(ECS::World& world, Engine::Game& game, ECS::Entity& entit
 }
 
 namespace Systems {
-	void Input::init()
+	void ControlPlayer::init()
 	{
 		_game = &Engine::Game::GetInstance();
 	}
 
-	void Input::run(ECS::FilteredEntities& entities)
+	void ControlPlayer::run(ECS::FilteredEntities& entities)
 	{
 		for (auto& entity : entities) {
 			handleMove(*_world, *_game, *entity);
