@@ -1,6 +1,6 @@
 #include "GFXAnimationRenderer.h"
 
-inline SDL_Rect createDrawRect(Components::GFXAnimtion& gfx, Components::Transform& transform) {
+inline SDL_Rect createDrawRect(const Components::GFXAnimtion& gfx, const Components::Transform& transform) {
 	SDL_Rect drawRect;
 	drawRect.x = static_cast<int>(transform.position.x);
 	drawRect.y = static_cast<int>(transform.position.y);
@@ -9,7 +9,7 @@ inline SDL_Rect createDrawRect(Components::GFXAnimtion& gfx, Components::Transfo
 	return drawRect;
 }
 
-inline SDL_Rect createClipRect(Components::GFXAnimtion& gfx) {
+inline SDL_Rect createClipRect(const Components::GFXAnimtion& gfx) {
 	SDL_Rect clipRect;
 	clipRect.x = gfx.offset.x + gfx.tileSize.width * gfx.currentFrame.x - gfx.tileSize.width;
 	clipRect.y = gfx.offset.y + gfx.tileSize.height * gfx.currentFrame.y - gfx.tileSize.height;
@@ -39,12 +39,12 @@ namespace Systems {
 		for (auto& entity : entities) {
 			auto& gfx = entity->getComponent<Components::GFXAnimtion>();
 			auto& transform = entity->getComponent<Components::Transform>();
-			_renderCache[gfx.layer].emplace_back([&]() {
+			_renderCache[gfx.layer].emplace_back([gfx, transform](SDL_Renderer& renderer) {
 				SDL_Rect clipRect = createClipRect(gfx);
 				SDL_Rect drawRect = createDrawRect(gfx, transform);
 				if (gfx.rotation > 0) {
 					SDL_RenderCopyEx(
-						_renderer,
+						&renderer,
 						gfx.texture,
 						&clipRect,
 						&drawRect,
@@ -54,9 +54,9 @@ namespace Systems {
 					);
 				}
 				else {
-					SDL_RenderCopy(_renderer, gfx.texture, &clipRect, &drawRect);
+					SDL_RenderCopy(&renderer, gfx.texture, &clipRect, &drawRect);
 				}
-				});
+			});
 
 			if (gfx.play) {
 				moveFrame(gfx);

@@ -2,6 +2,7 @@
 #include <array>
 #include <vector>
 #include <functional>
+#include "SDL.h"
 
 namespace Engine {
 	enum class Layer : char {
@@ -11,5 +12,5 @@ namespace Engine {
 		Last
 	};
 
-	using RenderCache = std::array<std::vector<std::function<void()>>, static_cast<char>(Layer::Last)>;
+	using RenderCache = std::array<std::vector<std::function<void(SDL_Renderer&)>>, static_cast<char>(Layer::Last)>;
 }

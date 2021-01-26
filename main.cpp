@@ -89,9 +89,10 @@ class Worker : public Engine::Worker {
 	}
 
 	inline void update() override {
+		auto& renderer = *Engine::Game::GetInstance().getRenderer();
 		for (auto& layer : _renderCache) {
 			for (auto& f : layer) {
-				f();
+				f(renderer);
 			}
 			layer.clear();
 		}
