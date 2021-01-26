@@ -254,6 +254,9 @@
     <ClInclude Include="ECS\OneFrameClearSystem.h">
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Builders\Explosions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CosmicEncounter.rc">

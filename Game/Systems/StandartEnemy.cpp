@@ -44,11 +44,13 @@ inline void followPlayer(Engine::Game& game, ECS::Entity& player, ECS::Entity& e
 
 void Systems::StandartEnemy::run(ECS::FilteredEntities& entities)
 {
-	for (auto& entity : entities) {
-		/*if (entity->hasComponent<Components::Collided>()) {
-			entity->addComponent<Components::ToRemoveTag>();
-			return;
-		}*/
+	for (auto entity : entities) {
+		if (entity->hasComponent<Components::Collided>()) {
+			auto& transform = entity->getComponent<Components::Transform>();
+			Builders::createSimpleExplosion(*_world, transform);
+			//entity->addComponent<Components::ToRemoveTag>();
+			//return;
+		}
 		//transform.position.y += static_cast<int>(stats.speed * _game->time.delta());
 
 		auto& players = _world->filterEntities(*_playerFilter);
