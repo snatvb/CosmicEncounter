@@ -81,7 +81,7 @@ class Worker : public Engine::Worker {
 		world.registerSystem<Systems::BulletControl>();
 		world.registerSystem<Systems::Remover>();
 		world.registerSystem<Systems::GFXAnimationRenderer>();
-		//world.registerSystem<Systems::GFXRectRenderer>();
+		world.registerSystem<Systems::GFXRectRenderer>();
 		world.init();
 		auto& player = createPlayer(world, game);
 		createFire(world, game, player);

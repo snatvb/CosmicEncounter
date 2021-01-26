@@ -6,7 +6,6 @@
 #include "./GFX/GFXAnimation.h"
 
 namespace Components {
-
 	struct GFXShape : ECS::Component {
 		SDL_Color color;
 		Engine::Layer layer = Engine::Layer::Default;
