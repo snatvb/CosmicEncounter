@@ -43,7 +43,7 @@ inline void handleFire(ECS::World& world, Engine::Game& game, ECS::Entity& entit
 		if (game.keyboard.isPressed(SDLK_SPACE)) {
 			auto position = transform.position + gun.offset;
 			Builders::createSimpleBullet(world, gun, position);
-			gun.cooldown = 1000 / gun.fireRate;
+			gun.cooldown = static_cast<int>(1000 / gun.fireRate);
 		}
 	}
 	else {

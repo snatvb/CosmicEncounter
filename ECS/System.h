@@ -15,6 +15,8 @@ namespace ECS {
 		virtual void run(FilteredEntities& entities) = 0;
 
 	protected:
+		BaseSystem(SystemID id) : _id(id) {}
+		SystemID _id;
 		World* _world;
 
 		friend class World;
@@ -24,6 +26,8 @@ namespace ECS {
 	class System : public BaseSystem {
 	public:
 		bool isActive = true;
+
+		System() : BaseSystem(getSystemTypeID<Impl>()) {}
 
 		virtual void init() {};
 

@@ -117,8 +117,8 @@
     <ClCompile Include="ECS\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ECS\Entity.cpp">
-      <Filter>Source Files\ECS</Filter>
+    <ClCompile Include="Engine\Utils\vectors.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

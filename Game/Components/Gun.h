@@ -9,13 +9,13 @@ namespace Components {
 		float bulletSpeed = 0;
 		Vector2D<float> direction;
 		Vector2D<float> offset;
-		int fireRate; // shoots per sec
+		float fireRate; // shoots per sec
 		int cooldown = 0;
 
-		Gun(Vector2D<float> direction, float damage, int fireRate)
+		Gun(Vector2D<float> direction, float damage, float fireRate)
 			: offset(0.0f, 0.0f), direction(direction), damage(damage), fireRate(fireRate) {};
 
-		Gun(Vector2D<float> offset, Vector2D<float> direction, float damage, int fireRate)
+		Gun(Vector2D<float> offset, Vector2D<float> direction, float damage, float fireRate)
 			: offset(offset), direction(direction), damage(damage), fireRate(fireRate) {};
 	};
 }

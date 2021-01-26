@@ -9,6 +9,7 @@ namespace ECS {
 
 	using ComponentID = unsigned __int16;
 	using EntityID = unsigned __int16;
+	using SystemID = unsigned __int16;
 	using ComponentBitSet = std::bitset<MAX_COMPONENTS>;
 
 	inline ComponentID getComponentTypeID() {
@@ -19,6 +20,17 @@ namespace ECS {
 	template<typename T>
 	inline ComponentID getComponentTypeID() noexcept {
 		static ComponentID typeID = getComponentTypeID();
+		return typeID;
+	}
+
+	inline SystemID getSystemTypeID() {
+		static SystemID lastID = 0;
+		return lastID++;
+	}
+
+	template<typename T>
+	inline SystemID getSystemTypeID() noexcept {
+		static SystemID typeID = getComponentTypeID();
 		return typeID;
 	}
 

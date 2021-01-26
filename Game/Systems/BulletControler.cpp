@@ -11,7 +11,7 @@ void Systems::BulletControl::run(ECS::FilteredEntities& entities)
 	for (auto entity : entities) {
 		auto& transform = entity->getComponent<Components::Transform>();
 		auto& bullet = entity->getComponent<Components::Bullet>();
-		auto diff = (bullet.direction * bullet.speed) * _game->time.delta();
+		auto diff = (bullet.direction * bullet.speed) * static_cast<float>(_game->time.delta());
 		transform.position += diff;
 
 		if (entity->hasComponent<Components::Collided>()) {

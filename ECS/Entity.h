@@ -60,14 +60,7 @@ namespace ECS {
 		bool removeComponent() {
 			if (hasComponent<T>()) {
 				auto id = getComponentTypeID<T>();
-				auto component = _componentArray[id];
-				_componentArray[id] = nullptr;
-				_componentBitSet[id] = false;
-				if (componentIs(*component, ComponentType::OneFrame)) {
-					_oneFrameComponentCount--;
-				}
-				_onChange(*this, *component, ChangeType::RemovedComponent);
-				delete component;
+				_removeComponentById(id);
 				return true;
 			}
 			return false;
@@ -83,9 +76,7 @@ namespace ECS {
 				if (_componentBitSet[i]) {
 					auto component = _componentArray[i];
 					if (componentIs(*component, ComponentType::OneFrame)) {
-						_componentArray[i] = nullptr;
-						_componentBitSet[i] = false;
-						delete component;
+						_removeComponentById(i);
 					}
 				}
 			}
@@ -101,5 +92,16 @@ namespace ECS {
 		ComponentArray _componentArray{};
 		ComponentBitSet _componentBitSet;
 		OnChange _onChange;
+
+		inline void _removeComponentById(ComponentID id) {
+			auto component = _componentArray[id];
+			if (componentIs(*component, ComponentType::OneFrame)) {
+				_oneFrameComponentCount--;
+			}
+			_onChange(*this, *component, ChangeType::RemovedComponent);
+			_componentArray[id] = nullptr;
+			_componentBitSet[id] = false;
+			delete component;
+		}
 	};
 }

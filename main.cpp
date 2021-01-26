@@ -18,13 +18,13 @@ inline ECS::Entity& createPlayer(ECS::World& world, Engine::Game& game) {
 
 	auto gunOffset = Vector2D<float>{ 12, -16 };
 	auto direction = Vector2D<float>{ 0, -1 };
-	auto& gun = entity.addComponent<Components::Gun>(gunOffset, direction, 10.0f, 1);
-	gun.bulletSpeed = 500.0f;
+	auto& gun = entity.addComponent<Components::Gun>(gunOffset, direction, 10.0f, 1.0f);
+	gun.bulletSpeed = 1500.0f;
 
 	auto texture = game.assets->textures.load("Assets/Ships/tile.png");
 	entity.addComponent<Components::GFXTexture>(*texture, tileSize);
 	auto& stats = entity.addComponent<Components::HeroStats>();
-	stats.speed = 300;
+	stats.speed = 900.0f;
 	return entity;
 }
 
@@ -37,11 +37,16 @@ inline ECS::Entity& createEnemy(ECS::World& world, Engine::Game& game) {
 	entity.addComponent<Components::EnemyTag>();
 	auto texture = game.assets->textures.load("Assets/Ships/tile.png");
 
+	auto gunOffset = Vector2D<float>{ 12, 32 };
+	auto direction = Vector2D<float>{ 0, 1 };
+	auto& gun = entity.addComponent<Components::Gun>(gunOffset, direction, 10.0f, 3.0f);
+	gun.bulletSpeed = 1200.0f;
+
 	Vector2D<int> tileOffset{64, 64};
 	auto& gfx = entity.addComponent<Components::GFXTexture>(*texture, tileOffset, tileSize);
 	gfx.rotation = 180.0f;
 	auto& stats = entity.addComponent<Components::HeroStats>();
-	stats.speed = 300;
+	stats.speed = 500.0f;
 	return entity;
 }
 

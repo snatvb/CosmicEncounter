@@ -18,10 +18,10 @@ namespace ECS {
 
 		World() {
 			_entities.reserve(256);
+			registerSystem<OneFrameClearSystem>();
 		}
 
 		void init() {
-			registerSystem<OneFrameClearSystem>();
 			for (auto& system : _systems) {
 				Filter& filter = system->getFilter();
 				_filteredEntities[&filter] = Entities{};
@@ -29,7 +29,7 @@ namespace ECS {
 		}
 
 
-		inline Entities filterEntities(Filter& filter) {
+		inline Entities& filterEntities(Filter& filter) {
 			return _filteredEntities[&filter];
 		}
 
@@ -96,9 +96,20 @@ namespace ECS {
 			return *system;
 		}
 
+		template<typename T>
+		Filter* getSystemFilter() {
+			SystemID needID = getSystemTypeID<T>();
+			for (auto system : _systems) {
+				if (needID == system->_id) {
+					auto& filter = system->getFilter();
+					return &filter;
+				}
+			}
+			return nullptr;
+		}
+
 	private:
 		std::map<Filter*, Entities> _filteredEntities;
-		Filters::OneFrame _oneFrameFilter;
 		Entities _entities;
 		Systems _systems;
 
@@ -119,7 +130,9 @@ namespace ECS {
 		void _handleComponentAdded(Entity& entity, Component& component) {
 			for (auto& [filter, entities] : _filteredEntities) {
 				if (filter->validate(entity)) {
-					entities.emplace_back(&entity);
+					if (std::find(entities.begin(), entities.end(), &entity) == entities.end()) {
+						entities.emplace_back(&entity);
+					}
 				}
 			}
 		}
