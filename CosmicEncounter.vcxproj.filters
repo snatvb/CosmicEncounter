@@ -49,6 +49,9 @@
     <Filter Include="Header Files\Game\Components\GFX">
       <UniqueIdentifier>{0a345a9e-efd4-4c6f-950b-e724fc5cee4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\Components">
+      <UniqueIdentifier>{25542d7e-6e48-4b11-b35d-3ca1818fc501}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -95,9 +98,6 @@
     </ClCompile>
     <ClCompile Include="Engine\EngineTime.cpp">
       <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Components\SimpleComponents.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +195,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\EngineTime.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Components\Physics.h">
+      <Filter>Header Files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Components.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>

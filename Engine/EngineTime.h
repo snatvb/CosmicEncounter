@@ -7,7 +7,7 @@ namespace Engine {
 	class Time {
 	public:
 		double delta();
-		double deltaMs();
+		long long deltaMs();
 
 	private:
 		std::chrono::steady_clock::time_point _lastTime;

@@ -2,8 +2,8 @@
 
 inline SDL_Rect createDrawRect(Components::GFXAnimtion& gfx, Components::Transform& transform) {
 	SDL_Rect drawRect;
-	drawRect.x = (int)transform.position.x;
-	drawRect.y = (int)transform.position.y;
+	drawRect.x = static_cast<int>(transform.position.x);
+	drawRect.y = static_cast<int>(transform.position.y);
 	drawRect.w = gfx.tileSize.width;
 	drawRect.h = gfx.tileSize.height;
 	return drawRect;
@@ -57,6 +57,15 @@ namespace Systems {
 			else {
 				SDL_RenderCopy(_renderer, gfx.texture, &clipRect, &drawRect);
 			}
+
+			SDL_Rect rect;
+			rect.x = static_cast<int>(transform.position.x);
+			rect.y = static_cast<int>(transform.position.y);
+			rect.w = 3;
+			rect.h = 3;
+			auto _renderer = Engine::Game::GetInstance().getRenderer();
+			SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
+			SDL_RenderFillRect(_renderer, &rect);
 
 			if (gfx.play) {
 				moveFrame(gfx);

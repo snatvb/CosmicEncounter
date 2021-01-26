@@ -3,3 +3,4 @@
 #include "Debug.h"
 #include "Worker.h"
 #include "Game.h"
+#include "Components.h"

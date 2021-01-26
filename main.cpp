@@ -11,7 +11,7 @@ inline ECS::Entity& makePlayer(ECS::World& world, Engine::Game& game) {
 	auto& entity = world.newEntity();
 	auto position = Components::Transform::Position(10, 10);
 	auto tileSize = Size{ 32, 32 };
-	double rotation = 90.0;
+	auto rotation = 0.0f;
 	entity.addComponent<Components::Transform>(position, tileSize, rotation);
 	entity.addComponent<Components::PlayerTag>();
 	auto* texture = game.assets->textures.load("Assets/Ships/tile.png");
@@ -32,10 +32,12 @@ inline void makeFire(ECS::World& world, Engine::Game& game, ECS::Entity& parent)
 	auto& animtion = entity.addComponent<Components::GFXAnimtion>(*texture, tileSize, frames);
 	animtion.speed = 0.5;
 
-	Vector2D<int> fireOffset{ 12, 28 };
+	Vector2D<int> fireOffset{ -4, 0 };
 	auto& anchor = entity.addComponent<Components::Anchor>(parent.id, fireOffset);
-	anchor.center.x = 16;
-	anchor.center.y = 16;
+	anchor.rotationCenter.x = -1;
+	anchor.rotationCenter.y = -1;
+	anchor.jointCenter.x = 16;
+	anchor.jointCenter.y = 24;
 }
 
 class Worker : public Engine::Worker {

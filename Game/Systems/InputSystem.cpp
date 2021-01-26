@@ -41,7 +41,12 @@ inline void handleMove(ECS::World& world, Engine::Game& game, ECS::Entity& entit
 
 	if (keyboard.isPressed(SDLK_r)) {
 		auto& transform = entity.getComponent<Components::Transform>().rotation;
-		transform += 10 * game.time.delta();
+		transform += 80 * static_cast<float>(game.time.delta());
+	}
+
+	if (keyboard.isPressed(SDLK_q)) {
+		auto& transform = entity.getComponent<Components::Transform>().rotation;
+		transform -= 80 * static_cast<float>(game.time.delta());
 	}
 
 	int x = getX(keyboard);

@@ -8,10 +8,10 @@ namespace Systems {
 			auto& gfx = entity->getComponent<Components::GFXTexture>();
 
 			SDL_Rect drawRect;
-			drawRect.x = (int)transform.position.x;
-			drawRect.y = (int)transform.position.y;
-			drawRect.w = (int)transform.scale.width;
-			drawRect.h = (int)transform.scale.height;
+			drawRect.x = static_cast<int>(transform.position.x);
+			drawRect.y = static_cast<int>(transform.position.y);
+			drawRect.w = static_cast<int>(transform.scale.width);
+			drawRect.h = static_cast<int>(transform.scale.height);
 
 			SDL_Rect clipRect;
 			clipRect.x = gfx.offset.x;

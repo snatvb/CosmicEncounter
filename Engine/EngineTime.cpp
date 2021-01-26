@@ -6,7 +6,7 @@ namespace Engine {
 		return _delta.count();
 	}
 
-	double Time::deltaMs()
+	long long Time::deltaMs()
 	{
 		return std::chrono::duration_cast<std::chrono::milliseconds>(_delta).count();
 	}
