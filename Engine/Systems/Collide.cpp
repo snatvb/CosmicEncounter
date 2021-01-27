@@ -14,15 +14,14 @@ inline void handleCollide(ECS::Entity& entity1, ECS::Entity& entity2, ECS::World
 	}
 }
 
-void Systems::Collide::run(ECS::FilteredEntities& entities)
+void Systems::Collide::run()
 {
-	auto filter = getFilter();
-	for (auto entity1 : entities) {
+	for (auto entity1 : *filter.entities) {
 		if (!entity1->hasComponent<Components::Transform>()) {
 			continue;
 		}
 		
-		for (auto entity2 : entities) {
+		for (auto entity2 : *filter.entities) {
 			if (!entity2->hasComponent<Components::Transform>() || entity1->id == entity2->id) {
 				continue;
 			}

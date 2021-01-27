@@ -1,8 +1,8 @@
 #include "EnemySpawner.h"
 
-void Systems::EnemySpawner::run(ECS::FilteredEntities& entities)
+void Systems::EnemySpawner::run()
 {
-	if (entities.size() >= 3) {
+	if (filter.entities->size() >= 3) {
 		return;
 	}
 

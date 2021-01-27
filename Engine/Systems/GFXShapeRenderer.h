@@ -10,6 +10,13 @@ namespace Systems {
 			Components::GFXRect,
 			Components::Transform
 		>;
-		void run(ECS::FilteredEntities& entities) override;
+		ECS::Filters::With<
+			Components::GFXRect,
+			Components::Transform
+		> filter;
+
+		REG_FILTERS(GFXRectRenderer, &filter)
+
+		void run() override;
 	};
 }

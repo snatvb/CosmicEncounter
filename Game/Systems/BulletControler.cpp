@@ -6,9 +6,9 @@ void Systems::BulletControl::init()
 	_game = &Engine::Game::GetInstance();
 }
 
-void Systems::BulletControl::run(ECS::FilteredEntities& entities)
+void Systems::BulletControl::run()
 {
-	for (auto entity : entities) {
+	for (auto entity : *filter.entities) {
 		auto& transform = entity->getComponent<Components::Transform>();
 		auto& bullet = entity->getComponent<Components::Bullet>();
 		auto diff = (bullet.direction * bullet.speed) * static_cast<float>(_game->time.delta());

@@ -42,9 +42,9 @@ inline void followPlayer(Engine::Game& game, ECS::Entity& player, ECS::Entity& e
 	}
 }
 
-void Systems::StandartEnemy::run(ECS::FilteredEntities& entities)
+void Systems::StandartEnemy::run()
 {
-	for (auto entity : entities) {
+	for (auto entity : *filter.entities) {
 		if (entity->hasComponent<Components::Collided>()) {
 			auto& transform = entity->getComponent<Components::Transform>();
 			Builders::createSimpleExplosion(*_world, transform);

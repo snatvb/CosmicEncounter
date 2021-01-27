@@ -1,9 +1,9 @@
 #include "GFXShapeRenderer.h"
 
 namespace Systems {
-	void GFXRectRenderer::run(ECS::FilteredEntities& entities)
+	void GFXRectRenderer::run()
 	{
-		for (auto& entity : entities) {
+		for (auto& entity : *filter.entities) {
 			auto& transform = entity->getComponent<Components::Transform>();
 			auto& shapeGfx = entity->getComponent<Components::GFXShape>();
 			auto& gfx = entity->getComponent<Components::GFXRect>();

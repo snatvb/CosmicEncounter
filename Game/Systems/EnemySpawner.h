@@ -9,6 +9,9 @@ namespace Systems {
 	public:
 		using Filter = ECS::Filters::Include<Components::EnemyTag>;
 
-		void run(ECS::FilteredEntities& entities) override;
+		ECS::Filters::Include<Components::EnemyTag> filter;
+		REG_FILTERS(EnemySpawner, &filter)
+
+		void run() override;
 	};
 }

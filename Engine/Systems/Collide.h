@@ -7,6 +7,10 @@ namespace Systems {
 	public:
 		using Filter = ECS::Filters::Include<Components::CircleCollider>;
 
-		void run(ECS::FilteredEntities& entities) override;
+		ECS::Filters::Include<Components::CircleCollider> filter;
+
+		REG_FILTERS(Collide, &filter)
+
+		void run() override;
 	};
 }

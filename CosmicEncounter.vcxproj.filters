@@ -69,9 +69,6 @@
     <ClCompile Include="Engine\Game.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Systems\RenderPlayer.cpp">
-      <Filter>Source Files\Game\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Worker.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
@@ -166,9 +163,6 @@
     </ClInclude>
     <ClInclude Include="Game\Components\Stats.h">
       <Filter>Header Files\Game\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Systems\RenderPlayer.h">
-      <Filter>Header Files\Game\Systems</Filter>
     </ClInclude>
     <ClInclude Include="ECS\System.h">
       <Filter>Header Files\ECS</Filter>
@@ -283,5 +277,8 @@
     <ResourceCompile Include="CosmicEncounter.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

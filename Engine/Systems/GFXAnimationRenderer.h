@@ -9,6 +9,10 @@ namespace Systems {
 	public:
 		using Filter = ECS::Filters::With<Components::Transform, Components::GFXAnimtion>;
 
-		void run(ECS::FilteredEntities& entities) override;
+		ECS::Filters::With<Components::Transform, Components::GFXAnimtion> filter;
+
+		REG_FILTERS(GFXAnimationRenderer, &filter)
+
+		void run() override;
 	};
 }

@@ -11,9 +11,7 @@ namespace Systems {
 
 		ECS::Filters::Include<Components::PlayerTag> playerFilter;
 
-		ControlPlayer() {
-			filters = ECS::FilterList{ &playerFilter };
-		}
+		REG_FILTERS(ControlPlayer, &playerFilter)
 
 		void init() override;
 		void run() override;

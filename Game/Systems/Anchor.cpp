@@ -36,9 +36,9 @@ Point getRelativeRotationPosition(const Components::Anchor& anchor, const Point&
 
 
 namespace Systems {
-	void Anchor::run(ECS::FilteredEntities& entities)
+	void Anchor::run()
 	{
-		for (auto& entity : entities) {
+		for (auto& entity : *filter.entities) {
 			auto& anchor = entity->getComponent<Components::Anchor>();
 
 			if (auto targetEntity = _world->getEntityById(anchor.entityId)) {

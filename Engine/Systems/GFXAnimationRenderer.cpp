@@ -35,9 +35,9 @@ inline void moveFrame(Components::GFXAnimtion& gfx) {
 }
 
 namespace Systems {
-	void GFXAnimationRenderer::run(ECS::FilteredEntities& entities)
+	void GFXAnimationRenderer::run()
 	{
-		for (auto& entity : entities) {
+		for (auto& entity : *filter.entities) {
 			auto& gfx = entity->getComponent<Components::GFXAnimtion>();
 			auto& transform = entity->getComponent<Components::Transform>();
 			_renderer->add(gfx.layer, [gfx, transform](SDL_Renderer& sdlRenderer) {

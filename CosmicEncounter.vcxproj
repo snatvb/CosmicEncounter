@@ -178,7 +178,6 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="Game\Systems\ControlPlayer.cpp" />
     <ClCompile Include="Game\Systems\EnemySpawner.cpp" />
     <ClCompile Include="Game\Systems\Remover.cpp" />
-    <ClCompile Include="Game\Systems\RenderPlayer.cpp" />
     <ClCompile Include="Game\Systems\StandartEnemy.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -226,7 +225,6 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Game\Systems\EnemySpawner.h" />
     <ClInclude Include="Game\Systems\Remover.h" />
     <ClInclude Include="Engine\Systems\RendererSystem.h" />
-    <ClInclude Include="Game\Systems\RenderPlayer.h" />
     <ClInclude Include="Game\Systems\StandartEnemy.h" />
     <ClInclude Include="Game\Systems\Systems.h" />
     <ClInclude Include="ECS\OneFrameClearSystem.h" />
@@ -240,6 +238,9 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ProjectReference Include="Geometry\Geometry.vcxproj">
       <Project>{4609ac74-4ed4-4cfb-a8a2-9a409b802909}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

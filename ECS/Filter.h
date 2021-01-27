@@ -5,6 +5,7 @@
 #include "Entity.h"
 
 namespace ECS {
+
 	class Entity;
 	using FilteredEntities = std::vector<Entity*>;
 
@@ -66,21 +67,11 @@ namespace ECS {
 			std::cout << "Filter created" << std::endl;
 		}
 
-		~Filter() {
-			_filters.erase(std::remove(
-				_filters.begin(),
-				_filters.end(),
-				_id
-			));
-		}
-
 		FilterID getId() { return _id; };
 		virtual bool validate(ECS::Entity& entity) = 0;
 
 		void handleRemovedEntity(ECS::Entity& entity);
-
 		void handleAddedComponent(ECS::Entity& entity);
-
 		void handleRemovedComponent(ECS::Entity& entity);
 
 	protected:

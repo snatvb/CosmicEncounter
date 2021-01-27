@@ -9,7 +9,10 @@ namespace Systems {
 	public:
 		using Filter = ECS::Filters::With<Components::Anchor, Components::Transform>;
 
+		ECS::Filters::With<Components::Anchor, Components::Transform> filter;
+		REG_FILTERS(Anchor, &filter);
+
 		void init() override {};
-		void run(ECS::FilteredEntities& enitites) override;
+		void run() override;
 	};
 }

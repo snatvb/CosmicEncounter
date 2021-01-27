@@ -8,8 +8,15 @@ namespace Systems {
 	public:
 		using Filter = ECS::Filters::With<Components::Transform, Components::EnemyTag, Components::HeroStats>;
 
+		ECS::Filters::With<
+			Components::Transform,
+			Components::EnemyTag,
+			Components::HeroStats
+		> filter;
+		REG_FILTERS(StandartEnemy, &filter)
+
 		void init() override;
-		void run(ECS::FilteredEntities& entities) override;
+		void run() override;
 	private:
 		Engine::Game* _game = nullptr;
 		ECS::Filter* _playerFilter = nullptr;

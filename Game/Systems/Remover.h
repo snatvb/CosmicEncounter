@@ -7,6 +7,9 @@ namespace Systems {
 	public:
 		using Filter = ECS::Filters::Include<Components::ToRemoveTag>;
 
-		void run(ECS::FilteredEntities& entities);
+		ECS::Filters::Include<Components::ToRemoveTag> filter;
+		REG_FILTERS(Remover, &filter);
+
+		void run();
 	};
 }

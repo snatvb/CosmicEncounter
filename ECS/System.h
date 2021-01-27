@@ -1,5 +1,10 @@
 #pragma once
 
+#define REG_FILTERS(CLASSNAME, ...) \
+    CLASSNAME() {\
+		filters = ECS::FilterList{ ##__VA_ARGS__ };\
+    }
+
 namespace ECS {
 	class World;
 	class Filter;

@@ -11,8 +11,14 @@ namespace Systems {
 			Components::Bullet
 		>;
 
+		ECS::Filters::With<
+			Components::Transform,
+			Components::Bullet
+		> filter;
+		REG_FILTERS(BulletControl, &filter)
+
 		void init() override;
-		void run(ECS::FilteredEntities& entities) override;
+		void run() override;
 	private:
 		Engine::Game* _game;
 	};
