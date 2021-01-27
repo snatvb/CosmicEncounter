@@ -17,10 +17,8 @@ namespace ECS {
 		bool isActive = true;
 		FilterList filters;
 
-		virtual Filter& getFilter() = 0;
 		virtual void init() = 0;
-		virtual void run(FilteredEntities& entities) {};
-		virtual void run() {};
+		virtual void run() = 0;
 
 	protected:
 		BaseSystem(SystemID id) : _id(id) {}
@@ -36,11 +34,5 @@ namespace ECS {
 		System() : BaseSystem(getSystemTypeID<Impl>()) {}
 
 		virtual void init() {};
-
-		auto getFilter() {
-			using Filter = typename Impl::Filter;
-			static auto filter = Filter();
-			return &filter;
-		}
 	};
 }

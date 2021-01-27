@@ -7,11 +7,6 @@
 namespace Systems {
 	class EndAnimationRemover : public ECS::System<EndAnimationRemover> {
 	public:
-		using Filter = ECS::Filters::With<
-			Components::GFXAnimtion,
-			Components::GFXDestroyByEndAnimationTag
-		>;
-
 		ECS::Filters::With<
 			Components::GFXAnimtion,
 			Components::GFXDestroyByEndAnimationTag

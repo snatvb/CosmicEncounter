@@ -7,8 +7,6 @@
 namespace Systems {
 	class ControlPlayer : public ECS::System<ControlPlayer> {
 	public:
-		using Filter = ECS::Filters::Include<Components::PlayerTag>;
-
 		ECS::Filters::Include<Components::PlayerTag> playerFilter;
 
 		REG_FILTERS(ControlPlayer, &playerFilter)

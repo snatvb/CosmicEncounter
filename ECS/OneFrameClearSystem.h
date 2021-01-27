@@ -6,8 +6,6 @@
 namespace ECS {
 	class OneFrameClearSystem : public System<OneFrameClearSystem> {
 	public:
-		using Filter = Filters::OneFrame;
-
 		Filters::OneFrame filter;
 		REG_FILTERS(OneFrameClearSystem, &filter)
 

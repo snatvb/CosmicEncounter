@@ -7,8 +7,6 @@
 namespace Systems {
 	class Anchor : public ECS::System<Anchor> {
 	public:
-		using Filter = ECS::Filters::With<Components::Anchor, Components::Transform>;
-
 		ECS::Filters::With<Components::Anchor, Components::Transform> filter;
 		REG_FILTERS(Anchor, &filter);
 

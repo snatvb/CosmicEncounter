@@ -6,11 +6,6 @@
 namespace Systems {
 	class BulletControl : public ECS::System<BulletControl> {
 	public:
-		using Filter = ECS::Filters::With<
-			Components::Transform,
-			Components::Bullet
-		>;
-
 		ECS::Filters::With<
 			Components::Transform,
 			Components::Bullet

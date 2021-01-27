@@ -21,9 +21,6 @@ namespace ECS {
 		}
 
 		void init() {
-			for (auto& system : _systems) {
-				Filter& filter = system->getFilter();
-			}
 		}
 
 		inline void update() {
@@ -72,7 +69,6 @@ namespace ECS {
 		T& registerSystem(TArgs&& ...args) {
 			T* system = new T(std::forward<TArgs>(args)...);
 			system->_world = this;
-			auto filter = system->getFilter();
 			system->init();
 			_systems.emplace_back(system);
 			return *system;

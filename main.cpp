@@ -75,13 +75,13 @@ class Worker : public Engine::Worker {
 	inline void init() override {
 		auto& game = Engine::Game::GetInstance();
 		auto& world = getWorld();
-		world.registerSystem<Systems::EndAnimationRemover>();
 		world.registerSystem<Systems::Collide>();
 		world.registerSystem<Systems::ControlPlayer>();
 		world.registerSystem<Systems::Anchor>();
 		world.registerSystem<Systems::StandartEnemy>();
 		world.registerSystem<Systems::BulletControl>();
 		world.registerSystem<Systems::Remover>();
+		world.registerSystem<Systems::EndAnimationRemover>();
 		world.registerSystem<Systems::GFXAnimationRenderer>();
 		world.registerSystem<Systems::GFXRectRenderer>();
 		world.init();
