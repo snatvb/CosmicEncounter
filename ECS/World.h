@@ -43,6 +43,7 @@ namespace ECS {
 					auto entities = _filteredEntities[&filter];
 					system->run(entities);
 				}
+				system->run();
 			}
 		};
 

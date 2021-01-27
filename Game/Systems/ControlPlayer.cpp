@@ -91,7 +91,7 @@ namespace Systems {
 		_game = &Engine::Game::GetInstance();
 	}
 
-	void ControlPlayer::run(ECS::FilteredEntities& entities)
+	void ControlPlayer::run()
 	{
 		for (auto& entity : playerFilter.entities) {
 			handleMove(*_world, *_game, *entity);

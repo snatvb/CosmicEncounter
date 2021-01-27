@@ -14,7 +14,8 @@ namespace ECS {
 
 		virtual Filter& getFilter() = 0;
 		virtual void init() = 0;
-		virtual void run(FilteredEntities& entities) = 0;
+		virtual void run(FilteredEntities& entities) {};
+		virtual void run() {};
 
 	protected:
 		BaseSystem(SystemID id) : _id(id) {}
@@ -27,8 +28,6 @@ namespace ECS {
 	template<typename Impl>
 	class System : public BaseSystem {
 	public:
-		bool isActive = true;
-
 		System() : BaseSystem(getSystemTypeID<Impl>()) {}
 
 		virtual void init() {};

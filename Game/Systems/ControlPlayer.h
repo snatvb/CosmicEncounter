@@ -16,7 +16,7 @@ namespace Systems {
 		}
 
 		void init() override;
-		void run(ECS::FilteredEntities& enitites) override;
+		void run() override;
 	private:
 		Engine::Game* _game;
 	};
