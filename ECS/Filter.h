@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <map>
 #include <iostream>
 #include "Entity.h"
 
@@ -55,44 +56,36 @@ namespace ECS {
 			OneFrame,
 		};
 
-		FilteredEntities entities{};
-		Type type = Type::None;
-		Filter()
-			: _id(getFilterId()) {
+		FilteredEntities* entities = nullptr;
+		const Type type = Type::None;
+		Filter() : _id(getFilterId()) {
+			if (_filters.find(_id) == _filters.end()) {
+				_filters[_id] = FilteredEntities{};
+				entities = &_filters[_id];
+			}
 			std::cout << "Filter created" << std::endl;
+		}
+
+		~Filter() {
+			_filters.erase(std::remove(
+				_filters.begin(),
+				_filters.end(),
+				_id
+			));
 		}
 
 		FilterID getId() { return _id; };
 		virtual bool validate(ECS::Entity& entity) = 0;
 
-		void handleRemovedEntity(ECS::Entity& entity) {
-			entities.erase(std::remove(
-				entities.begin(),
-				entities.end(),
-				&entity
-			), entities.end());
-		}
+		void handleRemovedEntity(ECS::Entity& entity);
 
-		void handleAddedComponent(ECS::Entity& entity) {
-			if (validate(entity)) {
-				if (std::find(entities.begin(), entities.end(), &entity) == entities.end()) {
-					entities.emplace_back(&entity);
-				}
-			}
-		}
+		void handleAddedComponent(ECS::Entity& entity);
 
-		void handleRemovedComponent(ECS::Entity& entity) {
-			if (!validate(entity)) {
-				entities.erase(std::remove(
-					entities.begin(),
-					entities.end(),
-					&entity
-				), entities.end());
-			}
-		}
+		void handleRemovedComponent(ECS::Entity& entity);
 
 	protected:
 	private:
+		static std::map<FilterID, FilteredEntities> _filters;
 		FilterID _id;
 	};
 
@@ -100,7 +93,7 @@ namespace ECS {
 		template <typename ...ComponentTypes>
 		class Include : public Filter {
 		public:
-			Type type = Type::Include;
+			const Type type = Type::Include;
 
 			bool validate(Entity& entity) {
 				return FilterHelper<ComponentTypes...>::hasComponent(entity);
@@ -110,7 +103,7 @@ namespace ECS {
 		template <typename ...ComponentTypes>
 		class Exclude : public Filter {
 		public:
-			Type type = Type::Exclude;
+			const Type type = Type::Exclude;
 
 			bool validate(Entity& entity) {
 				return !FilterHelper<ComponentTypes...>::hasComponent(entity);
@@ -120,7 +113,7 @@ namespace ECS {
 		template <typename ...ComponentTypes>
 		class With : public Filter {
 		public:
-			Type type = Type::With;
+			const Type type = Type::With;
 
 			bool validate(Entity& entity) {
 				return FilterHelper<ComponentTypes...>::hasComponents(entity);
@@ -129,7 +122,7 @@ namespace ECS {
 
 		class All : public Filter {
 		public:
-			Type type = Type::All;
+			const Type type = Type::All;
 
 			bool validate(Entity& entity) {
 				return true;
@@ -138,7 +131,7 @@ namespace ECS {
 
 		class Nothing : public Filter {
 		public:
-			Type type = Type::Nothing;
+			const Type type = Type::Nothing;
 
 			bool validate(Entity& entity) {
 				return false;
@@ -147,7 +140,7 @@ namespace ECS {
 
 		class OneFrame : public Filter {
 		public:
-			Type type = Type::OneFrame;
+			const Type type = Type::OneFrame;
 
 			bool validate(Entity& entity) {
 				return entity.hasOneFrameComponents();

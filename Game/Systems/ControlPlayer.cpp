@@ -93,7 +93,7 @@ namespace Systems {
 
 	void ControlPlayer::run()
 	{
-		for (auto& entity : playerFilter.entities) {
+		for (auto& entity : *playerFilter.entities) {
 			handleMove(*_world, *_game, *entity);
 			handleFire(*_world, *_game, *entity);
 			handleCollide(*_world, *_game, *entity);

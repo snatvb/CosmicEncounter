@@ -160,6 +160,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ECS\Component.cpp" />
+    <ClCompile Include="ECS\Filter.cpp" />
     <ClCompile Include="ECS\World.cpp" />
     <ClCompile Include="Engine\Assets\Texture.cpp" />
     <ClCompile Include="Engine\Game.cpp" />

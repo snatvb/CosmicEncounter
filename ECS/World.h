@@ -35,14 +35,8 @@ namespace ECS {
 		inline void update() {
 			for (auto& system : _systems) {
 				Filter& filter = system->getFilter();
-				if (filter.type == Filter::Type::Nothing) {
-					std::vector<Entity*> filteredEntities;
-					system->run(filteredEntities);
-				}
-				else {
-					auto entities = _filteredEntities[&filter];
-					system->run(entities);
-				}
+				auto entities = _filteredEntities[&filter];
+				system->run(entities);
 				system->run();
 			}
 		};

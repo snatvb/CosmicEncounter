@@ -126,6 +126,9 @@
     <ClCompile Include="Engine\helpers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ECS\Filter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
