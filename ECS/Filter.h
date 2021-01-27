@@ -61,8 +61,8 @@ namespace ECS {
 		Filter() : _id(getFilterId()) {
 			if (_filters.find(_id) == _filters.end()) {
 				_filters[_id] = FilteredEntities{};
-				entities = &_filters[_id];
 			}
+			entities = &_filters[_id];
 			std::cout << "Filter created" << std::endl;
 		}
 
