@@ -6,7 +6,6 @@
 void Systems::StandartEnemy::init()
 {
 	_game = &Engine::Game::GetInstance();
-	_playerFilter = _world->getSystemFilter<ControlPlayer>();
 }
 
 inline void shot(ECS::World& world, Engine::Game& game, ECS::Entity& player, ECS::Entity& entity) {
@@ -53,8 +52,7 @@ void Systems::StandartEnemy::run()
 		}
 		//transform.position.y += static_cast<int>(stats.speed * _game->time.delta());
 
-		auto& players = _world->filterEntities(*_playerFilter);
-		if (auto player = head(players)) {
+		if (auto player = head(*playerFilter.entities)) {
 			followPlayer(*_game, *player, *entity);
 
 			if (entity->hasComponent<Components::Gun>()) {

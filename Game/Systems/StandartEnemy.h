@@ -13,12 +13,12 @@ namespace Systems {
 			Components::EnemyTag,
 			Components::HeroStats
 		> filter;
-		REG_FILTERS(StandartEnemy, &filter)
+		ECS::Filters::Include<Components::PlayerTag> playerFilter;
+		REG_FILTERS(StandartEnemy, &filter, &playerFilter)
 
 		void init() override;
 		void run() override;
 	private:
 		Engine::Game* _game = nullptr;
-		ECS::Filter* _playerFilter = nullptr;
 	};
 }

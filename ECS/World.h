@@ -23,20 +23,11 @@ namespace ECS {
 		void init() {
 			for (auto& system : _systems) {
 				Filter& filter = system->getFilter();
-				_filteredEntities[&filter] = Entities{};
 			}
-		}
-
-
-		inline Entities& filterEntities(Filter& filter) {
-			return _filteredEntities[&filter];
 		}
 
 		inline void update() {
 			for (auto& system : _systems) {
-				Filter& filter = system->getFilter();
-				auto entities = _filteredEntities[&filter];
-				system->run(entities);
 				system->run();
 			}
 		};
@@ -67,13 +58,6 @@ namespace ECS {
 					for (auto filter : system->filters) {
 						filter->handleRemovedEntity(*entity);
 					}
-				}
-				for (auto& [_, entities] : _filteredEntities) {
-					entities.erase(std::remove(
-						entities.begin(),
-						entities.end(),
-						entity
-					), entities.end());
 				}
 				_entities.erase(toDelete);
 				delete entity;
@@ -107,7 +91,6 @@ namespace ECS {
 		}
 
 	private:
-		std::map<Filter*, Entities> _filteredEntities;
 		std::map<EntityID, Entity*> _entities;
 		Systems _systems;
 
@@ -126,14 +109,6 @@ namespace ECS {
 		}
 
 		void _handleComponentAdded(Entity& entity, Component& component) {
-			for (auto& [filter, entities] : _filteredEntities) {
-				if (filter->validate(entity)) {
-					if (std::find(entities.begin(), entities.end(), &entity) == entities.end()) {
-						entities.emplace_back(&entity);
-					}
-				}
-			}
-
 			for (auto system : _systems) {
 				for (auto filter : system->filters) {
 					filter->handleAddedComponent(entity);
@@ -142,16 +117,6 @@ namespace ECS {
 		}
 
 		void _handleComponentRemoved(Entity& entity, Component& component) {
-			for (auto& [filter, entities] : _filteredEntities) {
-				if (!filter->validate(entity)) {
-					entities.erase(std::remove_if(
-						entities.begin(),
-						entities.end(),
-						[&](Entity* item) { return entity.id == item->id; }
-					), entities.end());
-				}
-			}
-
 			for (auto system : _systems) {
 				for (auto filter : system->filters) {
 					filter->handleRemovedComponent(entity);

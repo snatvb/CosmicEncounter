@@ -8,8 +8,11 @@ namespace ECS {
 	public:
 		using Filter = Filters::OneFrame;
 
-		void run(FilteredEntities& entities) {
-			for (auto entity : entities) {
+		Filters::OneFrame filter;
+		REG_FILTERS(OneFrameClearSystem, &filter)
+
+		void run() {
+			for (auto entity : *filter.entities) {
 				entity->clearOneFrameComponents();
 			}
 		}
