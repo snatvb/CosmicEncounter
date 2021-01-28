@@ -21,6 +21,9 @@ namespace ECS {
 		}
 
 		void init() {
+			for (auto system : _systems) {
+				system->init();
+			}
 		}
 
 		inline void update() {
@@ -69,7 +72,6 @@ namespace ECS {
 		T& registerSystem(TArgs&& ...args) {
 			T* system = new T(std::forward<TArgs>(args)...);
 			system->_world = this;
-			system->init();
 			_systems.emplace_back(system);
 			return *system;
 		}

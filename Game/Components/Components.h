@@ -4,3 +4,4 @@
 #include "Stats.h"
 #include "Bullet.h"
 #include "Gun.h"
+#include "Stars.h"

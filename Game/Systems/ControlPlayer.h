@@ -1,8 +1,6 @@
 #pragma once
 
-#include "ECS.h"
-#include "Engine.h"
-#include "../Components/Components.h"
+#include "./DefaultIncludes.h"
 
 namespace Systems {
 	class ControlPlayer : public ECS::System<ControlPlayer> {

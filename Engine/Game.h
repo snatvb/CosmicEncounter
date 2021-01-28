@@ -27,8 +27,15 @@ namespace Engine {
 		Time time;
 		Assets::Manager* assets = nullptr;
 
-		static Renderer* GetRenderer() {
+		inline static Renderer* GetRenderer() {
 			return GetInstance()._renderer;
+		}
+
+		inline static std::pair<int, int> GetWindowSize() {
+			int width;
+			int height;
+			SDL_GetWindowSize(GetInstance().getWindow(), &width, &height);
+			return std::pair<int, int>{width, height};
 		}
 
 		void setName(const char* name);

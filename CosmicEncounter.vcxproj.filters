@@ -129,6 +129,9 @@
     <ClCompile Include="Game\Systems\CheckDied.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Systems\StarsControl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -276,6 +279,18 @@
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
     <ClInclude Include="Game\Systems\CheckDied.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Systems\DefaultIncludes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Systems\StarsControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Components\Stars.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Builders\Stars.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

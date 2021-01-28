@@ -18,15 +18,15 @@ namespace Components {
 		bool play = true;
 		float rotation = 0;
 
-		GFXAnimtion(SDL_Texture& texture, Size& tileSize, Vector2D<int>& frames)
+		GFXAnimtion(SDL_Texture& texture, const Size& tileSize, Vector2D<int>& frames)
 			: texture(&texture), tileSize(tileSize), frames(frames), currentFrame(1, 1)
 		{}
 
-		GFXAnimtion(SDL_Texture & texture, Size & tileSize)
+		GFXAnimtion(SDL_Texture& texture, Size& tileSize)
 			: texture(&texture), tileSize(tileSize), frames(1, 1), play(false), currentFrame(1, 1)
 		{}
 
-		GFXAnimtion(SDL_Texture & texture, Vector2D<int>& offset, Size & tileSize)
+		GFXAnimtion(SDL_Texture& texture, Vector2D<int>& offset, Size& tileSize)
 			: texture(&texture), tileSize(tileSize), offset(offset), play(false), frames(1, 1), currentFrame(1, 1)
 		{}
 	};

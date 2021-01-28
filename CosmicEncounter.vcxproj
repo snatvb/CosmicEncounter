@@ -180,6 +180,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="Game\Systems\EnemySpawner.cpp" />
     <ClCompile Include="Game\Systems\Remover.cpp" />
     <ClCompile Include="Game\Systems\StandartEnemy.cpp" />
+    <ClCompile Include="Game\Systems\StarsControl.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -211,9 +212,11 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Game\Builders.h" />
     <ClInclude Include="Game\Builders\Bullets.h" />
     <ClInclude Include="Game\Builders\Explosions.h" />
+    <ClInclude Include="Game\Builders\Stars.h" />
     <ClInclude Include="Game\Components\Bullet.h" />
     <ClInclude Include="Game\Components\Components.h" />
     <ClInclude Include="Game\Components\Gun.h" />
+    <ClInclude Include="Game\Components\Stars.h" />
     <ClInclude Include="Game\Components\Stats.h" />
     <ClInclude Include="Game\Components\Tags.h" />
     <ClInclude Include="Engine\helpers.h" />
@@ -224,10 +227,12 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Engine\Systems\GFXShapeRenderer.h" />
     <ClInclude Include="Game\Systems\CheckDied.h" />
     <ClInclude Include="Game\Systems\ControlPlayer.h" />
+    <ClInclude Include="Game\Systems\DefaultIncludes.h" />
     <ClInclude Include="Game\Systems\EnemySpawner.h" />
     <ClInclude Include="Game\Systems\Remover.h" />
     <ClInclude Include="Engine\Systems\RendererSystem.h" />
     <ClInclude Include="Game\Systems\StandartEnemy.h" />
+    <ClInclude Include="Game\Systems\StarsControl.h" />
     <ClInclude Include="Game\Systems\Systems.h" />
     <ClInclude Include="ECS\OneFrameClearSystem.h" />
     <ClInclude Include="resource.h" />
