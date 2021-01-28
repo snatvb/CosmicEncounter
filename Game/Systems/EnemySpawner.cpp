@@ -19,6 +19,9 @@ void Systems::EnemySpawner::run()
 			GET_RANDOM(-100.0f, width + 100.0f),
 			YPOS
 		};
-		Builders::createEnemy(*_world, game, position);
+		auto& enemy = Builders::createEnemy(*_world, game, position);
+		auto& stats = enemy.getComponent<Components::HeroStats>();
+		stats.speed = stats.speed + GET_RANDOM(0, 100);
+		stats.speed -= GET_RANDOM(0, 100);
 	}
 }
