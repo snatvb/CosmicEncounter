@@ -1,3 +1,4 @@
+#include <thread>
 #include "./helpers.h"
 #include "Game.h"
 #include "Debug.h"
@@ -39,24 +40,39 @@ namespace Engine {
 		Uint32 frameStart;
 		int frameTime;
 
+		std::thread renderThread([&]() {
+			while (_isRunning) {
+				if (!_renderer->getNeedRender()) {
+					continue;
+				}
+				SDL_RenderClear(_sdlRenderer);
+				_renderer->render();
+				SDL_SetRenderDrawColor(_sdlRenderer, 0, 0, 0, 255);
+				SDL_RenderPresent(_sdlRenderer);
+				std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
+				if (_frameDelay > frameTime) {
+					std::this_thread::sleep_for(std::chrono::milliseconds(_frameDelay - frameTime));
+				}
+			}
+		});
+
 		while (_isRunning) {
 			time._update();
 			frameStart = SDL_GetTicks();
 			frameTime = SDL_GetTicks() - frameStart;
 
-
-			SDL_RenderClear(_sdlRenderer);
 			_handleEvents();
 			_worker->getWorld().update();
 			_worker->update();
-			_renderer->render();
-			SDL_SetRenderDrawColor(_sdlRenderer, 0, 0, 0, 255);
-			SDL_RenderPresent(_sdlRenderer);
+			_renderer->setNeedRender(true);
 
 			if (_frameDelay > frameTime) {
 				SDL_Delay(_frameDelay - frameTime);
 			}
 		}
+
+		renderThread.join();
 	}
 
 	SDL_Renderer* Game::getSDLRenderer()
