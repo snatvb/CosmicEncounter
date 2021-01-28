@@ -45,11 +45,9 @@ void Systems::StandartEnemy::run()
 {
 	for (auto entity : *filter.entities) {
 		auto& stats = entity->getComponent<Components::HeroStats>();
-		if (entity->hasComponent<Components::Collided>()) {
-			auto& collided = entity->getComponent<Components::Collided>();
+		if (auto collided = entity->tryGetComponent<Components::Collided>()) {
 			auto& transform = entity->getComponent<Components::Transform>();
-			auto entityCollided = _world->getEntityById(collided.entityId);
-			if (entityCollided->hasComponent<Components::Bullet>()) {
+			if (auto entityCollided = _world->getEntityById(collided->entityId)) {
 				auto& bullet = entityCollided->getComponent<Components::Bullet>();
 				stats.health -= bullet.damage;
 			}

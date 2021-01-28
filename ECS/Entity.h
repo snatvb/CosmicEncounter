@@ -57,6 +57,15 @@ namespace ECS {
 		}
 
 		template<typename T>
+		T* tryGetComponent() const {
+			if (hasComponent<T>()) {
+				auto component = _componentArray[getComponentTypeID<T>()];
+				return static_cast<T*>(component);
+			}
+			return nullptr;
+		}
+
+		template<typename T>
 		bool removeComponent() {
 			if (hasComponent<T>()) {
 				auto id = getComponentTypeID<T>();

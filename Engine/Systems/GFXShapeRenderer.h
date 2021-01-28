@@ -4,14 +4,19 @@
 #include "../Components.h"
 
 namespace Systems {
-	class GFXRectRenderer : public RendererSystem<Systems::GFXRectRenderer> {
+	class GFXShapeRenderer : public RendererSystem<Systems::GFXShapeRenderer> {
 	public:
 		ECS::Filters::With<
 			Components::GFXRect,
 			Components::Transform
-		> filter;
+		> rects;
 
-		REG_FILTERS(GFXRectRenderer, &filter)
+		ECS::Filters::With<
+			Components::GFXRect,
+			Components::Transform
+		> circles;
+
+		REG_FILTERS(GFXShapeRenderer, &rects, &circles)
 
 		void run() override;
 	};
