@@ -8,7 +8,7 @@ void Systems::EnemySpawner::run()
 		return;
 	}
 
-	auto needSpawn = rand() % 100 <= 30;
+	const auto needSpawn = rand() % 100 <= 30;
 	if (needSpawn) {
 		int width;
 		int height;

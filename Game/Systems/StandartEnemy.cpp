@@ -17,7 +17,8 @@ inline void shot(ECS::World& world, Engine::Game& game, ECS::Entity& player, ECS
 	if (diffX < 2.0f && diffX > -2.0f) {
 		if (gun.cooldown <= 0) {
 			auto position = transform.position + gun.offset;
-			Builders::createSimpleBullet(world, gun, position);
+			Builders::CollideLayers igonreLayers{ CollideLayer::Enemy };
+			Builders::createSimpleBullet(world, gun, position, igonreLayers);
 			gun.cooldown = static_cast<int>(1000 / gun.fireRate);
 		}
 	}
@@ -60,8 +61,8 @@ inline void followPlayer(
 
 	auto diffY = transform.position.y - playerTransform.position.y;
 	if (ABS(diffY) > 300) {
-		if(!hasAllyForward(entity, transform, otherEntities)) {
-			transform.position.y += stats.speed * deltaTime;
+		if (!hasAllyForward(entity, transform, otherEntities)) {
+			transform.position.y += static_cast<float>(stats.speed * deltaTime);
 		}
 	}
 }
@@ -69,20 +70,21 @@ inline void followPlayer(
 void Systems::StandartEnemy::run()
 {
 	for (auto entity : *filter.entities) {
-		auto& stats = entity->getComponent<Components::HeroStats>();
-		if (auto collided = entity->tryGetComponent<Components::Collided>()) {
-			if (auto entityCollided = _world->getEntityById(collided->entityId)) {
-				if (auto bullet = entityCollided->tryGetComponent<Components::Bullet>()){
-					stats.health -= bullet->damage;
-				}
-			}
+		auto player = head(*playerFilter.entities);
+		if (player == nullptr) { return; }
+
+		followPlayer(*_game, *player, *entity, *filter.entities);
+
+		if (entity->hasComponent<Components::Gun>()) {
+			shot(*_world, *_game, *player, *entity);
 		}
 
-		if (auto player = head(*playerFilter.entities)) {
-			followPlayer(*_game, *player, *entity, *filter.entities);
-
-			if (entity->hasComponent<Components::Gun>()) {
-				shot(*_world, *_game, *player, *entity);
+		if (auto collided = entity->tryGetComponent<Components::Collided>()) {
+			auto& stats = entity->getComponent<Components::HeroStats>();
+			if (auto entityCollided = _world->getEntityById(collided->entityId)) {
+				if (auto bullet = entityCollided->tryGetComponent<Components::Bullet>()) {
+					stats.health -= bullet->damage;
+				}
 			}
 		}
 	}

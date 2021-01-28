@@ -1,12 +1,9 @@
 #pragma once
-#include "ECS.h"
-#include "Game.h"
-#include "../Components/Components.h"
-#include "../Assets.h"
+#include "../game_common.h"
 
 namespace Builders {
 	inline void createSimpleExplosion(ECS::World& world, Components::Transform& transform) {
-		auto texture = Engine::Game::GetInstance().assets->textures.load(Assets::simpleExplostion);
+		auto texture = Engine::Game::GetInstance().assets->textures.load(AssetPathes::simpleExplostion);
 
 		auto tileSize = Size{ 32, 32 };
 		auto& entity = world.newEntity();

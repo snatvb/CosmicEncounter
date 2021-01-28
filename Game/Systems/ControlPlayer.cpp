@@ -1,5 +1,4 @@
 #include "ControlPlayer.h"
-#include "../Assets.h"
 #include "../Builders.h"
 
 inline void move(ECS::Entity& entity, int x, int y, double delta) {
@@ -42,7 +41,8 @@ inline void handleFire(ECS::World& world, Engine::Game& game, ECS::Entity& entit
 	if (gun.cooldown <= 0) {
 		if (game.keyboard.isPressed(SDLK_SPACE)) {
 			auto position = transform.position + gun.offset;
-			Builders::createSimpleBullet(world, gun, position);
+			Builders::CollideLayers igonreLayers{};
+			Builders::createSimpleBullet(world, gun, position, igonreLayers);
 			gun.cooldown = static_cast<int>(1000 / gun.fireRate);
 		}
 	}

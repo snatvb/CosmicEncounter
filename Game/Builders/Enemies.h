@@ -5,9 +5,12 @@
 namespace Builders {
 	inline ECS::Entity& createEnemy(ECS::World& world, Engine::Game& game, Components::Transform::Position& position) {
 		auto& entity = world.newEntity();
+
 		auto tileSize = Size{ 32, 32 };
 		entity.addComponent<Components::Transform>(position, tileSize);
-		entity.addComponent<Components::CircleCollider>(16.0f, 16.0f, 16.0f);
+		auto& collider = entity.addComponent<Components::CircleCollider>(16.0f, 16.0f, 16.0f);
+		collider.layer = static_cast<size_t>(CollideLayer::Enemy);
+
 		entity.addComponent<Components::EnemyTag>();
 		auto texture = game.assets->textures.load("Assets/Ships/tile.png");
 

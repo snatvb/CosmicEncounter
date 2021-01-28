@@ -5,7 +5,7 @@
 #include "Game/Components/Components.h"
 #include "Game/Systems/Systems.h"
 #include "Geometry.h"
-#include "Game/Assets.h"
+#include "Game/AssetPathes.h"
 #include "TimeMeasure.h"
 
 inline ECS::Entity& createPlayer(ECS::World& world, Engine::Game& game) {
@@ -13,8 +13,10 @@ inline ECS::Entity& createPlayer(ECS::World& world, Engine::Game& game) {
 	auto position = Components::Transform::Position(300, 700);
 	auto tileSize = Size{ 32, 32 };
 	entity.addComponent<Components::Transform>(position, tileSize);
-	entity.addComponent<Components::CircleCollider>(16.0f, 16.0f, 16.0f);
 	entity.addComponent<Components::PlayerTag>();
+	
+	auto& collider = entity.addComponent<Components::CircleCollider>(16.0f, 16.0f, 16.0f);
+	collider.layer = static_cast<size_t>(CollideLayer::Player);
 
 	auto gunOffset = Vector2D<float>{ 12, -16 };
 	auto direction = Vector2D<float>{ 0, -1 };
