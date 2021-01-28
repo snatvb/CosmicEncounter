@@ -1,12 +1,12 @@
 #include "StarsControl.h"
 
 constexpr int STARS_COUNT = 50;
-constexpr int STARS_SPEED = 300;
+constexpr int STARS_SPEED = 200;
 const Vector2D<int, int> TILE_SIZE{ 8, 8 };
 const Vector2D<int, int> TILE_COUNT{ 4, 2 };
 
 inline float getRandomSpeed() {
-	return rand() % 100 + STARS_SPEED - 50;
+	return static_cast<float>(rand() % 100 + STARS_SPEED - 50);
 }
 
 void Systems::StarsControl::init()
