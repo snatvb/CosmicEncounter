@@ -44,11 +44,15 @@ inline void followPlayer(Engine::Game& game, ECS::Entity& player, ECS::Entity& e
 void Systems::StandartEnemy::run()
 {
 	for (auto entity : *filter.entities) {
+		auto& stats = entity->getComponent<Components::HeroStats>();
 		if (entity->hasComponent<Components::Collided>()) {
+			auto& collided = entity->getComponent<Components::Collided>();
 			auto& transform = entity->getComponent<Components::Transform>();
-			Builders::createSimpleExplosion(*_world, transform);
-			//entity->addComponent<Components::ToRemoveTag>();
-			//return;
+			auto entityCollided = _world->getEntityById(collided.entityId);
+			if (entityCollided->hasComponent<Components::Bullet>()) {
+				auto& bullet = entityCollided->getComponent<Components::Bullet>();
+				stats.health -= bullet.damage;
+			}
 		}
 		//transform.position.y += static_cast<int>(stats.speed * _game->time.delta());
 

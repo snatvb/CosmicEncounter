@@ -79,10 +79,6 @@ inline void handleCollide(ECS::World& world, Engine::Game& game, ECS::Entity& en
 			stats.health -= bullet.damage;
 		}
 	}
-
-	if (stats.health <= 0) {
-		entity.addComponent<Components::ToRemoveTag>();
-	}
 }
 
 namespace Systems {

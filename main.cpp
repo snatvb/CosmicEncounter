@@ -80,6 +80,7 @@ class Worker : public Engine::Worker {
 		world.registerSystem<Systems::Anchor>();
 		world.registerSystem<Systems::StandartEnemy>();
 		world.registerSystem<Systems::BulletControl>();
+		world.registerSystem<Systems::CheckDied>();
 		world.registerSystem<Systems::Remover>();
 		world.registerSystem<Systems::EndAnimationRemover>();
 		world.registerSystem<Systems::GFXAnimationRenderer>();

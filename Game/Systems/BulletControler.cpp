@@ -1,4 +1,5 @@
 #include "BulletControler.h"
+#include "../Builders.h"
 
 
 void Systems::BulletControl::init()
@@ -18,7 +19,10 @@ void Systems::BulletControl::run()
 			auto& collided = entity->getComponent<Components::Collided>();
 			if (auto entityCollided = _world->getEntityById(collided.entityId)) {
 				if (!entityCollided->hasComponent<Components::Bullet>()) {
+					auto& collidedTransform = entityCollided->getComponent<Components::Transform>();
+					Builders::createSimpleExplosion(*_world, collidedTransform);
 					entity->addComponent<Components::ToRemoveTag>();
+					return;
 				}
 			}
 		}

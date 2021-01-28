@@ -175,6 +175,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="Game\Systems\BulletControler.cpp" />
     <ClCompile Include="Engine\Systems\GFXAnimationRenderer.cpp" />
     <ClCompile Include="Engine\Systems\GFXShapeRenderer.cpp" />
+    <ClCompile Include="Game\Systems\CheckDied.cpp" />
     <ClCompile Include="Game\Systems\ControlPlayer.cpp" />
     <ClCompile Include="Game\Systems\EnemySpawner.cpp" />
     <ClCompile Include="Game\Systems\Remover.cpp" />
@@ -221,6 +222,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Game\Systems\BulletControler.h" />
     <ClInclude Include="Engine\Systems\GFXAnimationRenderer.h" />
     <ClInclude Include="Engine\Systems\GFXShapeRenderer.h" />
+    <ClInclude Include="Game\Systems\CheckDied.h" />
     <ClInclude Include="Game\Systems\ControlPlayer.h" />
     <ClInclude Include="Game\Systems\EnemySpawner.h" />
     <ClInclude Include="Game\Systems\Remover.h" />
