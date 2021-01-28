@@ -38,6 +38,10 @@ namespace Engine {
 			return std::pair<int, int>{width, height};
 		}
 
+		inline static void GetWindowSize(Game& game, int& width, int& height) {
+			SDL_GetWindowSize(GetInstance().getWindow(), &width, &height);
+		}
+
 		void setName(const char* name);
 		void init(Worker& gameHandler);
 		void run();

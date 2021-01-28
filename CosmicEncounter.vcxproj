@@ -211,6 +211,8 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Engine\Worker.h" />
     <ClInclude Include="Game\Builders.h" />
     <ClInclude Include="Game\Builders\Bullets.h" />
+    <ClInclude Include="Game\Builders\default_includes.h" />
+    <ClInclude Include="Game\Builders\Enemies.h" />
     <ClInclude Include="Game\Builders\Explosions.h" />
     <ClInclude Include="Game\Builders\Stars.h" />
     <ClInclude Include="Game\Components\Bullet.h" />

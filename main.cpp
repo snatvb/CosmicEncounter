@@ -30,30 +30,6 @@ inline ECS::Entity& createPlayer(ECS::World& world, Engine::Game& game) {
 	return entity;
 }
 
-inline ECS::Entity& createEnemy(ECS::World& world, Engine::Game& game) {
-	auto& entity = world.newEntity();
-	auto position = Components::Transform::Position(300.0f, 300.0f);
-	auto tileSize = Size{ 32, 32 };
-	entity.addComponent<Components::Transform>(position, tileSize);
-	entity.addComponent<Components::CircleCollider>(16.0f, 16.0f, 16.0f);
-	entity.addComponent<Components::EnemyTag>();
-	auto texture = game.assets->textures.load("Assets/Ships/tile.png");
-
-	auto gunOffset = Vector2D<float>{ 12, 32 };
-	auto direction = Vector2D<float>{ 0, 1 };
-	auto& gun = entity.addComponent<Components::Gun>(gunOffset, direction, 10.0f, 4.0f);
-	gun.bulletSpeed = 800.0f;
-
-	Vector2D<int> tileOffset{64, 64};
-	auto& gfx = entity.addComponent<Components::GFXAnimtion>(*texture, tileOffset, tileSize);
-	gfx.play = false;
-	gfx.rotation = 180.0f;
-	auto& stats = entity.addComponent<Components::HeroStats>();
-	stats.speed = 450.0f;
-	stats.health = 10.0f;
-	return entity;
-}
-
 
 inline void createFire(ECS::World& world, Engine::Game& game, ECS::Entity& parent) {
 	auto& entity = world.newEntity();
@@ -75,6 +51,7 @@ class Worker : public Engine::Worker {
 	inline void init() override {
 		auto& game = Engine::Game::GetInstance();
 		auto& world = getWorld();
+		world.registerSystem<Systems::EnemySpawner>();
 		world.registerSystem<Systems::StarsControl>();
 		world.registerSystem<Systems::Collide>();
 		world.registerSystem<Systems::ControlPlayer>();
@@ -89,7 +66,6 @@ class Worker : public Engine::Worker {
 		world.init();
 		auto& player = createPlayer(world, game);
 		createFire(world, game, player);
-		createEnemy(world, game);
 	}
 
 	inline void update() override {}

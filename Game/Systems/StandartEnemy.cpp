@@ -48,8 +48,9 @@ void Systems::StandartEnemy::run()
 		if (auto collided = entity->tryGetComponent<Components::Collided>()) {
 			auto& transform = entity->getComponent<Components::Transform>();
 			if (auto entityCollided = _world->getEntityById(collided->entityId)) {
-				auto& bullet = entityCollided->getComponent<Components::Bullet>();
-				stats.health -= bullet.damage;
+				if (auto bullet = entityCollided->tryGetComponent<Components::Bullet>()){
+					stats.health -= bullet->damage;
+				}
 			}
 		}
 		//transform.position.y += static_cast<int>(stats.speed * _game->time.delta());
