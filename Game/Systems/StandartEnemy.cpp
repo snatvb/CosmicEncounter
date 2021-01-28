@@ -59,8 +59,10 @@ inline void followPlayer(
 		transform.position.x += static_cast<int>(stats.speed * deltaTime);
 	}
 
-	auto diffY = transform.position.y - playerTransform.position.y;
-	if (ABS(diffY) > 300) {
+	auto diffY = playerTransform.position.y - transform.position.y;
+	if (diffY < 0) {
+		transform.position.y -= static_cast<float>(stats.speed * deltaTime);
+	} else if (diffY > 300) {
 		if (!hasAllyForward(entity, transform, otherEntities)) {
 			transform.position.y += static_cast<float>(stats.speed * deltaTime);
 		}
