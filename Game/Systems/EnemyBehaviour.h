@@ -4,15 +4,15 @@
 #include "../Components/Components.h"
 
 namespace Systems {
-	class StandartEnemy : public ECS::System<StandartEnemy> {
+	class EnemyBehaviour : public ECS::System<EnemyBehaviour> {
 	public:
 		ECS::Filters::With<
 			Components::Transform,
-			Components::EnemyTag,
+			Components::Enemy,
 			Components::HeroStats
 		> filter;
 		ECS::Filters::Include<Components::PlayerTag> playerFilter;
-		REG_FILTERS(StandartEnemy, &filter, &playerFilter)
+		REG_FILTERS(EnemyBehaviour, &filter, &playerFilter)
 
 		void init() override;
 		void run() override;

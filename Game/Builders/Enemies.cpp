@@ -8,7 +8,7 @@ ECS::Entity& Builders::createStandartEnemy(ECS::World& world, Engine::Game& game
 	auto& collider = entity.addComponent<Components::CircleCollider>(16.0f, 16.0f, 16.0f);
 	collider.layer = static_cast<size_t>(CollideLayer::Enemy);
 
-	entity.addComponent<Components::EnemyTag>();
+	entity.addComponent<Components::Enemy>(Components::Enemy::Type::Standart);
 	auto texture = game.assets->textures.load(AssetPathes::shipsTile);
 
 	auto gunOffset = Vector2D<float>{ 12, 32 };
@@ -35,7 +35,7 @@ ECS::Entity& Builders::createBombardirEnemy(ECS::World& world, Engine::Game& gam
 	auto& collider = entity.addComponent<Components::CircleCollider>(16.0f, 16.0f, 16.0f);
 	collider.layer = static_cast<size_t>(CollideLayer::Enemy);
 
-	entity.addComponent<Components::EnemyTag>();
+	entity.addComponent<Components::Enemy>(Components::Enemy::Type::Bombardir);
 	auto texture = game.assets->textures.load(AssetPathes::shipsTile);
 
 	auto gunOffset = Vector2D<float>{ 12, 32 };

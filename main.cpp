@@ -58,7 +58,7 @@ class Worker : public Engine::Worker {
 		world.registerSystem<Systems::Collide>();
 		world.registerSystem<Systems::ControlPlayer>();
 		world.registerSystem<Systems::Anchor>();
-		world.registerSystem<Systems::StandartEnemy>();
+		world.registerSystem<Systems::EnemyBehaviour>();
 		world.registerSystem<Systems::BulletControl>();
 		world.registerSystem<Systems::CheckDied>();
 		world.registerSystem<Systems::Scenario>();

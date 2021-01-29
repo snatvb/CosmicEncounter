@@ -93,9 +93,6 @@
     <ClCompile Include="Game\Systems\ControlPlayer.cpp">
       <Filter>Source Files\Game\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Systems\StandartEnemy.cpp">
-      <Filter>Source Files\Game\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Systems\BulletControler.cpp">
       <Filter>Source Files\Game\Systems</Filter>
     </ClCompile>
@@ -146,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="Game\Systems\Scenario.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Systems\EnemyBehaviour.cpp">
+      <Filter>Source Files\Game\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -239,9 +239,6 @@
     <ClInclude Include="Engine\Components\GFX\GFXAnimation.h">
       <Filter>Header Files\Engine\Components\GFX</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Systems\StandartEnemy.h">
-      <Filter>Header Files\Game\Systems</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Systems\Assets.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
@@ -325,6 +322,12 @@
     </ClInclude>
     <ClInclude Include="Game\Systems\Scenario.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Components\Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Systems\EnemyBehaviour.h">
+      <Filter>Header Files\Game\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 #include <array>
 #include "Utils/EnumArray.h"
 #include "ECS.h"
+#include "./Enemy.h"
 
 namespace Components {
 	struct Scenario : ECS::Component {
@@ -9,11 +10,7 @@ namespace Components {
 			TechnicalPlanet
 		};
 
-		enum class EnemyType {
-			Standart,
-			Bombardir,
-			__count
-		};
+		using EnemyType = Enemy::Type;
 
 		using EnemiesCount = EnumArray<EnemyType, unsigned char, static_cast<size_t>(EnemyType::__count)>;
 

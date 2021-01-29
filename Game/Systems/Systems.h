@@ -1,7 +1,7 @@
 #pragma once
 
 #include "BulletControler.h"
-#include "StandartEnemy.h"
+#include "EnemyBehaviour.h"
 #include "ControlPlayer.h"
 #include "EnemySpawner.h"
 #include "StarsControl.h"

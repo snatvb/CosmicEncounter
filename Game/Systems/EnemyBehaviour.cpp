@@ -1,9 +1,9 @@
-#include "StandartEnemy.h"
+#include "EnemyBehaviour.h"
 #include "ControlPlayer.h"
 #include "Utils/vectors.cpp"
 #include "../Builders.h"
 
-void Systems::StandartEnemy::init()
+void Systems::EnemyBehaviour::init()
 {
 	_game = &Engine::Game::GetInstance();
 }
@@ -69,7 +69,7 @@ inline void followPlayer(
 	}
 }
 
-void Systems::StandartEnemy::run()
+void Systems::EnemyBehaviour::run()
 {
 	for (auto entity : *filter.entities) {
 		auto player = head(*playerFilter.entities);
