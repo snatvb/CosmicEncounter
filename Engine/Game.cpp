@@ -52,7 +52,9 @@ namespace Engine {
 				std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
 				if (_frameDelay > frameTime) {
-					std::this_thread::sleep_for(std::chrono::milliseconds(_frameDelay - frameTime));
+					std::this_thread::sleep_for(
+						std::chrono::milliseconds(_frameDelay - frameTime)
+					);
 				}
 			}
 		});

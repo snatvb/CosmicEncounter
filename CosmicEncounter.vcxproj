@@ -201,6 +201,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Engine\Components\SimpleComponents.h" />
     <ClInclude Include="Engine\Debug.h" />
     <ClInclude Include="Engine\Engine.h" />
+    <ClInclude Include="Engine\Utils\EnumArray.h" />
     <ClInclude Include="Engine\Game.h" />
     <ClInclude Include="Engine\Keyboard.h" />
     <ClInclude Include="Engine\EngineTime.h" />
@@ -218,6 +219,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Game\Components\Bullet.h" />
     <ClInclude Include="Game\Components\Components.h" />
     <ClInclude Include="Game\Components\Gun.h" />
+    <ClInclude Include="Game\Components\Scenario.h" />
     <ClInclude Include="Game\Components\Stars.h" />
     <ClInclude Include="Game\Components\Stats.h" />
     <ClInclude Include="Game\Components\Tags.h" />

@@ -302,6 +302,12 @@
     <ClInclude Include="Game\game_common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Components\Scenario.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Utils\EnumArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CosmicEncounter.rc">
