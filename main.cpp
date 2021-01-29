@@ -61,6 +61,7 @@ class Worker : public Engine::Worker {
 		world.registerSystem<Systems::StandartEnemy>();
 		world.registerSystem<Systems::BulletControl>();
 		world.registerSystem<Systems::CheckDied>();
+		world.registerSystem<Systems::Scenario>();
 		world.registerSystem<Systems::Remover>();
 		world.registerSystem<Systems::EndAnimationRemover>();
 		world.registerSystem<Systems::GFXAnimationRenderer>();

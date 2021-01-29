@@ -183,6 +183,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="Game\Systems\ControlPlayer.cpp" />
     <ClCompile Include="Game\Systems\EnemySpawner.cpp" />
     <ClCompile Include="Game\Systems\Remover.cpp" />
+    <ClCompile Include="Game\Systems\Scenario.cpp" />
     <ClCompile Include="Game\Systems\StandartEnemy.cpp" />
     <ClCompile Include="Game\Systems\StarsControl.cpp" />
     <ClCompile Include="main.cpp" />
@@ -240,6 +241,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Game\Systems\EnemySpawner.h" />
     <ClInclude Include="Game\Systems\Remover.h" />
     <ClInclude Include="Engine\Systems\RendererSystem.h" />
+    <ClInclude Include="Game\Systems\Scenario.h" />
     <ClInclude Include="Game\Systems\StandartEnemy.h" />
     <ClInclude Include="Game\Systems\StarsControl.h" />
     <ClInclude Include="Game\Systems\Systems.h" />

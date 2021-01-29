@@ -10,5 +10,6 @@ namespace Systems {
 		REG_FILTERS(EnemySpawner, &filter, &scenarios);
 
 		void run() override;
+		void spawnStandart();
 	};
 }

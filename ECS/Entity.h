@@ -51,6 +51,23 @@ namespace ECS {
 		}
 
 		template<typename T>
+		void addComponent(T* component) {
+			if (hasComponent<T>()) {
+				// TODO: throw error in debug
+				return;
+			}
+
+			auto id = getComponentTypeID<T>();
+
+			_componentArray[id] = component;
+			_componentBitSet[id] = true;
+			if (componentIs(*component, ComponentType::OneFrame)) {
+				_oneFrameComponentCount++;
+			}
+			_onChange(*this, *component, ChangeType::AddedComponent);
+		}
+
+		template<typename T>
 		T& getComponent() const {
 			auto component = _componentArray[getComponentTypeID<T>()];
 			return *static_cast<T*>(component);

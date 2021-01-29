@@ -4,6 +4,11 @@ constexpr int YPOS = -200;
 
 void Systems::EnemySpawner::run()
 {
+	spawnStandart();
+}
+
+void Systems::EnemySpawner::spawnStandart()
+{
 	if (filter.entities->size() >= 3) {
 		return;
 	}

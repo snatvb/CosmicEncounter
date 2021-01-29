@@ -144,6 +144,9 @@
     <ClCompile Include="Game\Builders\Explosions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Systems\Scenario.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -318,6 +321,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Utils\EnumArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Systems\Scenario.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

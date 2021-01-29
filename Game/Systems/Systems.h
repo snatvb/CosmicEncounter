@@ -6,5 +6,6 @@
 #include "EnemySpawner.h"
 #include "StarsControl.h"
 #include "CheckDied.h"
+#include "Scenario.h"
 #include "Remover.h"
 #include "Anchor.h"

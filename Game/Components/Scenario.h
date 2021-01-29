@@ -20,7 +20,7 @@ namespace Components {
 		EnemiesCount maxEnemies;
 		EnemiesCount kills;
 		EnemiesCount needKillsToBoss;
-		Boss boss;
+		Boss boss = Boss::TechnicalPlanet;
 		bool finished = false;
 	};
 }
