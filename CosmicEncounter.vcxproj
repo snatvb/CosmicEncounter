@@ -171,6 +171,10 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="Engine\Utils\vectors.cpp" />
     <ClCompile Include="Engine\Worker.cpp" />
     <ClCompile Include="Engine\helpers.cpp" />
+    <ClCompile Include="Game\Builders\Bullets.cpp" />
+    <ClCompile Include="Game\Builders\Enemies.cpp" />
+    <ClCompile Include="Game\Builders\Explosions.cpp" />
+    <ClCompile Include="Game\Builders\Stars.cpp" />
     <ClCompile Include="Game\Systems\Anchor.cpp" />
     <ClCompile Include="Game\Systems\BulletControler.cpp" />
     <ClCompile Include="Engine\Systems\GFXAnimationRenderer.cpp" />
