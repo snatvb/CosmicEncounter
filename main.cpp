@@ -28,7 +28,7 @@ inline ECS::Entity& createPlayer(ECS::World& world, Engine::Game& game) {
 	gfx.play = false;
 	auto& stats = entity.addComponent<Components::HeroStats>();
 	stats.speed = 900.0f;
-	stats.health = 30.0f;
+	stats.health = 30.0f * 100000;
 	return entity;
 }
 

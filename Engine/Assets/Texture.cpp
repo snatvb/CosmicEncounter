@@ -16,8 +16,7 @@ namespace Assets {
 
 	SDL_Texture* Textures::load(const char* path)
 	{
-		auto texture = _textures[path];
-		if (texture) {
+		if (auto texture = _textures[path]) {
 			return texture;
 		}
 

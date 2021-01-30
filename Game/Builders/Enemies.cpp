@@ -15,7 +15,7 @@ ECS::Entity& Builders::createStandartEnemy(ECS::World& world, Engine::Game& game
 
 	auto gunOffset = Vector2D<float>{ 12, 32 };
 	auto direction = Vector2D<float>{ 0, 1 };
-	auto& gun = entity.addComponent<Gun>(gunOffset, direction, 10.0f, 4.0f);
+	auto& gun = entity.addComponent<Gun>(gunOffset, direction, 10.0f, 1.5f);
 	gun.bulletSpeed = 700.0f;
 
 	Vector2D<int> tileOffset{ 64, 64 };
@@ -42,7 +42,7 @@ ECS::Entity& Builders::createBombardirEnemy(ECS::World& world, Engine::Game& gam
 
 	auto gunOffset = Vector2D<float>{ 12, 32 };
 	auto direction = Vector2D<float>{ 0, 1 };
-	auto& gun = entity.addComponent<Gun>(gunOffset, direction, 30.0f, 1.0f);
+	auto& gun = entity.addComponent<Gun>(gunOffset, direction, 30.0f, 2.5f);
 	gun.type = Gun::Type::Grenade;
 	gun.bulletSpeed = 250.0f;
 
