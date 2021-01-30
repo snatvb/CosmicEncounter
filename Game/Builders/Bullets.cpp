@@ -23,7 +23,7 @@ ECS::Entity& Builders::createDefaultBullet(ECS::World& world, Engine::Game& game
 }
 
 ECS::Entity& Builders::createGrenadeBullet(ECS::World& world, Engine::Game& game, Gun& gun, Point& point, CollideLayers& ignoreLayers) {
-	Size tileSize{ 10, 26 };
+	Size tileSize{ 9, 25 };
 	auto& entity = world.newEntity();
 	entity.addComponent<Transform>(point, tileSize);
 	entity.addComponent<Bullet>(gun.direction, gun.bulletSpeed, gun.damage);
@@ -35,7 +35,7 @@ ECS::Entity& Builders::createGrenadeBullet(ECS::World& world, Engine::Game& game
 	}
 
 	Vector2D<int> frames{ 10, 6 };
-	auto texture = game.assets->textures.load(AssetPathes::smallFireball10x26);
+	auto texture = game.assets->textures.load(AssetPathes::smallGreenFireball9x25);
 	auto& gfx = entity.addComponent<GFXAnimtion>(*texture, tileSize, frames);
 	gfx.rotation = gun.direction.y > 0 ? 0.0f : 180.0f;
 
