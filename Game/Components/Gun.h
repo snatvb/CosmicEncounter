@@ -5,6 +5,12 @@
 
 namespace Components {
 	struct Gun : ECS::Component {
+		enum class Type {
+			Default,
+			Grenade
+		};
+
+		Type type = Type::Default;
 		float damage;
 		float bulletSpeed = 0;
 		Vector2D<float> direction;
