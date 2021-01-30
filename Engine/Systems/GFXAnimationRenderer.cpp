@@ -40,7 +40,7 @@ namespace Systems {
 		for (auto& entity : *filter.entities) {
 			auto& gfx = entity->getComponent<Components::GFXAnimtion>();
 			auto& transform = entity->getComponent<Components::Transform>();
-			_renderer->add(gfx.layer, [gfx, transform](SDL_Renderer& sdlRenderer) {
+			_renderer->add(gfx.layer, entity->id, [gfx, transform](SDL_Renderer& sdlRenderer) {
 				SDL_Rect clipRect = createClipRect(gfx);
 				SDL_Rect drawRect = createDrawRect(gfx, transform);
 				if (gfx.rotation > 0) {

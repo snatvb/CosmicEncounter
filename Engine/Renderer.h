@@ -13,7 +13,7 @@ namespace Engine {
 		inline void render() {
 			mtx.lock();
 			for (auto& layer : _functionsByLayers) {
-				for (auto& f : layer) {
+				for (auto& [_, f] : layer) {
 					f(*_renderer);
 				}
 				layer.clear();
@@ -40,15 +40,15 @@ namespace Engine {
 			return _needRender;
 		}
 
-		inline void add(char layer, const RenderCallback& callback) {
+		inline void add(char layer, ECS::EntityID id, const RenderCallback& callback) {
 			mtx.lock();
-			_functionsByLayers[layer].emplace_back(callback);
+			_functionsByLayers[layer][id] = callback;
 			mtx.unlock();
 		};
 
-		inline void add(Layer layer, const RenderCallback& callback) {
+		inline void add(Layer layer, ECS::EntityID id, const RenderCallback& callback) {
 			mtx.lock();
-			_functionsByLayers[static_cast<int>(layer)].emplace_back(callback);
+			_functionsByLayers[static_cast<int>(layer)][id] = callback;
 			mtx.unlock();
 		};
 	private:

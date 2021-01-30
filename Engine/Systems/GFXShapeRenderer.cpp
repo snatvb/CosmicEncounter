@@ -6,7 +6,7 @@ inline void renderRects(Engine::Renderer& renderer, ECS::Filter& filter) {
 		auto& shapeGfx = entity->getComponent<Components::GFXShape>();
 		auto& gfx = entity->getComponent<Components::GFXRect>();
 
-		renderer.add(shapeGfx.layer, [gfx, shapeGfx, transform](SDL_Renderer& sdlRenderer) {
+		renderer.add(shapeGfx.layer, entity->id, [gfx, shapeGfx, transform](SDL_Renderer& sdlRenderer) {
 			SDL_Rect rect;
 			rect.x = static_cast<int>(transform.position.x);
 			rect.y = static_cast<int>(transform.position.y);
