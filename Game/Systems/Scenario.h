@@ -8,9 +8,10 @@ namespace Systems {
 		ECS::Filters::Include<Components::Scenario> filter;
 		ECS::Filters::With<
 			Components::Enemy,
-			Components::Collided
+			Components::Collided,
+			Components::ToRemoveTag
 		> enemiesCollided;
-		REG_FILTERS(Scenario, &filter);
+		REG_FILTERS(Scenario, &filter, &enemiesCollided);
 
 		void init() override;
 		void run() override;
