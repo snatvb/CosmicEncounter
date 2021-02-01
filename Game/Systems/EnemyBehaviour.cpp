@@ -18,7 +18,7 @@ inline void shot(ECS::World& world, Engine::Game& game, ECS::Entity& player, ECS
 		if (gun.cooldown <= 0) {
 			auto position = transform.position + gun.offset;
 			Builders::CollideLayers igonreLayers{ CollideLayer::Enemy };
-			Builders::createBulletByGun(world, gun, position, igonreLayers);
+			Builders::createBulletByGun(world, entity.id, gun, position, igonreLayers);
 			gun.cooldown = static_cast<int>(1000 / gun.fireRate);
 		}
 	}

@@ -7,8 +7,9 @@ namespace Components {
 		float speed;
 		float damage;
 		Vector2D<float> direction;
+		ECS::EntityID ownerId;
 
-		Bullet(Vector2D<float> direction, float speed, float damage)
-			: direction(direction), speed(speed), damage(damage) {}
+		Bullet(ECS::EntityID ownerId, Vector2D<float> direction, float speed, float damage)
+			: ownerId(ownerId), direction(direction), speed(speed), damage(damage) {}
 	};
 }

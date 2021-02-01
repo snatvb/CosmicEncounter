@@ -6,7 +6,7 @@ namespace Builders {
 
 	ECS::Entity& createDefaultBullet(
 		ECS::World& world,
-		Engine::Game& game,
+		ECS::EntityID ownerId,
 		Components::Gun& gun,
 		Components::Point& point,
 		CollideLayers& ignoreLayers
@@ -14,7 +14,7 @@ namespace Builders {
 
 	ECS::Entity& createGrenadeBullet(
 		ECS::World& world,
-		Engine::Game& game,
+		ECS::EntityID ownerId,
 		Components::Gun& gun,
 		Components::Point& point,
 		CollideLayers& ignoreLayers
@@ -22,14 +22,7 @@ namespace Builders {
 
 	ECS::Entity* createBulletByGun(
 		ECS::World& world,
-		Engine::Game& game,
-		Components::Gun& gun,
-		Components::Point& point,
-		CollideLayers& ignoreLayers
-	);
-
-	ECS::Entity* createBulletByGun(
-		ECS::World& world,
+		ECS::EntityID ownerId,
 		Components::Gun& gun,
 		Components::Point& point,
 		CollideLayers& ignoreLayers
