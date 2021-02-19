@@ -16,6 +16,7 @@ namespace Components {
 		Vector2D<int> offset;
 		double frameCooldown = 0.0;
 		bool play = true;
+		bool loop = true;
 		float rotation = 0;
 
 		GFXAnimtion(SDL_Texture& texture, const Size& tileSize, Vector2D<int>& frames)

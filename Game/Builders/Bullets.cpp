@@ -45,6 +45,29 @@ ECS::Entity& Builders::createGrenadeBullet(ECS::World& world, ECS::EntityID owne
 	return entity;
 }
 
+ECS::Entity& Builders::createFoilBullet(ECS::World& world, ECS::EntityID ownerId, const Gun& gun, const Point& point, const CollideLayers& ignoreLayers) {
+	auto& game = Engine::Game::GetInstance();
+	Size tileSize{ 64, 16 };
+	auto& entity = world.newEntity();
+	entity.addComponent<Transform>(point, tileSize);
+	entity.addComponent<Bullet>(ownerId, gun.direction, gun.bulletSpeed, gun.damage);
+
+	auto& collider = entity.addComponent<CircleCollider>(32.0f, 8.0f, 12.0f);
+	collider.layer = static_cast<size_t>(CollideLayer::Bullet);
+	for (auto layer : ignoreLayers) {
+		collider.layers[static_cast<size_t>(layer)] = false;
+	}
+
+	Vector2D<int> frames{ 5, 1 };
+	auto texture = game.assets->textures.load(AssetPathes::fiolBullet);
+	auto& gfx = entity.addComponent<GFXAnimtion>(*texture, tileSize, frames);
+	gfx.speed = 0.3f;
+	gfx.loop = false;
+	gfx.rotation = gun.direction.y > 0 ? 90.0f : -90.0f;
+
+	return entity;
+}
+
 ECS::Entity* Builders::createBulletByGun(
 	ECS::World& world,
 	ECS::EntityID ownerId,
@@ -58,6 +81,8 @@ ECS::Entity* Builders::createBulletByGun(
 		return &Builders::createDefaultBullet(world, ownerId, gun, point, ignoreLayers);
 	case Gun::Type::Grenade:
 		return &Builders::createGrenadeBullet(world, ownerId, gun, point, ignoreLayers);
+	case Gun::Type::Fiol:
+		return &Builders::createFoilBullet(world, ownerId, gun, point, ignoreLayers);
 	default:
 		return nullptr;
 		break;

@@ -20,6 +20,14 @@ namespace Builders {
 		CollideLayers& ignoreLayers
 	);
 
+	ECS::Entity& createFoilBullet(
+		ECS::World& world,
+		ECS::EntityID ownerId,
+		const Components::Gun& gun,
+		const Components::Point& point,
+		const CollideLayers& ignoreLayers
+	);
+
 	ECS::Entity* createBulletByGun(
 		ECS::World& world,
 		ECS::EntityID ownerId,

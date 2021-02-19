@@ -20,6 +20,10 @@ inline SDL_Rect createClipRect(const Components::GFXAnimtion& gfx) {
 }
 
 inline void moveFrame(Components::GFXAnimtion& gfx) {
+	if (!gfx.loop && gfx.currentFrame == gfx.frames) {
+		gfx.play = false;
+		return;
+	}
 	if (gfx.frameCooldown <= 0) {
 		gfx.currentFrame.x = gfx.currentFrame.x % gfx.frames.x;
 		if (gfx.currentFrame.x == 0) {

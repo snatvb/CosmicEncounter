@@ -15,7 +15,7 @@ namespace Components {
 	};
 
 	struct TechBoss : ECS::Component {
-		
+		const float fireRate = 1.0f;
 	};
 }
 

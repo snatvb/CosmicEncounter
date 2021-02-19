@@ -69,6 +69,12 @@ ECS::Entity& Builders::createTechBoss(ECS::World& world, Engine::Game& game, con
 
 	auto texture = game.assets->textures.load(AssetPathes::techBoss);
 
+	auto gunOffset = Vector2D<float>{ 56, 128 };
+	auto direction = Vector2D<float>{ 0, 1 };
+	auto& gun = entity.addComponent<Gun>(gunOffset, direction, 10.0f, 2.5f);
+	gun.type = Gun::Type::Fiol;
+	gun.bulletSpeed = 200.0f;
+
 	Vector2D<int> tileOffset{ 0, 0 };
 	auto& gfx = entity.addComponent<GFXAnimtion>(*texture, tileOffset, tileSize);
 	gfx.play = false;

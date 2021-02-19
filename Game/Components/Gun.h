@@ -7,7 +7,8 @@ namespace Components {
 	struct Gun : ECS::Component {
 		enum class Type {
 			Default,
-			Grenade
+			Grenade,
+			Fiol
 		};
 
 		Type type = Type::Default;
