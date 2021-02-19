@@ -15,5 +15,6 @@ namespace Systems {
 
 		void init() override;
 		void run() override;
+		void _handleKills(const ECS::Entity& enemyEntity, Components::Scenario& scenario);
 	};
 }

@@ -12,7 +12,7 @@ inline Scenario* createTechScenario() {
 
 void Systems::Scenario::init()
 {
-	auto scenario = createTechScenario();
+	auto* scenario = createTechScenario();
 	auto& entity = _world->newEntity();
 	entity.addComponent(scenario);
 }
@@ -24,18 +24,27 @@ void Systems::Scenario::run()
 	auto& scenario = entity->getComponent<Components::Scenario>();
 
 	// TODO: handle scenario change
-	for (auto enemyEntity : *enemiesCollided.entities) {
-		auto& collided = enemyEntity->getComponent<Collided>();
-		auto& enemy = enemyEntity->getComponent<Enemy>();
-		auto& enemyStats = enemyEntity->getComponent<HeroStats>();
-		// skip alive enemy
-		if (enemyStats.health > 0) { continue; }
-		if (auto collidedEntity = _world->getEntityById(collided.entityId)) {
-			if (auto bullet = collidedEntity->tryGetComponent<Bullet>()) {
-				if (auto bulletOwner = _world->getEntityById(bullet->ownerId)) {
-					if (bulletOwner->hasComponent<PlayerTag>()) {
-						scenario.kills[enemy.type] += 1;
-					}
+	for (auto* enemyEntity : *enemiesCollided.entities) {
+		_handleKills(*enemyEntity, scenario);
+	}
+}
+
+void Systems::Scenario::_handleKills(const ECS::Entity& enemyEntity, Components::Scenario& scenario)
+{
+	auto& collided = enemyEntity.getComponent<Collided>();
+	auto& enemy = enemyEntity.getComponent<Enemy>();
+	auto& enemyStats = enemyEntity.getComponent<HeroStats>();
+	// skip alive enemy
+	if (enemyStats.health > 0) { return; }
+	if (auto collidedEntity = _world->getEntityById(collided.entityId)) {
+		if (auto bullet = collidedEntity->tryGetComponent<Bullet>()) {
+			if (auto bulletOwner = _world->getEntityById(bullet->ownerId)) {
+				if (bulletOwner->hasComponent<PlayerTag>()) {
+					scenario.kills[enemy.type] += 1;
+
+					// TODO: only in debug
+					auto count = std::to_string(static_cast<int>(scenario.kills[enemy.type]));
+					Engine::Debug::Log("Kills:", count);
 				}
 			}
 		}
