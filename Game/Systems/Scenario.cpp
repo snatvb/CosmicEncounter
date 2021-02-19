@@ -27,6 +27,9 @@ void Systems::Scenario::run()
 	for (auto enemyEntity : *enemiesCollided.entities) {
 		auto& collided = enemyEntity->getComponent<Collided>();
 		auto& enemy = enemyEntity->getComponent<Enemy>();
+		auto& enemyStats = enemyEntity->getComponent<HeroStats>();
+		// skip alive enemy
+		if (enemyStats.health > 0) { continue; }
 		if (auto collidedEntity = _world->getEntityById(collided.entityId)) {
 			if (auto bullet = collidedEntity->tryGetComponent<Bullet>()) {
 				if (auto bulletOwner = _world->getEntityById(bullet->ownerId)) {
