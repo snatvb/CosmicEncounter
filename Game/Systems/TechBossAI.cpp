@@ -17,10 +17,9 @@ void Systems::TechBossAI::run()
 	const auto& bossStats = boss->getComponent<HeroStats>();
 	// TODO: move to helpers - following position
 	auto diffX = transform.position.x + 32 - playerTransform.position.x;
-	Engine::Debug::Log(diffX);
-	if (diffX > 32.0f) {
+	if (diffX > 16.0f) {
 		transform.position.x -= static_cast<int>(bossStats.speed * deltaTime);
-	} else if (diffX < -32.0f) {
+	} else if (diffX < -16.0f) {
 		transform.position.x += static_cast<int>(bossStats.speed * deltaTime);
 	}
 }

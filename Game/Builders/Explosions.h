@@ -2,5 +2,5 @@
 #include "./default_includes.h"
 
 namespace Builders {
-	void createSimpleExplosion(ECS::World& world, Components::Transform& transform);;
+	void createSimpleExplosion(ECS::World& world, const Components::Transform::Position& transform);;
 }

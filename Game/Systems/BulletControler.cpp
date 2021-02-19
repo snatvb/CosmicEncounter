@@ -16,11 +16,14 @@ void Systems::BulletControl::run()
 		transform.position += diff;
 
 		if (entity->hasComponent<Components::Collided>()) {
-			auto& collided = entity->getComponent<Components::Collided>();
+			const auto& collided = entity->getComponent<Components::Collided>();
 			if (auto entityCollided = _world->getEntityById(collided.entityId)) {
 				if (!entityCollided->hasComponent<Components::Bullet>()) {
-					auto& collidedTransform = entityCollided->getComponent<Components::Transform>();
-					Builders::createSimpleExplosion(*_world, collidedTransform);
+					const auto& collidedTransform = entityCollided->getComponent<Components::Transform>();
+					// TODO: Need idea how filter explosion effect
+					if (!entityCollided->hasComponent<Components::TechBoss>()) {
+						Builders::createSimpleExplosion(*_world, collidedTransform.position);
+					}
 					entity->addComponent<Components::ToRemoveTag>();
 					return;
 				}
