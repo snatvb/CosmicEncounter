@@ -58,6 +58,10 @@ struct API Vector2D
 		return Vector2D(x * s, y * s);
 	}
 
+	Vector2D operator*(T s) const {
+		return Vector2D(x * s, y * s);
+	}
+
 	Vector2D operator/(T s) {
 		return Vector2D(x / s, y / s);
 	}

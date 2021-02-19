@@ -7,7 +7,8 @@ ECS::Entity& Builders::createDefaultBullet(ECS::World& world, ECS::EntityID owne
 	Size tileSize{ 9, 15 };
 	auto& entity = world.newEntity();
 	entity.addComponent<Transform>(point, tileSize);
-	entity.addComponent<Bullet>(ownerId, gun.direction, gun.bulletSpeed, gun.damage);
+	auto& bullet = entity.addComponent<Bullet>(ownerId, gun.direction, gun.bulletSpeed, gun.damage);
+	bullet.ignoreEntities.push_back(ECS::getComponentTypeID<Components::TechBoss>());
 
 	auto& collider = entity.addComponent<CircleCollider>(4.0f, 5.0f, 3.0f);
 	collider.layer = static_cast<size_t>(CollideLayer::Bullet);

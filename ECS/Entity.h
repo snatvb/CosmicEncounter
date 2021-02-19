@@ -31,6 +31,10 @@ namespace ECS {
 			return _componentBitSet[getComponentTypeID<T>()];
 		};
 
+		bool hasComponent(ComponentID id) const {
+			return _componentBitSet[id];
+		};
+
 		template<typename T, typename ...TArgs>
 		T& addComponent(TArgs&& ...args) {
 			if (hasComponent<T>()) {
