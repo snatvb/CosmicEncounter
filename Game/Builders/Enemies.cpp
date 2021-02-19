@@ -55,3 +55,25 @@ ECS::Entity& Builders::createBombardirEnemy(ECS::World& world, Engine::Game& gam
 	stats.speed = 400.0f;
 	return entity;
 }
+
+ECS::Entity& Builders::createTechBoss(ECS::World& world, Engine::Game& game, const Components::Transform::Position& position)
+{
+	auto& entity = world.newEntity();
+
+	entity.addComponent<TechBoss>();
+
+	auto tileSize = Size{ 128, 128 };
+	entity.addComponent<Transform>(position, tileSize);
+	auto& collider = entity.addComponent<CircleCollider>(64.0f, 64.0f, 64.0f);
+	collider.layer = static_cast<size_t>(CollideLayer::Enemy);
+
+	auto texture = game.assets->textures.load(AssetPathes::techBoss);
+
+	Vector2D<int> tileOffset{ 0, 0 };
+	auto& gfx = entity.addComponent<GFXAnimtion>(*texture, tileOffset, tileSize);
+	gfx.play = false;
+	auto& stats = entity.addComponent<HeroStats>();
+	stats.health = 100.0f;
+	stats.speed = 300.0f;
+	return entity;
+}

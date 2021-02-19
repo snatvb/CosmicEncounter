@@ -52,10 +52,9 @@ inline void followPlayer(
 	const auto deltaTime = game.time.delta();
 
 	auto diffX = transform.position.x - playerTransform.position.x;
-	if (diffX > 1.0f) {
+	if (diffX > 1.5f) {
 		transform.position.x -= static_cast<int>(stats.speed * deltaTime);
-	}
-	if (diffX < 1.0f) {
+	} else if (diffX < -1.5f) {
 		transform.position.x += static_cast<int>(stats.speed * deltaTime);
 	}
 

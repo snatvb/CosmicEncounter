@@ -55,7 +55,7 @@ namespace Engine {
 		~Game();
 
 		bool _isRunning = false;
-		int _fps = 300;
+		int _fps = 100;
 		int _frameDelay = 1000 / _fps;
 		const char* _name = "Engine";
 		SDL_Window* _window = nullptr;

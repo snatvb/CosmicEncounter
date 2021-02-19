@@ -13,5 +13,9 @@ namespace Components {
 
 		Enemy(Type type) : type(type) {}
 	};
+
+	struct TechBoss : ECS::Component {
+		
+	};
 }
 

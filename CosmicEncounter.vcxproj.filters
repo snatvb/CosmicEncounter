@@ -147,6 +147,9 @@
     <ClCompile Include="Game\Systems\EnemyBehaviour.cpp">
       <Filter>Source Files\Game\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Systems\TechBossAI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -328,6 +331,9 @@
     </ClInclude>
     <ClInclude Include="Game\Systems\EnemyBehaviour.h">
       <Filter>Header Files\Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Systems\TechBossAI.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

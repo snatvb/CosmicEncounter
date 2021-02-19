@@ -41,16 +41,16 @@ namespace Components {
 		Position position;
 		Rotation rotation = 0.0f;
 
-		Transform() {}
+		Transform() = default;
 		Transform(float x, float y) : position(x, y) {}
-		Transform(Position& position) : position(position) {}
-		Transform(Position& position, Scale& scale)
+		Transform(const Position& position) : position(position) {}
+		Transform(const Position& position, Scale& scale)
 			: position(position), scale(scale) {}
-		Transform(Position& position, Rotation rotation)
+		Transform(const Position& position, Rotation rotation)
 			: position(position), rotation(rotation) {}
-		Transform(Position& position, Scale& scale, Rotation rotation)
+		Transform(const Position& position, Scale& scale, Rotation rotation)
 			: position(position), rotation(rotation), scale(scale) {}
-		Transform(Position& position, Rotation rotation, Scale& scale)
+		Transform(const Position& position, Rotation rotation, Scale& scale)
 			: position(position), rotation(rotation), scale(scale) {}
 	};
 }

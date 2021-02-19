@@ -59,6 +59,7 @@ class Worker : public Engine::Worker {
 		world.registerSystem<Systems::ControlPlayer>();
 		world.registerSystem<Systems::Anchor>();
 		world.registerSystem<Systems::EnemyBehaviour>();
+		world.registerSystem<Systems::TechBossAI>();
 		world.registerSystem<Systems::BulletControl>();
 		world.registerSystem<Systems::CheckDied>();
 		world.registerSystem<Systems::Scenario>();

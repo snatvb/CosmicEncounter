@@ -186,6 +186,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="Game\Systems\Scenario.cpp" />
     <ClCompile Include="Game\Systems\EnemyBehaviour.cpp" />
     <ClCompile Include="Game\Systems\StarsControl.cpp" />
+    <ClCompile Include="Game\Systems\TechBossAI.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +248,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Game\Systems\StarsControl.h" />
     <ClInclude Include="Game\Systems\Systems.h" />
     <ClInclude Include="ECS\OneFrameClearSystem.h" />
+    <ClInclude Include="Game\Systems\TechBossAI.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="TimeMeasure.h" />
   </ItemGroup>

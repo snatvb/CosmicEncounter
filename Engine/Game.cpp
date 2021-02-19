@@ -49,12 +49,13 @@ namespace Engine {
 				_renderer->render();
 				SDL_SetRenderDrawColor(_sdlRenderer, 0, 0, 0, 255);
 				SDL_RenderPresent(_sdlRenderer);
-				std::this_thread::sleep_for(std::chrono::milliseconds(10));
+				//std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
 				if (_frameDelay > frameTime) {
-					std::this_thread::sleep_for(
-						std::chrono::milliseconds(_frameDelay - frameTime)
-					);
+					SDL_Delay(_frameDelay - frameTime);
+					//std::this_thread::sleep_for(
+					//	std::chrono::milliseconds(_frameDelay - frameTime)
+					//);
 				}
 			}
 		});
@@ -70,6 +71,7 @@ namespace Engine {
 			_renderer->setNeedRender(true);
 
 			if (_frameDelay > frameTime) {
+				//std::this_thread::sleep_for(std::chrono::milliseconds(_frameDelay - frameTime));
 				SDL_Delay(_frameDelay - frameTime);
 			}
 		}

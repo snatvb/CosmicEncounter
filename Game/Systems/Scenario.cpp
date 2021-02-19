@@ -7,6 +7,9 @@ inline Scenario* createTechScenario() {
 	scenario->maxEnemies[Scenario::EnemyType::Standart] = 3;
 	scenario->maxEnemies[Scenario::EnemyType::Bombardir] = 1;
 
+	scenario->needKillsToBoss[Scenario::EnemyType::Bombardir] = 3;
+	scenario->needKillsToBoss[Scenario::EnemyType::Standart] = 8;
+
 	return scenario;
 }
 
@@ -15,6 +18,8 @@ void Systems::Scenario::init()
 	auto* scenario = createTechScenario();
 	auto& entity = _world->newEntity();
 	entity.addComponent(scenario);
+
+	Builders::createTechBoss(*_world, Engine::Game::GetInstance(), { 0, 0 });
 }
 
 void Systems::Scenario::run()
