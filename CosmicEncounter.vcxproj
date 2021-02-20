@@ -175,6 +175,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="Game\Builders\Enemies.cpp" />
     <ClCompile Include="Game\Builders\Explosions.cpp" />
     <ClCompile Include="Game\Builders\Stars.cpp" />
+    <ClCompile Include="Game\helpers\shot.cpp" />
     <ClCompile Include="Game\Systems\Anchor.cpp" />
     <ClCompile Include="Game\Systems\BulletControler.cpp" />
     <ClCompile Include="Engine\Systems\GFXAnimationRenderer.cpp" />
@@ -232,6 +233,7 @@ xcopy /y /d "SDL2_image\lib\x64\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Game\Components\Tags.h" />
     <ClInclude Include="Engine\helpers.h" />
     <ClInclude Include="Game\game_common.h" />
+    <ClInclude Include="Game\helpers\shot.h" />
     <ClInclude Include="Game\Systems\Anchor.h" />
     <ClInclude Include="Game\Systems\Assets.h" />
     <ClInclude Include="Game\Systems\BulletControler.h" />

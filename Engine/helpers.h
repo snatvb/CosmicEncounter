@@ -6,6 +6,8 @@
 
 #define ABS(x) (((x) < 0) ? (-x) : (x))
 
-namespace helpers {
-	void srandTime();
+namespace Engine {
+	namespace helpers {
+		void srandTime();
+	}
 }

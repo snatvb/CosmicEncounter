@@ -150,6 +150,9 @@
     <ClCompile Include="Game\Systems\TechBossAI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game\helpers\shot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -333,6 +336,9 @@
       <Filter>Header Files\Game\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Game\Systems\TechBossAI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\helpers\shot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
